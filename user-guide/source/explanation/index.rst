@@ -4,13 +4,9 @@
 Concepts
 ########
 
-.. note::
+.. include:: ../contribute-note.include
 
-          This is a new section in the django CMS documentation, and a priority
-          for the project. If you'd like to contribute to it, we'd love to hear
-          from you - join us on `our friendly Slack group
-          <https://www.django-cms.org/slack>`_.
-
+django CMS uses some specific concepts. This section explains those concepts from a content editor perspective.
 
 .. toctree::
     :maxdepth: 1
@@ -21,3 +17,4 @@ Concepts
     version-locking
     aliases
     structure-content-modes
+    touch

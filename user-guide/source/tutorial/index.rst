@@ -4,12 +4,7 @@
 Tutorial
 ########
 
-.. note::
-
-          This is a new section in the django CMS documentation, and a priority
-          for the project. If you'd like to contribute to it, we'd love to hear
-          from you - join us on `our friendly Slack group
-          <https://www.django-cms.org/slack>`_.
+.. include:: ../contribute-note.include
 
 It's strongly recommended that you follow this tutorial step-by-step. It has
 been designed to introduce you to the system in a methodical way, and each

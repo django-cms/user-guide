@@ -81,7 +81,7 @@ current_year = datetime.datetime.now().year
 # General information about the project.
 project = 'django cms'
 copyright = '2009-{}, django CMS Association and contributors'.format(current_year)
-html_title = "django CMS User Guide {}".format(VERSION)
+html_title = "django CMS {} User Guide".format(VERSION)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

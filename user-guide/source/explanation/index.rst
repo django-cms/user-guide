@@ -1,12 +1,12 @@
 .. _user-explanation:
 
-########
 Concepts
-########
+========
 
 .. include:: ../contribute-note.include
 
-django CMS uses some specific concepts. This section explains those concepts from a content editor perspective.
+django CMS uses some specific concepts. This section explains those concepts from a
+content editor perspective.
 
 .. toctree::
     :maxdepth: 1
@@ -14,7 +14,6 @@ django CMS uses some specific concepts. This section explains those concepts fro
     placeholders
     plugins
     publishing
-    version-locking
     aliases
     structure-content-modes
     touch

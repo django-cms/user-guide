@@ -1,8 +1,7 @@
 .. _user-reference:
 
-#############################
 Reference for content editors
-#############################
+=============================
 
 .. include:: ../contribute-note.include
 

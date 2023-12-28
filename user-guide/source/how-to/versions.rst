@@ -58,7 +58,7 @@ needed. Here's a step-by-step guide on how to manage versions:
 
     Only draft versions can be deleted. Outdated versions are kept on purpose.
 
-Managing versions in Django CMS allows to unterstand the history of the page content.
+Managing versions in Django CMS allows to understand the history of content.
 Drafts can be archived for later reuse. All versions currently public or once public are
 marked "published" or "unpublished", respectively. The content of versions can be
 compared with each other.

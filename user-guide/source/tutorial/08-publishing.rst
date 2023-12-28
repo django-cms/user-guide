@@ -78,7 +78,7 @@ You will see (a potentially long) list of all versions created, ever. On the rig
 of the list you see the action buttons. You can
 
 - **Pencil**: Go back to the **edit** view of a draft
-- **Archive**: Archive a draft version for later re-use.
+- **Archive**: Archive a draft version for later reuse.
 - **Antenna**: Publish a draft
 - **Litter bin**: Delete a draft
 - **Eye**: View an old version. Note: Those cannot be edited any more.

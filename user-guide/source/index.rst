@@ -52,7 +52,7 @@ Using django CMS
 
     This is a new section in the django CMS documentation, and a priority for the
     project. If you'd like to contribute to it, we'd love to hear from you - join us on
-    `our friendly Slack group <https://www.django-cms.org/slack>`_.
+    `our friendly Discord channel <https://discord-docs-channel.django-cms.org/>`_.
 
 This is a user guide for django CMS. The intended audience for this guide are content
 creators and site administrators.

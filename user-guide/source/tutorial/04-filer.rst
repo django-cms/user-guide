@@ -36,6 +36,5 @@ will be able to manage all the photo folders, add or delete them...
 
 .. warning::
 
-    Would you like to see more content here? Please `join us on Slack
-    <https://www.django-cms.org/slack>`_ and the Slack ``#workgroup-documentation`` to
-    add content here.
+    Would you like to see more content here? If you'd like to contribute, we'd love to hear
+    from you - join us on `our friendly Discord channel <https://discord-docs-channel.django-cms.org/>`_.

@@ -140,5 +140,5 @@ URL - will be automatically kept up-to-date.
 .. warning::
 
     Would you like to see more content here, e.g. on images, videos, links and buttons?
-    Please `join us on Slack <https://www.django-cms.org/slack>`_ and the Slack
-    ``#workgroup-documentation`` to add content here.
+    If you'd like to contribute, we'd love to hear from you - join us on
+    `our friendly Discord channel <https://discord-docs-channel.django-cms.org/>`_.

@@ -45,22 +45,22 @@
 
 .. _user-manual:
 
-Using Django CMS
+Using django CMS
 ================
 
 .. note::
 
-    This is a new section in the Django CMS documentation, and a priority for the
+    This is a new section in the django CMS documentation, and a priority for the
     project. If you'd like to contribute to it, we'd love to hear from you - join us on
     `our friendly Discord channel <https://discord-docs-channel.django-cms.org/>`_.
 
-This is the user guide for Django CMS. The intended audiences for this guide are content
+This is the user guide for django CMS. The intended audiences for this guide are content
 creators and site administrators.
 
 Django CMS sites are highly customisable and varied. The examples here follow the
 `quickstart project from Github <https://github.com/django-cms/django-cms-quickstart>`_.
 This provides certain features, which are entirely optional for your own site, and the
-features provided in the quickstart are used in this guide to demonstrate how Django CMS
+features provided in the quickstart are used in this guide to demonstrate how django CMS
 can be used.
 
 The origin of this document is a guide provided by `Kapt.mobi
@@ -77,7 +77,7 @@ Guide for content editors
 :ref:`user-tutorial`
 ~~~~~~~~~~~~~~~~~~~~
 
-**Start here as a new Django CMS content editor**:
+**Start here as a new django CMS content editor**:
 
 - Get to know the user interface
 - Understand the page tree
@@ -96,7 +96,7 @@ editor.
 :ref:`user-explanation`
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-What is a placeholder? What is a plugin? Understand these key concepts of Django CMS.
+What is a placeholder? What is a plugin? Understand these key concepts of django CMS.
 
 .. rst-class:: column column2 bottom-right
 

@@ -54,7 +54,7 @@ Using django CMS
     project. If you'd like to contribute to it, we'd love to hear from you - join us on
     `our friendly Discord channel <https://discord-docs-channel.django-cms.org/>`_.
 
-This is a user guide for django CMS. The intended audience for this guide are content
+This is the user guide for django CMS. The intended audiences for this guide are content
 creators and site administrators.
 
 Django CMS sites are highly customisable and varied. The examples here follow the
@@ -79,9 +79,9 @@ Guide for content editors
 
 **Start here as a new django CMS content editor**:
 
-- Getting to know the user interface
-- Understanding the page tree
-- Creating content
+- Get to know the user interface
+- Understand the page tree
+- Create content
 
 .. rst-class:: column column2 top-right
 
@@ -89,14 +89,14 @@ Guide for content editors
 ~~~~~~~~~~~~~~~~~~
 
 Practical **step-by-step guides** to get things done in the most simple way as a content
-editor
+editor.
 
 .. rst-class:: column column2 bottom-left
 
 :ref:`user-explanation`
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-What's a placeholder? What's a plugin? Understand key concepts of django CMS.
+What is a placeholder? What is a plugin? Understand these key concepts of django CMS.
 
 .. rst-class:: column column2 bottom-right
 

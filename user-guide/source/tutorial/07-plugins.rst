@@ -137,6 +137,13 @@ URL - will be automatically kept up-to-date.
 .. image:: ./images/07-text-enabled-plugins.jpg
     :alt: The CMS Plugins menu in the rich text editor
 
+.. tip::
+
+    To remove "CMS Plugins" menu within the text editor, click on the editor and hit
+    the backspace or delete key to remove it.
+
+    If for some reason the content of the plugin is empty, try positioning the cursor behind it empty object and use backspace.
+
 .. warning::
 
     Would you like to see more content here, e.g. on images, videos, links and buttons?

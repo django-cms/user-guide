@@ -147,7 +147,7 @@ You can perform the following actions:
 
 - **Manage versions...** - get a list of all versions of this page in the sidebar.
 - **Compare to version <x>...** - get a visual comparison on how the currently viewed
-  version differs from any other version of the pasge. Difference are highlighted by
+  version differs from any other version of the page. Difference are highlighted by
   colors either on the page or the page's source code.
 - **Discard Changes** - makes all changes of the current draft undone
 

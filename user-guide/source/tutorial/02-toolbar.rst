@@ -92,8 +92,8 @@ The "Page" menu allows you to perform the following actions:
       A sub page is a page nested within the parent page group. A parent page is the
       "parent" of the sub page which if also called child page.
 
-      This is called page inheritance.and explained in more detail in the `section on
-      the tree structure <pagetree>`_ of your site later in this document.
+      This is called page inheritance.and explained in more detail in the :ref:`section on
+      the tree structure <pagetree>` of your site later in this document.
 
 - **Edit this page** - allows you to edit the page you are on. Changes to a page are
   only possible if your are in edit mode.

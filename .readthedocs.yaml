@@ -11,7 +11,7 @@ build:
   jobs:
     post_build:
       # Build a single-file HTML version into a temp dir (Pandoc reads this, not your raw .rst)
-      - python -m sphinx -b singlehtml . /tmp/singlehtml
+      - python -m sphinx -b singlehtml source/ /tmp/singlehtml
       # Convert it to ODT and drop it where Read the Docs will publish it
       - pandoc /tmp/singlehtml/index.html
           --resource-path=/tmp/singlehtml

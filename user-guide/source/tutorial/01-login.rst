@@ -3,9 +3,10 @@
 Logging-in
 ==========
 
-Once you have :ref:`created your site <install-django-cms-tutorial>` with the django CMS
-components you will want to customise the site and add content. To this you will need to
-log in and edit it.
+Once you have `created your site
+<https://docs.django-cms.org/en/latest/introduction/01-install.html>`_ with the django
+CMS components you will want to customise the site and add content. To this end you will
+need to log in and edit it.
 
 There are different ways of accessing your user account in django CMS. Please refer to
 what the respective developer of your project has told you.

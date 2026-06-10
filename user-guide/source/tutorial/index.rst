@@ -25,8 +25,8 @@ previous one.
 
     **Touch-screen users**
 
-    Django CMS supports touch-screen interfaces, though there are currently some
-    limitations in support. You complete this tutorial using a
+    django CMS supports touch-screen interfaces, though there are currently some
+    limitations in support. You can complete this tutorial using a
     touch-screen device, but please consult :ref:`touch`, and see the notes on
     :ref:`device-support`.
 

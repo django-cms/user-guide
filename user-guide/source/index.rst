@@ -57,7 +57,7 @@ Using django CMS
 This is the user guide for django CMS. The intended audiences for this guide are content
 creators and site administrators.
 
-Django CMS sites are highly customisable and varied. The examples here follow the
+django CMS sites are highly customisable and varied. The examples here follow the
 `quickstart project from Github <https://github.com/django-cms/django-cms-quickstart>`_.
 This provides certain features, which are entirely optional for your own site, and the
 features provided in the quickstart are used in this guide to demonstrate how django CMS
@@ -103,7 +103,8 @@ What is a placeholder? What is a plugin? Understand these key concepts of django
 :ref:`user-reference`
 ~~~~~~~~~~~~~~~~~~~~~
 
-Reference material for installed plugins.
+Look up the details: toolbar menus, page settings, version states, and installed
+plugins.
 
 .. rst-class:: clearfix row
 

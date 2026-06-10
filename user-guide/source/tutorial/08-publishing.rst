@@ -56,7 +56,7 @@ later use.
 .. figure:: images/08-version-states.png
     :alt: Version states and the editing process
 
-    This diagram summarizes the possible states and the actions which create a change in
+    This diagram summarises the possible states and the actions which create a change in
     the state of a version.
 
 Managing versions

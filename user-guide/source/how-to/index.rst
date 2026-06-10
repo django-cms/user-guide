@@ -11,6 +11,10 @@ Use our guides to learn how to do a specific task in the CMS.
     :maxdepth: 1
 
     pages
+    add-image
+    links
+    aliases
+    translations
     versions
     media-files
     redirects

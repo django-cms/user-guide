@@ -1,29 +1,58 @@
+.. _explanation-placeholders:
+
 Placeholders
 ============
 
-In Django CMS, placeholders are special markers within templates that define regions
-where content can be edited and managed by content editors. These placeholders act as
-slots or containers within a template where various types of content can be added,
-modified, and rearranged through django CMS' frontend editor and its structure board.
+Placeholders are the regions of a page where you, as an editor, can put content. They
+are defined in the page's **template** by the site's designers, and they appear in the
+structure board when you edit a page. This page explains why django CMS divides pages
+this way, and why that division is a feature rather than a limitation.
 
-Here's how placeholders work:
+Separating design from content
+------------------------------
 
-1. **Defined Areas in a page:** Designers identify specific areas within their HTML
-   templates where content can be dynamically inserted. Editors can access these defined
-   placeholders and add or edit content directly through the user-friendly frontend
-   editing interface without needing to touch the underlying code. Pages can be rendered
-   using different templates.
-2. **Content Manipulation:** Editors interact with placeholders to add various types of
-   content elements or plugins (such as text, images, videos, forms, etc.) to these
-   designated areas. They can modify existing content, rearrange elements, or remove
-   content as needed.
-3. **Flexibility and Customization:** Django CMS allows for the creation of custom
-   plugins that can be inserted into placeholders. These plugins offer a wide range of
-   functionalities and content types, giving content editors the flexibility to create
-   diverse and engaging web pages without requiring developer intervention for each
-   content update.
+A django CMS page is the product of two independent things:
 
-Ultimately, placeholders in Django CMS facilitate a clear separation between the
-presentation layer (templates) and the content, enabling content editors to manage and
-update website content easily without needing extensive technical knowledge or modifying
-the underlying code.
+- a **template**, written by designers and developers, that determines the look of the
+  page: the header, the navigation, the fonts and colours, and *where* content can
+  appear;
+- the **content** — the tree of plugins you create — that fills the template's
+  placeholders.
+
+The template defines one placeholder for each region that should be editable: perhaps
+one for the main content area, one for a sidebar, one for a banner. Everything outside
+the placeholders is fixed by the template.
+
+Why you cannot put content "anywhere"
+-------------------------------------
+
+It might seem restrictive that content can only go into predefined regions. This
+restriction is deliberate, and it is what keeps a large site consistent:
+
+- **Consistency without effort.** Every page using the same template automatically
+  has the same layout. Editors cannot accidentally break the design, place text over
+  the navigation, or produce a page that looks out of place.
+- **Freedom within the regions.** Inside a placeholder you are free: any available
+  plugin, in any order, nested as deeply as the plugins allow.
+- **Redesigns without content migration.** Because content lives in placeholders
+  rather than in fixed page markup, the site's design can be replaced by switching
+  templates — the content stays where it is and is rendered in the new design. The
+  same content can even be rendered differently per device.
+
+How templates, placeholders and plugins relate
+----------------------------------------------
+
+Think of it as a hierarchy::
+
+    Template            (the design — fixed)
+    └── Placeholder     (an editable region — defined by the template)
+        └── Plugins     (your content — text, images, layout elements, ...)
+            └── ...     (plugins can contain other plugins)
+
+A page can offer different templates to choose from (via the page menu's "Templates"
+entry); each may provide different placeholders. Which plugins a placeholder accepts
+can also be configured — for example, a narrow sidebar placeholder might not accept
+wide layout plugins.
+
+If you need an additional editable region on a page, that is a change to the template,
+and a conversation to have with your site's developers.

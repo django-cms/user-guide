@@ -1,39 +1,53 @@
 Structure and content modes
 ===========================
 
-In Django CMS, the concepts of "structure" and "content" modes refer to different
-aspects of managing and arranging the plugins when editing a page (or other content).
+When editing in django CMS you constantly switch between two perspectives on the same
+page: the **structure board**, which shows the page as a tree of plugins, and the
+**content view**, which shows the page as visitors will see it. This page explains why
+there are two modes and what each is for.
 
 You can toggle between structure and content mode by clicking the button on the far
-right of the toolbar.
+right of the toolbar (or by pressing the space bar while editing).
 
 .. image:: ../tutorial/images/07-structure-toggle.jpg
     :scale: 50
     :alt: Structure mode toggle opens the structure board.
 
-1. **Structure Mode:**
+Two modes for two kinds of thinking
+-----------------------------------
 
-   - **Purpose:** Structure mode is primarily concerned with the arrangement and
-     organization of the different plugins within placeholders.
-   - **Functionality:** In structure mode, you can define the overall layout of your
-     pages by creating plugins (regions within a template where content can be placed)
-     and arranging these plugins within the placeholders of your page.
-   - **Usage:** This mode is used for setting up the basic plugin structure of a page,
-     determining where various types of content (text, images, videos, etc.) are placed
-     within the layout.
+Editing a page involves two quite different activities:
 
-2. **Content Mode:**
+- **Arranging** — deciding what building blocks the page consists of and in what
+  order: a container, a heading, two columns, an image beside a text. This is
+  layout thinking, and it is what **structure mode** is for. The structure board
+  shows every :ref:`placeholder <explanation-placeholders>` and the tree of
+  :ref:`plugins <explanation-plugins>` inside it — including elements that are
+  invisible in the rendered page, such as empty containers or layout wrappers. Here
+  you add plugins, nest them, and rearrange them by drag & drop.
 
-   - **Purpose:** Content mode focuses on the actual content that fills the placeholders
-     created in structure mode.
-   - **Functionality:** When in content mode, you can add, edit, and manage the specific
-     plugins by double-clicking. This includes text, images, videos, widgets, and any
-     other content types supported by Django CMS.
-   - **Usage:** Content mode is used for changing or populating the placeholders with
-     actual content. Users typically work in content mode when they want to add or
-     modify text, images, or any other elements on the pages.
+- **Writing** — working on the actual words and pictures. This is what **content
+  mode** is for. You see the page exactly as it will be rendered and edit elements
+  in place by double-clicking them (or, with inline editing enabled, by typing
+  directly into the text).
 
-In summary, structure mode deals with the layout and arrangement of placeholders on a
-page, while content mode involves filling those placeholders with actual content. These
-modes work together to provide a structured yet flexible way of managing the overall
-structure and content of a website within Django CMS.
+Neither view alone would suffice. The rendered page hides structure: you cannot see
+(let alone rearrange) an invisible container, and nested layouts are hard to grasp
+from their visual result. The structure tree, in turn, is a poor place to judge how a
+paragraph reads or whether an image works. The two modes give each activity the
+representation that fits it.
+
+How they work together
+----------------------
+
+A typical editing session moves back and forth: open the structure board to set up or
+adjust the skeleton of the page, switch to content mode to fill in and polish the
+content, and back again when the layout needs to change. Changes made in one mode are
+immediately reflected in the other — they are two views of the same plugin tree, not
+two different copies of the page.
+
+.. tip::
+
+    In the structure board, hover over a plugin while pressing the **SHIFT** key to
+    highlight the corresponding element on the page — useful for finding out which
+    tree entry belongs to which visible element.

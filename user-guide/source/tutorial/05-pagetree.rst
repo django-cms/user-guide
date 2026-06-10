@@ -18,7 +18,7 @@ pages that make up your site: visible and non-visible, pages and sub-pages, publ
 not.
 
 Alternatively, you can reach the page tree by clicking "Page contents" in the admin
-sidebar, which you find in the "Django CMS" section.
+sidebar, which you find in the "django CMS" section.
 
 Principles of the parent, child and sibling pages
 -------------------------------------------------
@@ -29,7 +29,7 @@ inheritance and the names given to it.
 The page tree structure is divided into different sections: these are the pages at
 different levels. Each page can be nested in another one, i.e. a page can contain
 several sub-pages. This page is then called the "parent page" and its sub-pages are its
-"child pages". A child page can also have its own child pages. The idea is to organize
+"child pages". A child page can also have its own child pages. The idea is to organise
 your site in several different levels so that it is clearer for the user.
 
 To better understand, let us take the image of a tree as a metaphor:
@@ -83,7 +83,7 @@ From left to right, you will find the following items:
    the site. A puzzle symbol at this place indicates that the page is handled by a
    third-party application.
 6. The **eye icon** allows you to preview the page
-7. The **publication status menu** menu. Its color provides the following information:
+7. The **publication status menu** menu. Its colour provides the following information:
        - **Blank**: the translation of the page into this language does not exist.
        - **White with blue border**: An unpublished draft of the page exists. There is
          not public version of the page.
@@ -96,10 +96,16 @@ From left to right, you will find the following items:
        - Gray / unchecked: the page does not appear
 9. The **settings button** opens the page settings.
 10. The **add button** adds a child page.
-11. The **hamburger context menu** offers additional actions: * Copy * Cut * Paste *
-    Delete... * Set as home * Advanced settings * Miscellaneous information: the date of
-    the last change, the access (restricted or not), the author of the last
-    modifications.
+11. The **hamburger context menu** offers additional actions:
+
+    - Copy
+    - Cut
+    - Paste
+    - Delete...
+    - Set as home
+    - Advanced settings
+    - Miscellaneous information: the date of the last change, the access (restricted
+      or not), the author of the last modifications.
 
 At the top right is a small menu, composed of a search button allowing you to find a
 specific page in your tree, a "..." button to choose the site whose tree you want to see

@@ -57,7 +57,7 @@ extensions = [
     ]
 intersphinx_mapping = {
     'python': ('http://docs.python.org/3/', None),
-    'django': ('https://docs.djangoproject.com/en/3.2/', 'https://docs.djangoproject.com/en/2.2/_objects/'),
+    'django': ('https://docs.djangoproject.com/en/4.2/', 'https://docs.djangoproject.com/en/4.2/_objects/'),
     'classytags': ('http://readthedocs.org/docs/django-classy-tags/en/latest/', None),
     'sekizai': ('http://readthedocs.org/docs/django-sekizai/en/latest/', None),
     'treebeard': ('http://django-treebeard.readthedocs.io/en/latest/', None),
@@ -277,10 +277,12 @@ latex_documents = [
 # Spelling language.
 spelling_lang = 'en_GB'
 
-# Location of word list.
-spelling_word_list_filename = 'spelling_wordlist'
+# Location of word list (relative to this configuration directory).
+spelling_word_list_filename = '../spelling_wordlist'
 
-spelling_ignore_pypi_package_names = True
+# Querying PyPI for package names relies on a removed PyPI API and breaks the
+# spelling builder; add package names to the word list instead.
+spelling_ignore_pypi_package_names = False
 
 #Split common contractions from words so they are not flagged as errors by the spellchecker.
 #https://github.com/sphinx-contrib/spelling/blob/master/sphinxcontrib/spelling/filters.py

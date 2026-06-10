@@ -35,11 +35,11 @@ In the page dialog box, give a title and possibly a menu and page title then sav
 slug field will be filled automatically based on the page title. Of course, you can
 manually change it.
 
-Your newly created page is displayed, as well as the Django CMS menu/toolbar with the
+Your newly created page is displayed, as well as the django CMS menu/toolbar with the
 main content management tools. A newly created page is empty. Adding content is done via
 the structure board, in the upper right corner.
 
-The color, the size of the text... everything is generated automatically according to
+The colour, the size of the text... everything is generated automatically according to
 the page template of your site which in turn should be based on your individual graphics
 design. To change the design, there are options to modify the page template. If you want
 to change the design, talk to the developers to review it.
@@ -59,7 +59,7 @@ Required fields
 ~~~~~~~~~~~~~~~
 
 - **Title**: it will be used by the template of your site and displayed at the top of
-  the page, in the tab of the site on the browser, and in the favorites. Search engines
+  the page, in the tab of the site on the browser, and in the favourites. Search engines
   will also use it. It is therefore a field that must be filled in.
 - **Slug**: this is part of the URL of your page. In general, you will want it to
   reflect the title of your page, and it will be automatically generated from it in an
@@ -106,8 +106,8 @@ need to click "show" to make them visible.
   the slug of your current page, placed after the slug of its parent pages. For example,
   its default URL could be: ``/a-propos/company/our-vision/``. Overwriting the URL would
   allow you to shorten it to ``/our-vision/``, even though the page still keeps its
-  parents and children organized in the same way (About page, Company daughter page, Our
+  parents and children organised in the same way (About page, Company daughter page, Our
   Vision grandchild page). We do not recommend using this function.
 - **Redirect**: Allows you to redirect the user to a different page. This is useful if
-  you've moved content to another page but don't want to break the URL that your users
+  you have moved content to another page but don't want to break the URL that your users
   may have bookmarked or affect the rank of that page in search engine results.

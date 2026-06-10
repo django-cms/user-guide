@@ -60,7 +60,7 @@ all are optional), and save. The new content is displayed on your page.
     container plugin in the example is one of many plugins provided by the django CMS
     Frontend package which are designed to structure your page.
 
-    Those plugins do have a set of tabs (colored in blue) at the top of the dialog and
+    Those plugins do have a set of tabs (coloured in blue) at the top of the dialog and
     offer a wide set of design options, most of which are optional.
 
 Repeat the operation as many times as you want and for as much content as you want.
@@ -144,8 +144,49 @@ URL - will be automatically kept up-to-date.
 
     If for some reason the content of the plugin is empty, try positioning the cursor behind it empty object and use backspace.
 
-.. warning::
+Images
+~~~~~~
 
-    Would you like to see more content here, e.g. on images, videos, links and buttons?
-    If you'd like to contribute, we'd love to hear from you - join us on
-    `our friendly Discord channel <https://discord-docs-channel.django-cms.org/>`_.
+Let's place the image you uploaded to the media library in :ref:`lesson 4 <filer>` on
+your page:
+
+1. Open the **structure board** and click the **add button** of your placeholder (or
+   of the container you created earlier).
+2. Select the **"Picture / Image"** plugin from the list.
+3. Click the magnifier next to the **"Image"** field, navigate to your "Tutorial"
+   folder and pick your image.
+4. Save the dialog. Your image appears on the page.
+
+.. todo::
+
+    **Screenshot needed:** ``tutorial/images/07-add-image.png`` —
+    The "Picture / Image" plugin dialog with an image selected from the media
+    library's "Tutorial" folder. Quickstart project, light colour scheme, browser
+    window ~1200 px wide.
+
+.. Uncomment once the screenshot exists:
+.. .. image:: ./images/07-add-image.png
+..     :alt: Adding an image with the Picture / Image plugin
+
+Links
+~~~~~
+
+Now make a piece of your text link to another page of your site:
+
+1. Edit your text plugin and place the cursor where the link should appear.
+2. Open the **"CMS Plugins"** menu in the editor's toolbar and select the
+   **"Link / Button"** plugin.
+3. Enter the link text, choose a page of your site in the **"Internal link"** field,
+   and save.
+4. Save the text plugin. The link is now part of your text — and because it is a
+   dynamic link, it keeps working even if the destination page's URL changes later.
+
+Where to go from here
+---------------------
+
+You now know the editing workflow: open the structure board, add plugins, arrange and
+edit them. The how-to guides cover the everyday tasks in more depth — for example
+:ref:`adding images <how-to-add-image>`, :ref:`creating links and buttons
+<how-to-links>` and :ref:`reusing content with aliases <how-to-aliases>` — and the
+:ref:`plugin reference <ref-plugins>` lists all plugins that ship with the quickstart
+project. Next, in the final lesson, you publish your work.

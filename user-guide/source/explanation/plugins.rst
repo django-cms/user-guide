@@ -1,30 +1,55 @@
+.. _explanation-plugins:
+
 Plugins
 =======
 
-Django CMS plugins are modular components that represent content. In Django CMS, content
-components are organized into placeholders within templates. These placeholders can be
-filled with various plugins to add diverse content components.
+In django CMS, content is not one big block of formatted text. It is a **tree of
+plugins**: typed components — a text, an image, a row of columns, a video — each with
+its own editing form, nested inside each other and inside
+:ref:`placeholders <explanation-placeholders>`. This page explains why content is
+structured this way.
 
-Django CMS plugins offer content editors an intuitive way to manage and enrich the
-content of web pages without needing technical expertise or diving into code. Here's how
-they benefit content editors:
+Why structured content beats one big text field
+-----------------------------------------------
 
-1. **Ease of Use:** Content editors can work inside the frontend editor and use the
-   structure board, where they can see available placeholders on a page. They can easily
-   add, edit, or remove content elements (plugins) within these placeholders using a
-   simple drag-and-drop interface or form-based interactions.
-2. **Content Variety:** Plugins provide a wide range of content types that can be
-   inserted into placeholders, such as text, images, videos, galleries, sliders, forms,
-   maps, and more. This variety enables editors to create rich and diverse web pages
-   without relying on developers for every content update.
-3. **Customization:** While there's a set of default plugins available, each
-   installation has its own set of plugins activated and might also use custom plugins
-   tailored to specific needs. These custom plugins can encapsulate complex
-   functionalities or unique design elements that content editors might require for
-   their content. Those custom plugins are not within the scope of this user guide.
+Many simpler systems give editors a single rich-text area per page and leave the rest
+to copy-and-paste. django CMS deliberately splits content into typed components,
+because the structure pays off in several ways:
 
-In essence, Django CMS plugins empower content editors to manage and present content
-effectively, providing them with the tools to create engaging and dynamic web
-experiences without needing to delve into the technical intricacies of web development.
-These plugins empower editors to create and manage content without needing to write code
-or modify templates each time they want to add specific elements to a webpage.
+- **The design stays in charge of presentation.** An image plugin knows it is an
+  image, so the site's design decides how images are rendered — sized, cropped,
+  responsive — consistently across the whole site. In a free-form text field, every
+  editor's manual formatting choices accumulate into inconsistency.
+- **Content can be rendered anywhere.** Because the structure is machine-readable,
+  the same content can be rendered for desktop and mobile, reused in another context
+  (see :ref:`aliases <explanation-aliases>`), or restyled wholesale when the site is
+  redesigned — without anyone editing the content itself.
+- **Complex elements stay editable by everyone.** A carousel or a multi-column layout
+  is a form with a few fields, not a chunk of fragile markup. Editors without HTML
+  knowledge can build pages that would otherwise require a developer.
+- **Each piece is manageable on its own.** Plugins can be moved by drag & drop,
+  copied between pages and languages, and edited individually — the rest of the page
+  is untouched.
+
+When to use a plugin instead of text formatting
+-----------------------------------------------
+
+The text plugin's rich-text editor can do a lot — and for paragraphs, lists and
+emphasis it is the right tool. As a rule of thumb, switch to a dedicated plugin when
+the element has *meaning or behaviour* beyond formatted text: images, buttons, links
+to other pages of the site, videos, structured layouts. You get the design's styling
+for free, and the element remains intact if the text around it changes.
+
+Some plugins can even live *inside* a text, through the editor's "CMS Plugins" menu —
+combining the flow of text with the robustness of typed components. A link to another
+page inserted this way keeps working even when that page's URL changes.
+
+Which plugins do I have?
+------------------------
+
+The set of available plugins is specific to each site: it depends on the installed
+packages (the quickstart project ships the set described in the :ref:`plugin reference
+<ref-plugins>`) and may include custom plugins built for your site's particular needs.
+Custom plugins are outside the scope of this guide — but the way you interact with
+them (add, edit, nest, drag) is always the same, which is what the
+:ref:`tutorial <plugins>` teaches.

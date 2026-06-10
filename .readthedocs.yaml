@@ -3,7 +3,7 @@
 version: 2
 
 build:
-  os: ubuntu-lts-latest
+  os: ubuntu-26.04
   tools:
     python: "3.13"
   apt_packages:
@@ -11,7 +11,7 @@ build:
   jobs:
     post_build:
       # Build a single-file HTML version into a temp dir (Pandoc reads this, not your raw .rst)
-      - python -m sphinx -b singlehtml docs/ /tmp/singlehtml
+      - python -m sphinx -b singlehtml . /tmp/singlehtml
       # Convert it to ODT and drop it where Read the Docs will publish it
       - pandoc /tmp/singlehtml/index.html
           --resource-path=/tmp/singlehtml

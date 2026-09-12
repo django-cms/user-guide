@@ -3,110 +3,101 @@
 Filling in content
 ==================
 
-Now that you have created a place where your content can live, you can start filling in
-actual content. Like the page tree, content is structured in so called "plugins" which
-live in plugin trees inside placeholders.
+Your page is empty. Time to fill it.
 
-Structure board
----------------
+Content in django CMS is not one long text. It is made of **plugins** — a text, an
+image, a row of columns, a carousel — placed inside the **placeholders** that your
+page's template offers. In this lesson you add your first plugins, arrange them, and
+edit them again.
 
-Your page will have one or more placeholders to fill with content. They are displayed in
-the **structure board**.
+Open the structure board
+------------------------
 
-To add plugins to your page (or alias, or blog), you need go to open the structure board
-by clicking the button on the far right side of the menu bar.
+Click the **structure board toggle** at the far right of the toolbar:
 
 .. image:: ./images/07-structure-toggle.jpg
     :alt: Toggle button for the structure board
     :scale: 50
 
-There are different types of plugins for adding content, each with a specific purpose.
-The ones you will mainly need are the "classic" rich text, image, video, link and button
-plugins.
-
-.. note::
-
-    Which plugins are available on your site strongly depends on the installation. Take
-    this guide as a blueprint on how to interact with plugins. Even if you have
-    different plugin options installed the editing process is always the same.
-
-Once you have clicked on the structure board button, the structure board will open on
-the right side of your browser window. It will show one or more placeholders.
+The structure board opens beside your page and shows its placeholders — the regions your
+template makes editable. On a new page they are still empty.
 
 .. image:: ./images/07-structure-board.jpg
     :alt: django CMS structure board
     :scale: 50
 
-Adding plugins
---------------
+.. note::
 
-To add content to a page, click on the button . A dialog box will open, showing you the
-list of content you can add. Make your choice, a new dialog box opens.
+    Which plugins your site offers depends on the packages installed on it, so your list
+    may differ from the screenshots here. The way you work with plugins is always the
+    same.
 
-.. image:: ./images/07-add-plugin.jpg
-    :scale: 50
-    :alt: Select a plugin to add
+Add your first plugin
+---------------------
 
-Fill in the fields (in the container example below you do not have to fill any fields -
-all are optional), and save. The new content is displayed on your page.
+1. Click the **add button** of the placeholder you want to fill. A dialog lists the
+   plugins you can use at this position.
 
-.. image:: ./images/07-add-container.jpg
-    :scale: 50
-    :alt: Add container dialog box
+   .. image:: ./images/07-add-plugin.jpg
+       :scale: 50
+       :alt: Select a plugin to add
+
+2. Choose a **Container** — a plugin that groups the content of one section of your
+   page.
+3. Click **"Save"**. The container has no required fields, so there is nothing to fill
+   in.
+
+   .. image:: ./images/07-add-container.jpg
+       :scale: 50
+       :alt: Add container dialog box
+
+The plugin now appears both on your page and in the structure board. Adding content is
+this step, repeated: pick a place, pick a plugin, fill in its form.
 
 .. note::
 
-    The exact content of the add or edit plugin depends on the plugin itself. The
-    container plugin in the example is one of many plugins provided by the django CMS
-    Frontend package which are designed to structure your page.
+    Every plugin brings its own dialog. The container used here is one of the plugins
+    provided by the django CMS Frontend package, which are designed to structure a page.
+    Their options are grouped in the blue tabs at the top of the dialog, and nearly all
+    of them are optional.
 
-    Those plugins do have a set of tabs (coloured in blue) at the top of the dialog and
-    offer a wide set of design options, most of which are optional.
+Nest and rearrange plugins
+--------------------------
 
-Repeat the operation as many times as you want and for as much content as you want.
-
-If you want to move content to arrange their layout, for example to move an image before
-or after text, use the "drag & drop" function of the CMS via the notch on the left of
-the content type.
-
-You can also add content to change your layout; some of this content is nestable (you
-can put text in columns, which are themselves inserted in a section).
-
-If this element allows the addition of nestable content, the add plugin button will be
-available at the same level as the module title. The triangle icon will appear next to
-the dotted line of the drag and drop button to show or hide the nested content:
+Some plugins hold others: a text sits inside a column, the column inside a container.
+When a plugin accepts children, its entry in the structure board has an add button of
+its own, and a triangle next to the drag handle that shows or hides what is nested
+inside it.
 
 .. image:: ./images/07-nested-plugins.jpg
     :scale: 50
     :alt: Nested plugins in a placeholder
 
+To change the order of your content — to move an image above a text, say — take hold of
+the plugin by the dotted handle on the left of its entry and **drag** it to its new
+place.
+
 .. tip::
 
-    If you **hover** over the structure menu items while pressing the **SHIFT** key, the
-    content displayed on the CMS page will be highlighted, so you can see what each
-    plugin corresponds to.
+    Hold the **SHIFT** key while hovering over an entry in the structure board and the
+    matching element is highlighted on the page. It is the quickest way to tell which
+    entry belongs to which piece of content.
 
-Editing plugins
----------------
+Edit a plugin
+-------------
 
-You can change existing plugins by either
+To change something you have already added, either
 
-- **double clicking** on the content in the page (when in edit mode)
-- **clicking the pencil icon** of the plugin in the structure board.
+- **double-click** the content on the page, or
+- click the **pencil icon** of its entry in the structure board.
 
-Editing works exactly like creating a plugin
+The dialog you filled in when you created the plugin opens again.
 
-Integrating content
--------------------
+Add text
+--------
 
-When you add content to your page, you may want to integrate text, a video, clickable
-buttons or links into your text.
-
-Text
-~~~~
-
-django CMS includes a rich text editor. Its interface is particularly simple, since it
-only consists of the text you want to enter:
+Add a **Text** plugin inside your container: the rich text editor opens, and it works
+like any editor you know. Type your text, format it with the toolbar, and save.
 
 .. image:: ./images/07-ckeditor.jpg
     :alt: django CMS' integrated rich text editor
@@ -121,31 +112,26 @@ only consists of the text you want to enter:
 
 .. tip::
 
-    All plugins show a few words of summary in the plugin tree. Those plugin trees can
-    get huge, though. To keep an overview, use a feature of the Container plugin:
+    Each entry in the structure board shows a few words of its content, but a long page
+    still produces a long tree. Give each of your containers a **title**: it is shown in
+    the structure board instead of the summary, so using one container per section of
+    the page — "Hero", "Team", "Contact" — turns the tree into a table of contents.
 
-    The title field is a text field to briefly describe the container content. It will
-    be displayed in the plugin tree. It is a good practice to use separate containers
-    for different sections of your page and fill the title for quick navigation in the
-    plugin tree.
-
-Some plugins can even be added directly to a text plugin using the "CMS Plugins" menu
-within the text editor. This is useful for adding dynamic links to your text. Dynamic
-links are links to other pages of your site which - should the destination change its
-URL - will be automatically kept up-to-date.
+Plugins can also live *inside* a text. Open the **"CMS Plugins"** menu of the editor and
+you can insert, for example, a link to another page of your site: a dynamic link that
+keeps working even if the destination page's address changes later.
 
 .. image:: ./images/07-text-enabled-plugins.jpg
     :alt: The CMS Plugins menu in the rich text editor
 
 .. tip::
 
-    To remove "CMS Plugins" menu within the text editor, click on the editor and hit
-    the backspace or delete key to remove it.
-
-    If for some reason the content of the plugin is empty, try positioning the cursor behind it empty object and use backspace.
+    To remove a plugin from a text again, select it in the editor and press backspace or
+    delete. If the plugin appears to be empty and is hard to select, place the cursor
+    directly behind it and press backspace.
 
 Images
-~~~~~~
+------
 
 Let's place the image you uploaded to the media library in :ref:`lesson 4 <filer>` on
 your page:
@@ -169,7 +155,7 @@ your page:
 ..     :alt: Adding an image with the Picture / Image plugin
 
 Links
-~~~~~
+-----
 
 Now make a piece of your text link to another page of your site:
 

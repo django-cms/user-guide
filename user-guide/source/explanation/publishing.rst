@@ -5,31 +5,26 @@ Publishing
 
 .. include:: ../versioning-note.include
 
-In django CMS, publishing and versioning are crucial aspects for editors managing
-content. Here's a breakdown of how they work:
+In django CMS, nothing you write goes live by accident. Content exists as a series of
+**versions**, and exactly one of them — the published version — is the one visitors see.
+This page explains what that division buys you.
 
-Publishing
-----------
+Drafts and published versions
+-----------------------------
 
-Publishing refers to making content available to website visitors. In django CMS, you
-typically create or edit content using a **draft**, which means the unfinished content
-or changes are not immediately visible to the public. Editors can work on content
-privately until it's ready for publication.
+You never edit a live page. You edit a **draft**: your own working copy, visible to you
+and your colleagues in the CMS and to nobody else. You can take as long over it as you
+need, preview it exactly as visitors will see it, and leave it half-finished overnight
+without anyone noticing.
 
-This is the typical workflow:
-
-1. **Create Draft:** Editors create or modify content only in a draft version within the
-   CMS admin interface.
-2. **Preview:** They can preview how the content will appear on the live site before
-   publishing.
-3. **Publish:** When ready, editors can publish the changes to make them visible on the
-   live website for visitors to see.
-
-Published content cannot be changed any more. To make additional changes, start the
-process over and create a new draft based on the published version.
+**Publishing** is the deliberate step that puts your draft in place of what was live
+before. The draft becomes the published version, and the version it replaces is kept as
+a record. To change the page again, you start a new draft from the published version —
+which is why the toolbar offers you "New Draft" rather than letting you type straight
+into a live page.
 
 Why published versions cannot be edited
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
 Making published versions immutable may feel inconvenient at first, but it is a
 deliberate design decision:
@@ -64,8 +59,8 @@ Locked versions
     <https://djangocms-versioning.readthedocs.io/en/latest/settings.html#DJANGOCMS_VERSIONING_LOCK_VERSIONS>`_
     for more information.
 
-Version locking in django CMS is a feature that automatically locks each draft version
-of a content item to prevent unintended modifications or edits. A locked draft can only
-be changed by the person who created the draft. This functionality is particularly
-useful when you want to ensure that not two editors make changes to a specific content,
-ensuring changes do not interfere with each other.
+Where several people edit the same site, two of them can start work on the same page
+without noticing — and whoever saves last silently overwrites the other's work. Version
+locking prevents that: a draft belongs to the editor who created it, and only that
+editor can change it until the draft is published or the lock is released. Editing
+becomes a queue rather than a race.

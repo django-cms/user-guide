@@ -1,6 +1,6 @@
 .. _user-how-to:
 
-How-to-guides
+How-to guides
 =============
 
 .. include:: ../contribute-note.include

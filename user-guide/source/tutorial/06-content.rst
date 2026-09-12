@@ -1,48 +1,51 @@
 .. _content:
 
-Creating places for content
-===========================
+Creating a page
+===============
 
-Content needs a place to live. Typically those are pages, but you also may have other
-content models, like aliases (chunks of content that are reused elsewhere) or blog
-posts.
+Content needs somewhere to live. Usually that is a page, though your site may hold other
+kinds of content too — blog posts, or :ref:`aliases <explanation-aliases>`, chunks of
+content that are reused in several places. In this lesson you create a page.
 
-We will work with pages in this guide.
+Create your page
+----------------
 
-Create a page
--------------
-
-To create a new page, you have three options:
-
-1. Go to the **project menu**, select "Pages...". The sidebar will appear. Click on the
-   button "New page" to open the page dialog box.
-2. Use the **wizard** by clicking on the "Create" button at the top right of the
-   toolbar. The wizard dialog appears, where you can select "New page" or "New sub page"
+1. Click the **"Create"** button on the right-hand side of the toolbar. The creation
+   wizard opens and asks what you would like to create.
 
    .. image:: ./images/06-wizard-1.jpg
-       :alt: Step 1 of the wizard dialog
+       :alt: Step 1 of the wizard dialog: choosing what to create
 
-3. In the **"Page" menu**, select "Create a page" then "New page..." (or "New
-   sub-page...). The page dialog box appears.
+2. Choose **"New page"** — it creates a page next to the page you are currently on — and
+   click **"Next"**.
+3. Give your page a **title**. Leave the **slug** empty: django CMS derives it from the
+   title, and it becomes the last part of the page's address. Leave the content field
+   empty as well; you will fill the page in the next lesson.
 
-The page dialog is more extensive than the wizard dialog and contains all elements of
-the page settings.
+   .. image:: ./images/06-wizard-2.jpg
+       :alt: Step 2 of the wizard dialog: title, slug and content
 
-.. image:: ./images/06-create-page.jpg
-    :alt: aAge dialog box
+4. Click **"Create"**.
 
-In the page dialog box, give a title and possibly a menu and page title then save. The
-slug field will be filled automatically based on the page title. Of course, you can
-manually change it.
+Your new page opens in edit mode, and the version menu in the toolbar shows it as a
+draft. The page is empty — and it is yours alone until you publish it in :ref:`lesson 8
+<publishing>`.
 
-Your newly created page is displayed, as well as the django CMS menu/toolbar with the
-main content management tools. A newly created page is empty. Adding content is done via
-the structure board, in the upper right corner.
+Notice what you did *not* have to decide: colours, fonts, spacing, where the navigation
+goes. All of that comes from the page's **template**, built by your site's designers and
+shared with every other page. You supply the content; the design takes care of
+presenting it consistently.
 
-The colour, the size of the text... everything is generated automatically according to
-the page template of your site which in turn should be based on your individual graphics
-design. To change the design, there are options to modify the page template. If you want
-to change the design, talk to the developers to review it.
+.. tip::
+
+    There are other ways to create a page. The page menu's **"Create page"** entry opens
+    a fuller dialog that contains all page settings at once, and the add button of a row
+    in the page tree creates a child page exactly where you want it.
+
+    .. image:: ./images/06-create-page.jpg
+        :alt: The page dialog box
+
+    All routes are described in :ref:`Create a new page <how-to-create-page>`.
 
 .. _page-settings:
 

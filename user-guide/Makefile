@@ -2,12 +2,15 @@
 # You can set these variables from the command line.
 
 SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
 PAPER         =
-VENV = env/bin/activate
 PORT = 8001
 SOURCEDIR	  = source
 BUILDDIR      = build
+PYTHON       ?= python3
+VENV_DIR     ?= env
+VENV_PYTHON   = $(VENV_DIR)/bin/python
+SPHINXBUILD  ?= $(VENV_DIR)/bin/sphinx-build
+SPHINXAUTOBUILD ?= $(VENV_DIR)/bin/sphinx-autobuild
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -15,7 +18,7 @@ PAPEROPT_letter = -D latex_paper_size=letter
 ALLSPHINXOPTS   = -n -d build/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) $(SOURCEDIR)
 
 # list the targets that we don't want confused with files in the directory
-.PHONY: help clean html dirhtml pickle json htmlhelp qthelp latex changes linkcheck doctest screenshots screenshots-install
+.PHONY: help venv check-venv install clean html dirhtml pickle json htmlhelp qthelp latex changes linkcheck doctest spelling run text screenshots screenshots-install
 
 # "help" is first so that "make" without an argument acts like "make help".
 help:
@@ -35,60 +38,76 @@ help:
 	@echo "  screenshots to regenerate screenshots from screenshots.yml"
 	@echo "  screenshots-install to install Playwright and its Chromium browser"
 
+venv:
+	@command -v "$(PYTHON)" >/dev/null 2>&1 || { echo "error: Python executable not found: $(PYTHON)" >&2; exit 1; }
+	@"$(PYTHON)" -c 'import sys; sys.exit("error: Python 3.11 or newer is required") if sys.version_info < (3, 11) else None'
+	@if [ -f "$(VENV_DIR)/pyvenv.cfg" ] && [ ! -x "$(VENV_PYTHON)" ]; then \
+		echo "... replacing stale virtualenv in $(VENV_DIR)"; \
+		"$(PYTHON)" -m venv --clear "$(VENV_DIR)"; \
+	else \
+		"$(PYTHON)" -m venv "$(VENV_DIR)"; \
+	fi
+	@"$(VENV_PYTHON)" -c 'import sys; print("... using", sys.executable, "(" + sys.version.split()[0] + ")")'
 
-html:
-	. $(VENV); $(SPHINXBUILD) -b html $(ALLSPHINXOPTS) build/html
+check-venv:
+	@if [ ! -x "$(VENV_PYTHON)" ]; then \
+		echo "error: virtualenv is missing or stale; run 'make install'" >&2; \
+		exit 1; \
+	fi
+	@"$(VENV_PYTHON)" -c 'import sys' >/dev/null 2>&1 || { echo "error: virtualenv is unusable; run 'make install'" >&2; exit 1; }
+
+html: check-venv
+	"$(SPHINXBUILD)" -b html $(ALLSPHINXOPTS) build/html
 	@echo
 	@echo "Build finished. The HTML pages are in build/html."
 #  sphinx-build -b html  -n -d build/doctrees -D latex_paper_size=a4  -D latex_paper_size=letter build/html
 
-install:
-	@echo "... setting up virtualenv"
-	python3 -m venv env
-	. $(VENV); pip install -r requirements.txt
+install: venv
+	"$(VENV_PYTHON)" -m pip install --requirement requirements.txt
+	@printf '%s\n' \
+		"" \
+		"--------------------------------------------------------------------------------" \
+		"* watch, build and serve the documentation: make run" \
+		"* check spelling: make spelling" \
+		"" \
+		"enchant must be installed for spelling checks. See:" \
+		"https://docs.django-cms.org/en/latest/contributing/documentation.html#install-the-spelling-software" \
+		"--------------------------------------------------------------------------------" \
+		""
 
-	@echo "\n" \
-				"-------------------------------------------------------------------------------------------------- \n" \
-		    "* watch, build and serve the documentation: make run \n" \
-		    "* check spelling: make spelling \n" \
-		    "\n" \
-				"enchant must be installed in order for pyenchant (and therefore spelling checks) to work. See \n" \
-				"http://docs.django-cms.org/en/latest/contributing/documentation.html#install-the-spelling-software \n" \
-	      "-------------------------------------------------------------------------------------------------- \n" \
+screenshots-install: venv
+	"$(VENV_PYTHON)" -m pip install --requirement requirements-screenshots.txt
+	"$(VENV_PYTHON)" -m playwright install chromium
 
-screenshots-install:
-	. $(VENV); pip install -r requirements-screenshots.txt
-	. $(VENV); playwright install chromium
-
-screenshots:
-	. $(VENV); python scripts/capture_screenshots.py --config screenshots.yml
+screenshots: check-venv
+	"$(VENV_PYTHON)" scripts/capture_screenshots.py --config screenshots.yml
 
 clean:
 	-rm -r $(BUILDDIR)/*
 
-dirhtml:
-	. $(VENV); $(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) build/dirhtml
+dirhtml: check-venv
+	"$(SPHINXBUILD)" -b dirhtml $(ALLSPHINXOPTS) build/dirhtml
 	@echo
 	@echo "Build finished. The HTML pages are in build/dirhtml."
 
-pickle:
-	. $(VENV); $(SPHINXBUILD) -b pickle $(ALLSPHINXOPTS) build/pickle
+pickle: check-venv
+	"$(SPHINXBUILD)" -b pickle $(ALLSPHINXOPTS) build/pickle
 	@echo
 	@echo "Build finished; now you can process the pickle files."
 
-json:
-	. $(VENV); $(SPHINXBUILD) -b json $(ALLSPHINXOPTS) build/json
+json: check-venv
+	"$(SPHINXBUILD)" -b json $(ALLSPHINXOPTS) build/json
 	@echo
 	@echo "Build finished; now you can process the JSON files."
 
-htmlhelp:
-	. $(VENV); $(SPHINXBUILD) -b htmlhelp $(ALLSPHINXOPTS) build/htmlhelp
+htmlhelp: check-venv
+	"$(SPHINXBUILD)" -b htmlhelp $(ALLSPHINXOPTS) build/htmlhelp
 	@echo
 	@echo "Build finished; now you can run HTML Help Workshop with the" \
 	      ".hhp project file in build/htmlhelp."
 
-qthelp:
-	. $(VENV); $(SPHINXBUILD) -b qthelp $(ALLSPHINXOPTS) build/qthelp
+qthelp: check-venv
+	"$(SPHINXBUILD)" -b qthelp $(ALLSPHINXOPTS) build/qthelp
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in build/qthelp, like this:"
@@ -96,39 +115,39 @@ qthelp:
 	@echo "To view the help file:"
 	@echo "# assistant -collectionFile build/qthelp/FeinCMS.qhc"
 
-latex:
-	. $(VENV); $(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) build/latex
+latex: check-venv
+	"$(SPHINXBUILD)" -b latex $(ALLSPHINXOPTS) build/latex
 	@echo
 	@echo "Build finished; the LaTeX files are in build/latex."
 	@echo "Run \`make all-pdf' or \`make all-ps' in that directory to" \
 	      "run these through (pdf)latex."
 
-changes:
-	. $(VENV); $(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) build/changes
+changes: check-venv
+	"$(SPHINXBUILD)" -b changes $(ALLSPHINXOPTS) build/changes
 	@echo
 	@echo "The overview file is in build/changes."
 
-linkcheck:
-	. $(VENV); $(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) build/linkcheck
+linkcheck: check-venv
+	"$(SPHINXBUILD)" -b linkcheck $(ALLSPHINXOPTS) build/linkcheck
 	@echo
 	@echo "Link check complete; look for any errors in the above output " \
 	      "or in build/linkcheck/output.txt."
 
-doctest:
-	. $(VENV); $(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) build/doctest
+doctest: check-venv
+	"$(SPHINXBUILD)" -b doctest $(ALLSPHINXOPTS) build/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in build/doctest/output.txt."
 
-spelling:
-	. $(VENV); $(SPHINXBUILD) -b spelling $(ALLSPHINXOPTS) build/spelling
+spelling: check-venv
+	"$(SPHINXBUILD)" -b spelling $(ALLSPHINXOPTS) build/spelling
 	@echo
 	@echo "Check finished. Wrong words can be found in " \
 		"build/spelling/output.txt."
 
-run:
-	. $(VENV); sphinx-autobuild $(ALLSPHINXOPTS) build/html --host 0.0.0.0 --port $(PORT)
+run: check-venv
+	"$(SPHINXAUTOBUILD)" $(ALLSPHINXOPTS) build/html --host 0.0.0.0 --port $(PORT)
 
-text:
-	. $(VENV); $(SPHINXBUILD) -b text $(ALLSPHINXOPTS) build/text
+text: check-venv
+	"$(SPHINXBUILD)" -b text $(ALLSPHINXOPTS) build/text
 	@echo
 	@echo "Build finished. The HTML pages are in build/text."

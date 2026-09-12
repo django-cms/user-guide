@@ -1,21 +1,25 @@
 .. _sidebar:
 
-Administration side bar
-=======================
+The administration sidebar
+==========================
 
-Introduction
-------------
+Not everything lives on the page you are looking at. Your site's users, its media files
+and the settings of the applications it runs are managed in the **administration
+interface**, which django CMS opens in a sidebar over your page.
 
-When you click on "Administration" in the project menu, the administration or admin
-window opens. It covers most the content of your page. If you want to go back to your
-page, just click the close button or into the area outside the side bar. It covers the
-full administration interface of your site, including those added by django CMS.
-Depending on the modules installed on your site, its content may vary. It is identical
-to the content on the sites admin pages.
-
-From this page, you can access the different administration sections of your site:
-management of pages, media files, users, ...
+Open it now: in the **project menu**, select **"Administration..."**.
 
 .. image:: ./images/03-sidebar.jpg
     :alt: Example sidebar
     :width: 800
+
+What you find here depends on the packages installed on your site, so your sidebar will
+not look exactly like the screenshot. It holds the same sections as your site's
+administration pages. Two of them matter for this tutorial:
+
+- **django CMS**, which contains "Page contents" — another way into the page tree you
+  will meet in :ref:`lesson 5 <pagetree>`.
+- **Filer**, the media library where your images live. That is the next lesson.
+
+Close the sidebar again with the cross at its top right, or by clicking on the page
+outside it.

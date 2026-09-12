@@ -48,71 +48,101 @@
 Using django CMS
 ================
 
-.. note::
+django CMS lets you edit your website on the website itself. You log in, and your pages
+gain a toolbar: double-click a heading to rewrite it, drag a section into a new place,
+drop in an image where you need one — on the page, in context, seeing what your visitors
+will see.
 
-    This is a new section in the django CMS documentation, and a priority for the
-    project. If you'd like to contribute to it, we'd love to hear from you - join us on
-    `our friendly Discord channel <https://discord-docs-channel.django-cms.org/>`_.
+Nothing goes public by accident. Your changes stay drafts until you publish them, and
+every version that was ever live is kept — so you can always look back, compare, and
+restore.
 
-This is the user guide for django CMS. The intended audiences for this guide are content
-creators and site administrators.
+This guide is for the people who fill a django CMS site with content: editors, authors
+and site administrators. It assumes no knowledge of Django, HTML or programming.
 
-django CMS sites are highly customisable and varied. The examples here follow the
-`quickstart project from Github <https://github.com/django-cms/django-cms-quickstart>`_.
-This provides certain features, which are entirely optional for your own site, and the
-features provided in the quickstart are used in this guide to demonstrate how django CMS
-can be used.
-
-The origin of this document is a guide provided by `Kapt.mobi
-<https://support.kapt.mobi/index.php/docs/kapt-doc/>`_. It has been translated from the
-native French and extended.
-
-Guide for content editors
--------------------------
+Start here
+----------
 
 .. rst-class:: clearfix row
 
 .. rst-class:: column column2 top-left
 
-:ref:`user-tutorial`
-~~~~~~~~~~~~~~~~~~~~
+:ref:`Tutorial <user-tutorial>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Start here as a new django CMS content editor**:
-
-- Get to know the user interface
-- Understand the page tree
-- Create content
+**New to django CMS? Start here.** From your first login to a published page, in about
+half an hour.
 
 .. rst-class:: column column2 top-right
 
-:ref:`user-how-to`
-~~~~~~~~~~~~~~~~~~
+:ref:`How-to guides <user-how-to>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Practical **step-by-step guides** to get things done in the most simple way as a content
-editor.
+**Recipes for everyday tasks**: add an image, reuse a footer on every page, translate a
+page, undo a change that went wrong.
 
 .. rst-class:: column column2 bottom-left
 
-:ref:`user-explanation`
-~~~~~~~~~~~~~~~~~~~~~~~
+:ref:`Concepts <user-explanation>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-What is a placeholder? What is a plugin? Understand these key concepts of django CMS.
+**Why django CMS works the way it does.** Placeholders, plugins, drafts and versions,
+reusable content.
 
 .. rst-class:: column column2 bottom-right
 
-:ref:`user-reference`
-~~~~~~~~~~~~~~~~~~~~~
+:ref:`Reference <user-reference>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Look up the details: toolbar menus, page settings, version states, and installed
-plugins.
+**Look things up**: the toolbar menus, the page tree, the page settings, the version
+states, and the plugins installed on your site.
 
 .. rst-class:: clearfix row
+
+What you can do
+---------------
+
+- :ref:`Build and organise your site's pages <how-to-pages>` — create them, nest them,
+  rename their URLs, decide what appears in the navigation.
+- :ref:`Put images on a page <how-to-add-image>`, on their own or inside a text, from a
+  media library shared by the whole site.
+- :ref:`Add links and buttons <how-to-links>` that keep working even when the page they
+  point at moves.
+- :ref:`Maintain a footer, a banner or a contact block in one place <how-to-aliases>`
+  and show it on as many pages as you like.
+- :ref:`Publish a page in several languages <how-to-translations>`, each one edited and
+  published independently.
+- :ref:`Compare, restore or discard versions <how-to-versions>` — every state your site
+  has been in is kept.
+- :ref:`Organise the files of your site <how-to-media-files>` in the media library.
+- :ref:`Redirect an old address <how-to-redirects>` so visitors and search engines still
+  find the content.
+
+About this guide
+----------------
+
+django CMS sites are highly customisable and vary a great deal. The examples here follow
+the `quickstart project from GitHub
+<https://github.com/django-cms/django-cms-quickstart>`_, which provides a typical set of
+features — all of them optional for your own site. Where a section only applies to a
+particular package, it says so at the top.
+
+The origin of this document is a guide provided by `Kapt.mobi
+<https://support.kapt.mobi/index.php/docs/kapt-doc/>`_. It has been translated from the
+native French and extended.
+
+.. note::
+
+    This guide is a priority for the django CMS project, and it is never finished. If
+    you would like to contribute — a correction, a missing how-to, a screenshot — we
+    would love to hear from you: join us on `our friendly Discord channel
+    <https://discord-docs-channel.django-cms.org/>`_.
 
 .. toctree::
     :maxdepth: 1
     :hidden:
 
     tutorial/index
-    explanation/index
     how-to/index
+    explanation/index
     reference/index

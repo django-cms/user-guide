@@ -67,6 +67,50 @@ class ValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(ConfigurationError, "Unsupported action"):
             validate_config(config)
 
+    def test_accepts_element_labels(self):
+        config = valid_config()
+        config["screenshots"][0]["labels"] = [
+            {
+                "selector": ".brand",
+                "text": "Logo",
+                "position": "bottom-right",
+                "color": "#005a9c",
+            },
+            {
+                "selector": ".left",
+                "text": "Left",
+                "position": "outside-bottom-left",
+            },
+            {
+                "selector": ".center",
+                "text": "Center",
+                "position": "outside-bottom",
+            },
+            {
+                "selector": ".right",
+                "text": "Right",
+                "position": "outside-bottom-right",
+            },
+        ]
+
+        validate_config(config)
+
+    def test_rejects_label_without_text(self):
+        config = valid_config()
+        config["screenshots"][0]["labels"] = [{"selector": ".brand"}]
+
+        with self.assertRaisesRegex(ConfigurationError, r"labels\[0\]\.text"):
+            validate_config(config)
+
+    def test_rejects_unknown_label_position(self):
+        config = valid_config()
+        config["screenshots"][0]["labels"] = [
+            {"selector": ".brand", "text": "Logo", "position": "somewhere"}
+        ]
+
+        with self.assertRaisesRegex(ConfigurationError, r"labels\[0\]\.position"):
+            validate_config(config)
+
 
 class SelectionTests(unittest.TestCase):
     def test_skips_disabled_and_matches_id_or_output(self):
@@ -174,6 +218,133 @@ class CaptureTests(unittest.TestCase):
                 )
 
             self.assertEqual(target.read_bytes(), b"old screenshot")
+
+    def test_labels_are_drawn_and_removed_around_capture(self):
+        page = MagicMock()
+        label = MagicMock()
+        document_root = MagicMock()
+        page.locator.side_effect = lambda selector: {
+            ".brand": label,
+            "html": document_root,
+        }.get(selector, MagicMock())
+
+        def write_capture(*, path, **options):
+            Path(path).write_bytes(b"labelled screenshot")
+
+        page.screenshot.side_effect = write_capture
+        with tempfile.TemporaryDirectory() as directory:
+            capture_screenshot(
+                page,
+                {
+                    "id": "toolbar",
+                    "output": "toolbar.png",
+                    "labels": [
+                        {
+                            "selector": ".brand",
+                            "text": "Logo",
+                            "position": "bottom-right",
+                        }
+                    ],
+                },
+                Path(directory),
+            )
+
+        label.wait_for.assert_called_once_with(state="visible")
+        label.evaluate.assert_called_once()
+        options = label.evaluate.call_args.args[1]
+        self.assertEqual(options["text"], "Logo")
+        self.assertEqual(options["position"], "bottom-right")
+        document_root.evaluate.assert_called_once()
+
+    def test_labels_are_removed_when_capture_fails(self):
+        page = MagicMock()
+        document_root = MagicMock()
+        page.locator.side_effect = lambda selector: {
+            ".menu": MagicMock(),
+            "html": document_root,
+        }.get(selector, MagicMock())
+        page.screenshot.side_effect = RuntimeError("browser closed")
+
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            self.assertRaisesRegex(RuntimeError, "browser closed"),
+        ):
+            capture_screenshot(
+                page,
+                {
+                    "id": "menu",
+                    "output": "menu.png",
+                    "labels": [{"selector": ".menu", "text": "Main menu"}],
+                },
+                Path(directory),
+            )
+
+        document_root.evaluate.assert_called_once()
+
+    def test_outside_label_expands_element_capture(self):
+        page = MagicMock()
+        target = MagicMock()
+        target.bounding_box.return_value = {
+            "x": 20,
+            "y": 30,
+            "width": 100,
+            "height": 40,
+        }
+        label = MagicMock()
+        document_root = MagicMock()
+        overlays = MagicMock()
+        overlays.count.return_value = 2
+        outline = MagicMock()
+        outline.bounding_box.return_value = {
+            "x": 20,
+            "y": 30,
+            "width": 100,
+            "height": 40,
+        }
+        badge = MagicMock()
+        badge.bounding_box.return_value = {
+            "x": 126,
+            "y": 30,
+            "width": 70,
+            "height": 24,
+        }
+        overlays.nth.side_effect = [outline, badge]
+
+        def locate(selector):
+            return {
+                "main": target,
+                ".menu": label,
+                "html": document_root,
+            }.get(selector, overlays)
+
+        page.locator.side_effect = locate
+
+        def write_capture(*, path, **options):
+            Path(path).write_bytes(b"outside label")
+
+        page.screenshot.side_effect = write_capture
+        with tempfile.TemporaryDirectory() as directory:
+            capture_screenshot(
+                page,
+                {
+                    "id": "outside-label",
+                    "output": "outside-label.png",
+                    "labels": [
+                        {
+                            "selector": ".menu",
+                            "text": "Menu",
+                            "position": "outside-right",
+                        }
+                    ],
+                    "capture": {"selector": "main"},
+                },
+                Path(directory),
+            )
+
+        self.assertEqual(
+            page.screenshot.call_args.kwargs["clip"],
+            {"x": 20, "y": 30, "width": 176, "height": 40},
+        )
 
 
 if __name__ == "__main__":

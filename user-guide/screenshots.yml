@@ -9,8 +9,8 @@ output_dir: source
 browser:
   name: chromium
   viewport:
-    width: 1440
-    height: 1000
+    width: 1024
+    height: 800
   device_scale_factor: 1
   color_scheme: light
   reduced_motion: reduce
@@ -50,6 +50,19 @@ screenshots:
       selector: .cms-toolbar
       padding: 0
       quality: 90
+    labels:
+      - selector: ".cms-toolbar-item-logo"
+        text: Logo
+        position: outside-bottom
+      - selector: ".cms-toolbar-left ul.cms-toolbar-item-navigation >li:first-child"
+        text: Project menu
+        position: outside-bottom
+      - selector: ".cms-toolbar-item-dark-mode-toggle"
+        text: Color scheme
+        position: outside-bottom
+      - selector: ".cms-toolbar-item-cms-mode-switcher"
+        text: Structure board toggle
+        position: outside-bottom-right
 
   # A disabled template demonstrates menu screenshots without assuming the
   # exact markup of every django CMS version. Copy it, update the selectors for

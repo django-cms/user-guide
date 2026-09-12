@@ -49,8 +49,7 @@ def seed_site(
 
     site = Site.objects.get_current()
     site.domain = "127.0.0.1"
-    site.name = "django CMS"
-    site.save(update_fields=["domain", "name"])
+    site.save(update_fields=["domain"])
 
     page = Page.objects.filter(reverse_id=PAGE_REVERSE_ID).first()
     if page is None:

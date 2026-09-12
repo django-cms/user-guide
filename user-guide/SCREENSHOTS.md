@@ -78,6 +78,14 @@ screenshots:
       - wait_for:
           selector: '.cms-dropdown-menu[aria-expanded="true"]'
           state: visible
+    labels:
+      - selector: '.cms-logo'
+        text: Logo
+        position: top-left
+      - selector: '.cms-dropdown-menu[aria-expanded="true"]'
+        text: Page menu
+        position: outside-right
+        color: '#005a9c'
     capture:
       selector: '.cms-dropdown-menu[aria-expanded="true"]'
       padding: 8
@@ -114,6 +122,18 @@ With no capture option, the current viewport is saved. Set `full_page: true` to 
 the whole page, or set `selector` to save one element. Element captures also support
 `frame` and `padding`. Common screenshot options include `quality` (JPEG only),
 `omit_background`, `animations`, `caret`, `scale`, `hide`, `mask`, and `mask_color`.
+
+Use `labels` to identify important elements in the resulting image. Each label draws
+a temporary coloured outline around the matching element and places its text inside
+one corner. `selector` and `text` are required. `position` can be `top-left` (the
+default), `top-right`, `bottom-left`, or `bottom-right`. To place the badge next to
+the element instead, use `outside-top`, `outside-right`, `outside-bottom`, or
+`outside-left`. Bottom labels are centred by default; use `outside-bottom-left` or
+`outside-bottom-right` to align them with the corresponding edge of the element.
+Element captures automatically expand to include outside badges; `color` defaults to
+django CMS magenta (`#d40055`). A label can also use `frame` when its element is
+inside an iframe. Selectors must resolve to one visible element. Labels affect only
+the screenshot and are removed from the page immediately after capture.
 
 Any string value can refer to an environment variable as `${NAME}`. A default can be
 provided as `${NAME:-default}`. Missing variables without a default stop the run before

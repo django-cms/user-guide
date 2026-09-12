@@ -14,7 +14,7 @@ import tempfile
 import time
 import uuid
 from collections.abc import Mapping, Sequence
-from contextlib import contextmanager
+from contextlib import contextmanager, suppress
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -40,6 +40,17 @@ SUPPORTED_ACTIONS = {
     "wait_for_timeout",
 }
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png"}
+INSIDE_LABEL_POSITIONS = {"top-left", "top-right", "bottom-left", "bottom-right"}
+OUTSIDE_LABEL_POSITIONS = {
+    "outside-bottom",
+    "outside-bottom-left",
+    "outside-bottom-right",
+    "outside-left",
+    "outside-right",
+    "outside-top",
+}
+LABEL_POSITIONS = INSIDE_LABEL_POSITIONS | OUTSIDE_LABEL_POSITIONS
+LABEL_SETTINGS = {"color", "frame", "position", "selector", "text"}
 BROWSER_SETTINGS = {
     "accept_downloads",
     "channel",
@@ -72,6 +83,76 @@ ENVIRONMENT_VARIABLE = re.compile(
 TEMPORARY_USERNAME = "admin"
 TEMPORARY_PASSWORD = "djangocms-screenshots"
 TEMPORARY_PAGE_PATH = "/en/welcome/?toolbar_on"
+
+ADD_ELEMENT_LABEL_SCRIPT = """
+(element, options) => {
+    const document = element.ownerDocument;
+    const window = document.defaultView;
+    const bounds = element.getBoundingClientRect();
+    if (!bounds.width || !bounds.height) {
+        throw new Error(`Cannot label an element without dimensions: ${options.selector}`);
+    }
+
+    const outline = document.createElement("div");
+    outline.dataset.screenshotLabelGroup = options.group;
+    outline.setAttribute("aria-hidden", "true");
+    Object.assign(outline.style, {
+        position: "absolute",
+        left: `${bounds.left + window.scrollX}px`,
+        top: `${bounds.top + window.scrollY}px`,
+        width: `${bounds.width}px`,
+        height: `${bounds.height}px`,
+        boxSizing: "border-box",
+        border: `3px solid ${options.color}`,
+        borderRadius: "2px",
+        pointerEvents: "none",
+        zIndex: "2147483646",
+    });
+
+    const badge = document.createElement("span");
+    badge.dataset.screenshotLabelGroup = options.group;
+    badge.textContent = options.text;
+    Object.assign(badge.style, {
+        position: "absolute",
+        boxSizing: "border-box",
+        padding: "3px 7px",
+        background: options.color,
+        color: "white",
+        font: "600 13px/18px system-ui, -apple-system, sans-serif",
+        letterSpacing: "0.01em",
+        whiteSpace: "nowrap",
+        textShadow: "none",
+    });
+
+    const placements = {
+        "top-left": {top: "-3px", left: "-3px"},
+        "top-right": {top: "-3px", right: "-3px"},
+        "bottom-left": {bottom: "-3px", left: "-3px"},
+        "bottom-right": {bottom: "-3px", right: "-3px"},
+        "outside-top": {bottom: "100%", left: "-3px"},
+        "outside-right": {top: "-3px", left: "100%"},
+        "outside-bottom-left": {top: "100%", left: "-3px"},
+        "outside-bottom": {
+            top: "100%",
+            left: "50%",
+            transform: "translateX(-50%)",
+        },
+        "outside-bottom-right": {top: "100%", right: "-3px"},
+        "outside-left": {top: "-3px", right: "100%"},
+    };
+    Object.assign(badge.style, placements[options.position]);
+    outline.appendChild(badge);
+    (document.body || document.documentElement).appendChild(outline);
+}
+"""
+
+REMOVE_ELEMENT_LABELS_SCRIPT = """
+(root, group) => {
+    root.ownerDocument
+        .querySelectorAll(`[data-screenshot-label-group="${CSS.escape(group)}"]`)
+        .forEach((element) => element.remove());
+}
+"""
 
 
 class ConfigurationError(ValueError):
@@ -157,6 +238,39 @@ def _validate_actions(actions: Any, location: str) -> None:
             )
 
 
+def _validate_labels(labels: Any, location: str) -> None:
+    if labels is None:
+        return
+    if not isinstance(labels, list):
+        raise ConfigurationError(f"{location} must be a list")
+    for index, raw_label in enumerate(labels):
+        item_location = f"{location}[{index}]"
+        label = _require_mapping(raw_label, item_location)
+        unknown_settings = set(label) - LABEL_SETTINGS
+        if unknown_settings:
+            raise ConfigurationError(
+                f"Unknown {item_location} setting(s): "
+                f"{', '.join(sorted(unknown_settings))}"
+            )
+        for name in ("selector", "text"):
+            if not isinstance(label.get(name), str) or not label[name]:
+                raise ConfigurationError(
+                    f"{item_location}.{name} must be a non-empty string"
+                )
+        frame = label.get("frame")
+        if frame is not None and (not isinstance(frame, str) or not frame):
+            raise ConfigurationError(f"{item_location}.frame must be a string")
+        position = label.get("position", "top-left")
+        if position not in LABEL_POSITIONS:
+            choices = ", ".join(sorted(LABEL_POSITIONS))
+            raise ConfigurationError(
+                f"{item_location}.position must be one of {choices}"
+            )
+        color = label.get("color", "#d40055")
+        if not isinstance(color, str) or not color:
+            raise ConfigurationError(f"{item_location}.color must be a string")
+
+
 def validate_config(config: Any) -> None:
     config = _require_mapping(config, "configuration")
     if config.get("version") != 1:
@@ -224,6 +338,7 @@ def validate_config(config: Any) -> None:
             raise ConfigurationError(f"{location}.url must be a non-empty string")
 
         _validate_actions(screenshot.get("actions"), f"{location}.actions")
+        _validate_labels(screenshot.get("labels"), f"{location}.labels")
         capture = _require_mapping(screenshot.get("capture", {}), f"{location}.capture")
         selector = capture.get("selector")
         if selector is not None and (not isinstance(selector, str) or not selector):
@@ -392,6 +507,75 @@ def _capture_options(page: Any, capture: Mapping[str, Any]) -> dict[str, Any]:
     return options
 
 
+@contextmanager
+def element_labels(page: Any, labels: Sequence[Mapping[str, Any]]):
+    """Temporarily draw labelled outlines over selected page elements."""
+
+    group = uuid.uuid4().hex
+    document_roots: dict[str | None, Any] = {}
+    document_scopes: dict[str | None, Any] = {}
+    try:
+        for raw_label in labels:
+            label = dict(raw_label)
+            frame = label.get("frame")
+            scope = page.frame_locator(frame) if frame else page
+            document_roots.setdefault(frame, scope.locator("html"))
+            document_scopes.setdefault(frame, scope)
+            locator = scope.locator(str(label["selector"]))
+            locator.wait_for(state="visible")
+            locator.evaluate(
+                ADD_ELEMENT_LABEL_SCRIPT,
+                {
+                    "color": label.get("color", "#d40055"),
+                    "group": group,
+                    "position": label.get("position", "top-left"),
+                    "selector": label["selector"],
+                    "text": label["text"],
+                },
+            )
+        overlay_selector = f'[data-screenshot-label-group="{group}"]'
+        yield [scope.locator(overlay_selector) for scope in document_scopes.values()]
+    finally:
+        # Navigation or a browser failure may already have destroyed a document.
+        # Cleanup is deliberately best-effort so it cannot hide the capture error.
+        for root in document_roots.values():
+            with suppress(Exception):
+                root.evaluate(REMOVE_ELEMENT_LABELS_SCRIPT, group)
+
+
+def _capture_clip(
+    locator: Any,
+    overlay_locators: Sequence[Any],
+    padding: float,
+) -> dict[str, float]:
+    """Return a clip containing the capture target, padding, and label overlays."""
+
+    box = locator.bounding_box()
+    if box is None:
+        raise RuntimeError("Could not determine bounds for the capture selector")
+    left = box["x"] - padding
+    top = box["y"] - padding
+    right = box["x"] + box["width"] + padding
+    bottom = box["y"] + box["height"] + padding
+    for overlays in overlay_locators:
+        for index in range(overlays.count()):
+            overlay_box = overlays.nth(index).bounding_box()
+            if overlay_box is None:
+                continue
+            left = min(left, overlay_box["x"])
+            top = min(top, overlay_box["y"])
+            right = max(right, overlay_box["x"] + overlay_box["width"])
+            bottom = max(bottom, overlay_box["y"] + overlay_box["height"])
+    clipped_left = max(0, left)
+    clipped_top = max(0, top)
+    return {
+        "x": clipped_left,
+        "y": clipped_top,
+        "width": right - clipped_left,
+        "height": bottom - clipped_top,
+    }
+
+
 def capture_screenshot(
     page: Any,
     screenshot: Mapping[str, Any],
@@ -420,28 +604,27 @@ def capture_screenshot(
         options = _capture_options(page, capture)
         selector = capture.get("selector")
         padding = capture.get("padding", 0)
+        locator = None
         if selector:
             locator_parameters = {"selector": selector}
             if capture.get("frame"):
                 locator_parameters["frame"] = capture["frame"]
             locator = _locator(page, locator_parameters)
             locator.scroll_into_view_if_needed()
-            if padding:
-                box = locator.bounding_box()
-                if box is None:
-                    raise RuntimeError(f"Could not determine bounds for {selector!r}")
-                options["clip"] = {
-                    "x": max(0, box["x"] - padding),
-                    "y": max(0, box["y"] - padding),
-                    "width": box["width"] + 2 * padding,
-                    "height": box["height"] + 2 * padding,
-                }
+
+        labels = screenshot.get("labels", [])
+        has_outside_label = any(
+            label.get("position") in OUTSIDE_LABEL_POSITIONS for label in labels
+        )
+        with element_labels(page, labels) as overlay_locators:
+            if locator is not None and (padding or has_outside_label):
+                options["clip"] = _capture_clip(locator, overlay_locators, padding)
                 page.screenshot(path=temporary, **options)
-            else:
+            elif locator is not None:
                 locator.screenshot(path=temporary, **options)
-        else:
-            options["full_page"] = capture.get("full_page", False)
-            page.screenshot(path=temporary, **options)
+            else:
+                options["full_page"] = capture.get("full_page", False)
+                page.screenshot(path=temporary, **options)
         os.replace(temporary, target)
     finally:
         if temporary.exists():

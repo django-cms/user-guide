@@ -8,8 +8,10 @@ to 2100 px wide, which becomes 22 inches on the page: they run off the edge of t
 paper.
 
 This script rewrites the ``<img>`` tags of the generated single-file HTML so that
-no image is wider than the printable width of the page, preserving each image's
-aspect ratio. Images that already fit are left alone.
+no image is wider than the printable width of the page *minus the indentation an
+image may sit at* -- images in list items and notes start well right of the left
+margin -- preserving each image's aspect ratio. Images that already fit are left
+alone.
 
 Usage::
 
@@ -30,9 +32,13 @@ from urllib.parse import unquote, urlparse
 
 import imagesize
 
-# A4 (21 cm) with the 2 cm margins of pandoc's default ODT template leaves 17 cm of
-# text width. 600 px at 96 dpi is 6.25 inch (15.9 cm) and fits with room to spare.
-DEFAULT_MAX_WIDTH = 600
+# Pandoc's default ODT template is US Letter with 1 inch margins, so the text column is
+# 6.5 inch wide -- but a screenshot is never flush with the left margin. Pandoc indents
+# a block image by 0.2 inch, and one nested in a list by up to 0.31 inch more, so the
+# widest an image may be and still clear the right margin is about 6.18 inch (593 px at
+# 96 dpi). 500 px is 5.2 inch (13.2 cm): it keeps the largest screenshots legible and
+# leaves roughly an inch of slack for deeper indentation than the guide uses today.
+DEFAULT_MAX_WIDTH = 500
 
 IMG_TAG = re.compile(r"<img\b[^>]*>", re.IGNORECASE)
 ATTR = re.compile(r"""(\w[\w:-]*)\s*=\s*("([^"]*)"|'([^']*)')""")

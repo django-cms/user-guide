@@ -1,0 +1,3 @@
+# Dependencies used only to regenerate documentation screenshots.
+playwright>=1.40
+PyYAML>=6.0

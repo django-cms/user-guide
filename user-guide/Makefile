@@ -15,7 +15,7 @@ PAPEROPT_letter = -D latex_paper_size=letter
 ALLSPHINXOPTS   = -n -d build/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) $(SOURCEDIR)
 
 # list the targets that we don't want confused with files in the directory
-.PHONY: help clean html dirhtml pickle json htmlhelp qthelp latex changes linkcheck doctest
+.PHONY: help venv check-venv install clean html dirhtml pickle json htmlhelp qthelp latex changes linkcheck doctest spelling run text screenshots screenshots-install screenshots-temporary
 
 # "help" is first so that "make" without an argument acts like "make help".
 help:
@@ -32,6 +32,9 @@ help:
 	@echo "  linkcheck to check all external links for integrity"
 	@echo "  doctest   to run all doctests embedded in the documentation (if enabled)"
 	@echo "  spelling  to check for typos in documentation"
+	@echo "  screenshots to regenerate screenshots from screenshots.yml"
+	@echo "  screenshots-install to install Playwright and its Chromium browser"
+	@echo "  screenshots-temporary to capture against a disposable django CMS site"
 
 
 html:
@@ -45,14 +48,15 @@ install:
 	python3 -m venv env
 	. $(VENV); pip install -r requirements.txt
 
-	@echo "\n" \
-	      "-------------------------------------------------------------------------------------------------- \n" \
-		    "* watch, build and serve the documentation: make run \n" \
-		    "* check spelling: make spelling \n" \
-		    "\n" \
-				"enchant must be installed in order for pyenchant (and therefore spelling checks) to work. See \n" \
-				"http://docs.django-cms.org/en/latest/contributing/documentation.html#install-the-spelling-software \n" \
-	      "-------------------------------------------------------------------------------------------------- \n" \
+screenshots-install: install
+	"$(VENV_PYTHON)" -m pip install --requirement requirements-screenshots.txt
+	"$(VENV_PYTHON)" -m playwright install chromium
+
+screenshots: check-venv
+	"$(VENV_PYTHON)" scripts/capture_screenshots.py --config screenshots.yml
+
+screenshots-temporary: screenshots-install
+	"$(VENV_PYTHON)" scripts/capture_screenshots.py --config screenshots.yml --temporary-site
 
 clean:
 	-rm -r $(BUILDDIR)/*

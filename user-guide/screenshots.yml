@@ -1,0 +1,69 @@
+# Screenshot recipe for the django CMS user guide.
+#
+# Point DJANGOCMS_BASE_URL at a prepared django CMS site. The account must be a
+# staff user with permission to edit the page(s) referenced below.
+version: 1
+base_url: "${DJANGOCMS_BASE_URL:-http://localhost:8000}"
+output_dir: source
+
+browser:
+  name: chromium
+  viewport:
+    width: 1440
+    height: 1000
+  device_scale_factor: 1
+  color_scheme: light
+  reduced_motion: reduce
+  locale: en-US
+  timezone_id: Europe/Berlin
+  timeout: 10000
+  navigation_timeout: 30000
+
+# Login once and reuse the authenticated browser context for every screenshot.
+setup:
+  - goto: /admin/login/?next=/
+  - fill:
+      selector: 'input[name="username"]'
+      value: "${DJANGOCMS_USERNAME}"
+  - fill:
+      selector: 'input[name="password"]'
+      value: "${DJANGOCMS_PASSWORD}"
+  - click: 'button[type="submit"], input[type="submit"]'
+  - wait_for_load_state: networkidle
+
+before_each:
+  # Remove focus outlines and transient hover states from the previous capture.
+  - evaluate: "document.activeElement && document.activeElement.blur()"
+
+screenshots:
+  # This first recipe is intentionally small. Add one entry for each image that
+  # should be maintained automatically; see SCREENSHOTS.md for all actions and
+  # capture options.
+  - id: toolbar-overview
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/02-toolbar.jpg
+    actions:
+      - wait_for:
+          selector: .cms-toolbar
+          state: visible
+    capture:
+      selector: .cms-toolbar
+      padding: 0
+      quality: 90
+
+  # A disabled template demonstrates menu screenshots without assuming the
+  # exact markup of every django CMS version. Copy it, update the selectors for
+  # the target release, and enable it.
+  - id: project-menu
+    enabled: false
+    url: /?toolbar_on
+    output: tutorial/images/02-project-menu.jpg
+    actions:
+      - click: "REPLACE_WITH_PROJECT_MENU_BUTTON_SELECTOR"
+      - wait_for:
+          selector: "REPLACE_WITH_OPEN_PROJECT_MENU_SELECTOR"
+          state: visible
+    capture:
+      selector: "REPLACE_WITH_OPEN_PROJECT_MENU_SELECTOR"
+      padding: 8
+      quality: 90

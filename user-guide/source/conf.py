@@ -11,7 +11,7 @@
 # All configuration values have a default; values that are commented out serve
 # to show the default.
 
-VERSION = "4.1"
+VERSION = "5.1"
 
 import cms
 import datetime

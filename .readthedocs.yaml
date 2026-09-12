@@ -12,9 +12,13 @@ build:
     post_build:
       # Build a single-file HTML version into a temp dir (Pandoc reads this, not your raw .rst)
       - python -m sphinx -b singlehtml -t odtsource user-guide/source/ /tmp/singlehtml
+      # Screenshots are up to 2100 px wide, which is 22 inches at 96 dpi: constrain
+      # them to the printable width of the page before Pandoc sizes them
+      - python user-guide/scripts/fit_odt_images.py /tmp/singlehtml/index.html
       # Convert it to ODT and drop it where Read the Docs will publish it
       - pandoc /tmp/singlehtml/index.html
           --resource-path=/tmp/singlehtml
+          --dpi=96
           -o $READTHEDOCS_OUTPUT/html/django-cms-user-guide.odt
 
 sphinx:

@@ -612,6 +612,43 @@ def _capture_clip(
     }
 
 
+def _wait_for_stable_geometry(
+    page: Any,
+    locator: Any,
+    include_locators: Sequence[Any],
+    *,
+    interval: int = 50,
+    samples: int = 3,
+    attempts: int = 40,
+) -> None:
+    """Wait until an element crop stops moving or resizing."""
+
+    def normalized_box(item: Any) -> tuple[float, float, float, float] | None:
+        box = item.bounding_box()
+        if box is None:
+            return None
+        return tuple(round(box[key], 2) for key in ("x", "y", "width", "height"))
+
+    previous: tuple[Any, ...] | None = None
+    unchanged = 0
+    for _ in range(attempts):
+        current: tuple[Any, ...] = (normalized_box(locator),) + tuple(
+            normalized_box(additional.nth(index))
+            for additional in include_locators
+            for index in range(additional.count())
+        )
+        if current and all(box is not None for box in current) and current == previous:
+            unchanged += 1
+            if unchanged >= samples - 1:
+                return
+        else:
+            unchanged = 0
+        previous = current
+        page.wait_for_timeout(interval)
+
+    raise RuntimeError("Capture elements did not reach stable geometry")
+
+
 def capture_screenshot(
     page: Any,
     screenshot: Mapping[str, Any],
@@ -655,6 +692,8 @@ def capture_screenshot(
             include_locator = _locator(page, include_parameters)
             include_locator.wait_for(state="visible")
             include_locators.append(include_locator)
+        if locator is not None:
+            _wait_for_stable_geometry(page, locator, include_locators)
 
         labels = screenshot.get("labels", [])
         has_outside_label = any(

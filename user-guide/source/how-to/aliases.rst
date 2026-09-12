@@ -21,13 +21,13 @@ Create an alias
 
    .. todo::
 
-       **Screenshot needed:** ``how-to/images/aliases-changelist.png`` —
+       **Screenshot needed:** ``how-to/images/aliases-changelist.jpg`` —
        The Aliases overview in the sidebar with at least one category and one alias
        visible, the "Add Alias" button visible. Quickstart project, light colour
        scheme, browser window ~1200 px wide.
 
    .. Uncomment once the screenshot exists:
-   .. .. image:: images/aliases-changelist.png
+   .. .. image:: images/aliases-changelist.jpg
    ..     :alt: The Aliases overview in the sidebar
 
 4. Open the alias to edit its content. An alias has a placeholder which you fill with

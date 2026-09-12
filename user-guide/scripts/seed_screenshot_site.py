@@ -483,8 +483,7 @@ def seed_site(
 
     site = Site.objects.get_current()
     site.domain = "127.0.0.1"
-    site.name = "django CMS User Guide"
-    site.save(update_fields=["domain", "name"])
+    site.save(update_fields=["domain"])
 
     folder, image, document = _ensure_filer_assets(user)
     alias = _ensure_alias(site, user)

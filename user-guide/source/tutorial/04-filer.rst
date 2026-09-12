@@ -33,13 +33,13 @@ this tutorial:
 
 .. todo::
 
-    **Screenshot needed:** ``tutorial/images/04-filer-new-folder.png`` —
+    **Screenshot needed:** ``tutorial/images/04-filer-new-folder.jpg`` —
     The filer folder list with the "New Folder" button highlighted and the new
     "Tutorial" folder dialog open. Quickstart project, light colour scheme, browser
     window ~1200 px wide.
 
 .. Uncomment once the screenshot exists:
-.. .. image:: ./images/04-filer-new-folder.png
+.. .. image:: ./images/04-filer-new-folder.jpg
 ..     :alt: Creating a new folder in the media library
 
 Upload an image
@@ -52,13 +52,13 @@ Upload an image
 
 .. todo::
 
-    **Screenshot needed:** ``tutorial/images/04-filer-upload.png`` —
+    **Screenshot needed:** ``tutorial/images/04-filer-upload.jpg`` —
     The inside of a filer folder with one uploaded image visible and the upload
     button at the top right highlighted. Quickstart project, light colour scheme,
     browser window ~1200 px wide.
 
 .. Uncomment once the screenshot exists:
-.. .. image:: ./images/04-filer-upload.png
+.. .. image:: ./images/04-filer-upload.jpg
 ..     :alt: An uploaded image inside a media library folder
 
 Check the image details

@@ -7,6 +7,7 @@ from unittest.mock import MagicMock, patch
 
 from scripts.capture_screenshots import (
     ConfigurationError,
+    _wait_for_stable_geometry,
     capture_screenshot,
     configure_cms_site,
     expand_environment,
@@ -279,6 +280,20 @@ class BrowserActionTests(unittest.TestCase):
 
 
 class CaptureTests(unittest.TestCase):
+    def test_waits_for_capture_geometry_to_stop_changing(self):
+        page = MagicMock()
+        target = MagicMock()
+        target.bounding_box.side_effect = [
+            {"x": 0, "y": 0, "width": width, "height": 100}
+            for width in (100, 200, 300, 300, 300)
+        ]
+
+        _wait_for_stable_geometry(page, target, [])
+
+        self.assertEqual(target.bounding_box.call_count, 5)
+        self.assertEqual(page.wait_for_timeout.call_count, 4)
+        page.wait_for_timeout.assert_called_with(50)
+
     def test_successful_capture_atomically_replaces_existing_image(self):
         page = MagicMock()
 

@@ -138,6 +138,16 @@ native French and extended.
     would love to hear from you: join us on `our friendly Discord channel
     <https://discord-docs-channel.django-cms.org/>`_.
 
+.. only:: not odtsource
+
+    .. admonition:: Take the whole guide with you
+        :class: tip
+
+        This guide is also available as one document you can read offline,
+        print, improve, or hand to a new colleague: `download the user guide (ODT)
+        <django-cms-user-guide.odt>`_. It opens in LibreOffice, Word, Pages and Google
+        Docs. The file is rebuilt with the rest of the guide, so it is never out of date.
+
 .. toctree::
     :maxdepth: 1
     :hidden:

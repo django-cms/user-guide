@@ -18,7 +18,7 @@ PAPEROPT_letter = -D latex_paper_size=letter
 ALLSPHINXOPTS   = -n -d build/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) $(SOURCEDIR)
 
 # list the targets that we don't want confused with files in the directory
-.PHONY: help venv check-venv install clean html dirhtml pickle json htmlhelp qthelp latex changes linkcheck doctest spelling run text screenshots screenshots-install
+.PHONY: help venv check-venv install clean html dirhtml pickle json htmlhelp qthelp latex changes linkcheck doctest spelling run text screenshots screenshots-install screenshots-temporary
 
 # "help" is first so that "make" without an argument acts like "make help".
 help:
@@ -37,6 +37,7 @@ help:
 	@echo "  spelling  to check for typos in documentation"
 	@echo "  screenshots to regenerate screenshots from screenshots.yml"
 	@echo "  screenshots-install to install Playwright and its Chromium browser"
+	@echo "  screenshots-temporary to capture against a disposable django CMS site"
 
 venv:
 	@command -v "$(PYTHON)" >/dev/null 2>&1 || { echo "error: Python executable not found: $(PYTHON)" >&2; exit 1; }
@@ -55,6 +56,7 @@ check-venv:
 		exit 1; \
 	fi
 	@"$(VENV_PYTHON)" -c 'import sys' >/dev/null 2>&1 || { echo "error: virtualenv is unusable; run 'make install'" >&2; exit 1; }
+
 
 html: check-venv
 	"$(SPHINXBUILD)" -b html $(ALLSPHINXOPTS) build/html
@@ -75,12 +77,15 @@ install: venv
 		"--------------------------------------------------------------------------------" \
 		""
 
-screenshots-install: venv
+screenshots-install: install
 	"$(VENV_PYTHON)" -m pip install --requirement requirements-screenshots.txt
 	"$(VENV_PYTHON)" -m playwright install chromium
 
 screenshots: check-venv
 	"$(VENV_PYTHON)" scripts/capture_screenshots.py --config screenshots.yml
+
+screenshots-temporary: screenshots-install
+	"$(VENV_PYTHON)" scripts/capture_screenshots.py --config screenshots.yml --temporary-site
 
 clean:
 	-rm -r $(BUILDDIR)/*

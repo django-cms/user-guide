@@ -64,13 +64,13 @@ text, for example a call-to-action button:
 
    .. todo::
 
-       **Screenshot needed:** ``how-to/images/links-button-dialog.png`` —
+       **Screenshot needed:** ``how-to/images/links-button-dialog.jpg`` —
        The "Link / Button" plugin edit dialog of djangocms-frontend, showing the
        internal/external link fields and the "Link type" / context (colour) options.
        Quickstart project, light colour scheme, browser window ~1200 px wide.
 
    .. Uncomment once the screenshot exists:
-   .. .. image:: images/links-button-dialog.png
+   .. .. image:: images/links-button-dialog.jpg
    ..     :alt: The Link / Button plugin dialog
 
 3. Enter the **link text** and the destination: an internal page, an external URL, a

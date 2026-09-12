@@ -24,13 +24,13 @@ Add a standalone image
 
    .. todo::
 
-       **Screenshot needed:** ``how-to/images/add-image-dialog.png`` —
+       **Screenshot needed:** ``how-to/images/add-image-dialog.jpg`` —
        The "Picture / Image" plugin edit dialog of djangocms-frontend, showing the
        image select field and the alignment options. Quickstart project, light colour
        scheme, browser window ~1200 px wide.
 
    .. Uncomment once the screenshot exists:
-   .. .. image:: images/add-image-dialog.png
+   .. .. image:: images/add-image-dialog.jpg
    ..     :alt: The Picture / Image plugin dialog
 
 4. Choose the image:

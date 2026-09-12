@@ -1,0 +1,620 @@
+# Screenshot recipe for the django CMS user guide.
+#
+# Point DJANGOCMS_BASE_URL at a prepared django CMS site. The account must be a
+# staff user with permission to edit the page(s) referenced below.
+version: 1
+base_url: "${DJANGOCMS_BASE_URL:-http://localhost:8000}"
+output_dir: source
+
+browser:
+  name: chromium
+  viewport:
+    width: 1280
+    height: 800
+  device_scale_factor: 1
+  color_scheme: light
+  reduced_motion: reduce
+  locale: en-US
+  timezone_id: Europe/Berlin
+  timeout: 10000
+  navigation_timeout: 30000
+
+# Login once and reuse the authenticated browser context for every screenshot.
+setup:
+  - goto: /admin/login/?next=/
+  - fill:
+      selector: 'input[name="username"]'
+      value: "${DJANGOCMS_USERNAME}"
+  - fill:
+      selector: 'input[name="password"]'
+      value: "${DJANGOCMS_PASSWORD}"
+  - click: 'button[type="submit"], input[type="submit"]'
+  - wait_for_load_state: networkidle
+
+before_each:
+  # django CMS remembers an open sideframe across page loads. Close any modal or
+  # sideframe left by the preceding recipe before interacting with the page.
+  - wait_for_timeout: 250
+  - evaluate: >-
+      document.activeElement && document.activeElement.blur();
+      for (const selector of [
+        ".cms-modal.cms-modal-open .cms-modal-close",
+        ".cms-sideframe .cms-sideframe-close"
+      ]) {
+        const control = document.querySelector(selector);
+        if (control && control.getClientRects().length) control.click();
+      }
+  - wait_for_timeout: 250
+
+screenshots:
+  # Toolbar and its menus. The four navigation menus are emitted as top-level
+  # list items in this order by django CMS 5.1.
+  - id: toolbar-overview
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/02-toolbar.jpg
+    actions:
+      - wait_for:
+          selector: .cms-toolbar
+          state: visible
+    capture:
+      selector: .cms-toolbar
+      padding: 0
+      quality: 90
+    labels:
+      - selector: ".cms-toolbar-item-logo"
+        text: Logo
+        position: outside-bottom
+      - selector: ".cms-toolbar-left ul.cms-toolbar-item-navigation >li:first-child"
+        text: Project menu
+        position: outside-bottom
+      - selector: ".cms-toolbar-item-dark-mode-toggle"
+        text: Color scheme
+        position: outside-bottom
+      - selector: ".cms-toolbar-item-cms-mode-switcher"
+        text: Structure board toggle
+        position: outside-bottom-right
+
+  - id: project-menu
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/02-project-menu.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(1) > a"
+      - wait_for:
+          selector: ".cms-toolbar-left > ul > li:nth-child(1).cms-toolbar-item-navigation-hover > ul"
+          state: visible
+    capture:
+      selector: ".cms-toolbar-left > ul > li:nth-child(1) > ul"
+      include:
+        - ".cms-toolbar-left > ul > li:nth-child(1) > a"
+      padding: 8
+      quality: 90
+
+  - id: page-menu
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/02-page-menu.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(2) > a"
+      - wait_for:
+          selector: ".cms-toolbar-left > ul > li:nth-child(2).cms-toolbar-item-navigation-hover > ul"
+          state: visible
+    capture:
+      selector: ".cms-toolbar-left > ul > li:nth-child(2) > ul"
+      include:
+        - ".cms-toolbar-left > ul > li:nth-child(2) > a"
+      padding: 8
+      quality: 90
+
+  - id: page-settings
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/02-page-settings.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-left > ul > li:nth-child(2) > a"
+      - click: 'a[data-rel="modal"]:has-text("Page settings")'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: 'input[name="title"]'
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  - id: version-menu
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/02-version-menu.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(3) > a"
+      - wait_for:
+          selector: ".cms-toolbar-left > ul > li:nth-child(3).cms-toolbar-item-navigation-hover > ul"
+          state: visible
+    capture:
+      selector: ".cms-toolbar-left > ul > li:nth-child(3) > ul"
+      include:
+        - ".cms-toolbar-left > ul > li:nth-child(3) > a"
+      padding: 8
+      quality: 90
+
+  - id: language-menu
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/02-language-menu.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(4) > a"
+      - wait_for:
+          selector: ".cms-toolbar-left > ul > li:nth-child(4).cms-toolbar-item-navigation-hover > ul"
+          state: visible
+    capture:
+      selector: ".cms-toolbar-left > ul > li:nth-child(4) > ul"
+      include:
+        - ".cms-toolbar-left > ul > li:nth-child(4) > a"
+      padding: 8
+      quality: 90
+
+  # Administration sidebar and filer.
+  - id: administration-sidebar
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/03-sidebar.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(1) > a"
+      - click: 'a[data-rel="sideframe"]:has-text("Administration")'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: "#content-main"
+          state: visible
+    capture: {selector: ".cms-sideframe iframe", padding: 0, quality: 90}
+
+  - id: filer-section
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/04-filer-section.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(1) > a"
+      - click: 'a[data-rel="sideframe"]:has-text("Administration")'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: ".app-filer"
+          state: visible
+    capture: {frame: ".cms-sideframe iframe", selector: ".app-filer", padding: 8, quality: 90}
+
+  - id: filer-new-folder
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/04-filer-new-folder.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(1) > a"
+      - click: 'a[data-rel="sideframe"]:has-text("Administration")'
+      - click:
+          frame: ".cms-sideframe iframe"
+          selector: '.app-filer a:has-text("Folders")'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: "body.filebrowser"
+          state: visible
+      - evaluate:
+          frame: ".cms-sideframe iframe"
+          expression: 'document.querySelector(''a[title="Adds a new Folder"]'').removeAttribute("onclick")'
+      - click:
+          frame: ".cms-sideframe iframe"
+          selector: 'a[title="Adds a new Folder"]'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: 'input[name="name"]'
+          state: visible
+      - fill:
+          frame: ".cms-sideframe iframe"
+          selector: 'input[name="name"]'
+          value: "Tutorial screenshots"
+    capture: {frame: ".cms-sideframe iframe", selector: "#content-main", padding: 8, quality: 90}
+    labels:
+      - frame: ".cms-sideframe iframe"
+        selector: 'input[name="name"]'
+        text: Folder name
+        position: outside-bottom
+
+  - id: filer-upload
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/04-filer-upload.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(1) > a"
+      - click: 'a[data-rel="sideframe"]:has-text("Administration")'
+      - click:
+          frame: ".cms-sideframe iframe"
+          selector: '.app-filer a:has-text("Folders")'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: "body.filebrowser"
+          state: visible
+      - click:
+          frame: ".cms-sideframe iframe"
+          selector: '#content-main a[href$="/list/"]:has-text("Tutorial")'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: "#id_upload_button"
+          state: visible
+    capture: {frame: ".cms-sideframe iframe", selector: "#content-main", padding: 8, quality: 90}
+    labels:
+      - frame: ".cms-sideframe iframe"
+        selector: "#id_upload_button"
+        text: Upload files
+        position: outside-left
+
+  # Page tree. images/05-pagetree.jpg is a conceptual drawing and is not a
+  # browser capture.
+  - id: page-tree
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/05-pagetree-form.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(1) > a"
+      - click: 'a[data-rel="sideframe"]:has-text("Pages")'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: ".cms-pagetree-container"
+          state: visible
+      - click:
+          frame: ".cms-sideframe iframe"
+          selector: 'li.jstree-node:has(> a:has-text("Services")) > .jstree-ocl'
+    capture: {frame: ".cms-sideframe iframe", selector: ".cms-pagetree-root", padding: 8, quality: 90}
+  - id: page-tree-legend
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/05-pagetree-legend.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(1) > a"
+      - click: 'a[data-rel="sideframe"]:has-text("Pages")'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: ".cms-pagetree-legend-title-wrap"
+          state: visible
+      - click:
+          frame: ".cms-sideframe iframe"
+          selector: ".cms-pagetree-legend-title-wrap"
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: ".cms-pagetree-legend .cms-pagetree-dropdown-menu"
+          state: visible
+    capture: {frame: ".cms-sideframe iframe", selector: ".cms-pagetree-legend .cms-pagetree-dropdown-menu", padding: 8, quality: 90}
+
+  # Page creation and settings.
+  - id: creation-wizard-step-1
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/06-wizard-1.jpg
+    actions:
+      - click: '.cms-toolbar-item-buttons a:has-text("Create")'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: 'label:has-text("New page")'
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  - id: creation-wizard-step-2
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/06-wizard-2.jpg
+    actions:
+      - click: '.cms-toolbar-item-buttons a:has-text("Create")'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: 'label:has-text("New page")'
+          state: visible
+      - click:
+          frame: ".cms-modal iframe"
+          selector: 'label:has-text("New page")'
+      - click: ".cms-modal-buttons .cms-btn-action"
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: 'input[name="1-title"]'
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  - id: create-page-dialog
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/06-create-page.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(2) > a"
+      - hover: ".cms-toolbar-left > ul > li:nth-child(2) > ul > li.cms-toolbar-item-navigation-children > a"
+      - click: 'a[data-rel="modal"]:has-text("New Page")'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: 'input[name="title"]'
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  - id: url-options
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/06-url-options.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-left > ul > li:nth-child(2) > a"
+      - click: 'a[data-rel="modal"]:has-text("Page settings")'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: 'fieldset:has-text("URL options") summary'
+          state: visible
+      - click:
+          frame: ".cms-modal iframe"
+          selector: 'fieldset:has-text("URL options") summary'
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  # Structure board and plugin forms.
+  - id: structure-toggle
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/07-structure-toggle.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+    capture: {selector: ".cms-toolbar-item-cms-mode-switcher", padding: 16, quality: 90}
+
+  - id: structure-board
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/07-structure-board.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-item-cms-mode-switcher a"
+      - wait_for: ".cms-structure"
+    capture: {selector: ".cms-structure", padding: 0, quality: 90}
+
+  - id: add-plugin-picker
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/07-add-plugin.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-item-cms-mode-switcher a"
+      - wait_for: ".cms-structure"
+      - click: ".cms-dragbar:visible .cms-submenu-add"
+      - wait_for:
+          selector: ".cms-plugin-picker:visible"
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  # Container is added immediately in django CMS Frontend 5.3, so capture the
+  # existing container's edit form (the same options shown after insertion in
+  # versions which retain an add form).
+  - id: container-dialog
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/07-add-container.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-item-cms-mode-switcher a"
+      - wait_for: ".cms-structure"
+      - evaluate: &expand_plugin_tree >-
+          document.querySelectorAll('.cms-collapsable-container').forEach(
+            element => element.classList.remove('cms-hidden')
+          );
+          document.querySelectorAll('.cms-dragitem-collapsable').forEach(
+            element => element.classList.add('cms-dragitem-expanded')
+          );
+      - click: 'xpath=//span[starts-with(@title, "GridContainerPlugin ")]/ancestor::div[contains(concat(" ", normalize-space(@class), " "), " cms-draggable ")][1]/div[contains(concat(" ", normalize-space(@class), " "), " cms-dragitem ")]/div[contains(@class, "cms-submenu-edit")]'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: "#content-main"
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  - id: nested-plugins
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/07-nested-plugins.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-item-cms-mode-switcher a"
+      - wait_for: ".cms-structure"
+      - evaluate: *expand_plugin_tree
+    capture: {selector: ".cms-structure", padding: 0, quality: 90}
+
+  - id: text-editor
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/07-ckeditor.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-item-cms-mode-switcher a"
+      - wait_for: ".cms-structure"
+      - evaluate: *expand_plugin_tree
+      - click: 'xpath=(//span[starts-with(@title, "TextPlugin ")])[1]/ancestor::div[contains(concat(" ", normalize-space(@class), " "), " cms-draggable ")][1]/div[contains(concat(" ", normalize-space(@class), " "), " cms-dragitem ")]/div[contains(@class, "cms-submenu-edit")]'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: ".cms-editor-inline-wrapper"
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  - id: inline-text-editing
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/07-inline-editing.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle.cms-btn-active"
+      - scroll_into_view: "h1"
+    capture: {quality: 90}
+
+  - id: text-enabled-plugins
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/07-text-enabled-plugins.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-item-cms-mode-switcher a"
+      - wait_for: ".cms-structure"
+      - evaluate: *expand_plugin_tree
+      - click: 'xpath=(//span[starts-with(@title, "TextPlugin ")])[1]/ancestor::div[contains(concat(" ", normalize-space(@class), " "), " cms-draggable ")][1]/div[contains(concat(" ", normalize-space(@class), " "), " cms-dragitem ")]/div[contains(@class, "cms-submenu-edit")]'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: ".cms-editor-inline-wrapper"
+          state: visible
+      - click:
+          frame: ".cms-modal iframe"
+          selector: ".cms-editor-inline-wrapper .cms-toolbar .dropdown:has(.plugins)"
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: ".cms-editor-inline-wrapper .plugins"
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  - id: image-dialog-selected
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/07-add-image.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-item-cms-mode-switcher a"
+      - wait_for: ".cms-structure"
+      - evaluate: *expand_plugin_tree
+      - click: 'xpath=//span[starts-with(@title, "ImagePlugin ")]/ancestor::div[contains(concat(" ", normalize-space(@class), " "), " cms-draggable ")][1]/div[contains(concat(" ", normalize-space(@class), " "), " cms-dragitem ")]/div[contains(@class, "cms-submenu-edit")]'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: "#id_picture_lookup"
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  - id: image-dialog-format
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: how-to/images/add-image-dialog.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-item-cms-mode-switcher a"
+      - wait_for: ".cms-structure"
+      - evaluate: *expand_plugin_tree
+      - click: 'xpath=//span[starts-with(@title, "ImagePlugin ")]/ancestor::div[contains(concat(" ", normalize-space(@class), " "), " cms-draggable ")][1]/div[contains(concat(" ", normalize-space(@class), " "), " cms-dragitem ")]/div[contains(@class, "cms-submenu-edit")]'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: "#lnk-2"
+          state: visible
+      - click:
+          frame: ".cms-modal iframe"
+          selector: "#lnk-2"
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: "#id_alignment"
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  - id: link-button-dialog
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: how-to/images/links-button-dialog.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-item-cms-mode-switcher a"
+      - wait_for: ".cms-structure"
+      - evaluate: *expand_plugin_tree
+      - click: 'xpath=(//span[starts-with(@title, "TextLinkPlugin ")])[last()]/ancestor::div[contains(concat(" ", normalize-space(@class), " "), " cms-draggable ")][1]/div[contains(concat(" ", normalize-space(@class), " "), " cms-dragitem ")]/div[contains(@class, "cms-submenu-edit")]'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: "#id_link_type_1"
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  - id: aliases-changelist
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: how-to/images/aliases-changelist.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(1) > a"
+      - click: 'a[data-rel="sideframe"]:has-text("Aliases")'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: '#result_list tr:has-text("Contact callout")'
+          state: visible
+      - click:
+          frame: ".cms-sideframe iframe"
+          selector: "#toggle-nav-sidebar"
+      - wait_for_timeout: 250
+    capture: {frame: ".cms-sideframe iframe", selector: "#content-main", padding: 8, quality: 90}
+
+  # Publishing and version management. images/08-version-states.png is a
+  # conceptual state diagram and is intentionally not in this recipe.
+  - id: publish-button
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/08-publish-button.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: "a.cms-versioning-js-publish-btn"
+    capture: {selector: "a.cms-versioning-js-publish-btn", padding: 8, quality: 90}
+    labels:
+      - {selector: a.cms-versioning-js-publish-btn, text: "Click here to publish"}
+
+  - id: published-version-status
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/08-version-menu.jpg
+    actions:
+      - wait_for: ".cms-toolbar-left > ul > li:nth-child(3)"
+    capture: {selector: ".cms-toolbar-left", padding: 8, quality: 90}
+
+  - id: manage-versions
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/08-manage-versions.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(3) > a"
+      - click: 'a[data-rel="sideframe"]:has-text("Manage Versions")'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: "#result_list"
+          state: visible
+    capture: {frame: ".cms-sideframe iframe", selector: "#content-main", padding: 8, quality: 90}
+
+  - id: version-menu-open
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/08-version-menu-open.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(3) > a"
+      - wait_for:
+          selector: ".cms-toolbar-left > ul > li:nth-child(3).cms-toolbar-item-navigation-hover > ul"
+          state: visible
+    capture:
+      selector: ".cms-toolbar-left > ul > li:nth-child(3) > ul"
+      include:
+        - ".cms-toolbar-left > ul > li:nth-child(3) > a"
+      padding: 8
+      quality: 90
+
+  - id: versions-changelist
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: how-to/images/versions-changelist.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(3) > a"
+      - click: 'a[data-rel="sideframe"]:has-text("Manage Versions")'
+      - wait_for:
+          frame: ".cms-sideframe iframe"
+          selector: "#result_list"
+          state: visible
+    capture: {frame: ".cms-sideframe iframe", selector: "#content-main", padding: 8, quality: 90}
+
+  - id: compare-versions
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/08-comparing-versions.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(3) > a"
+      - click: 'a:has-text("Compare to Version")'
+      - wait_for: ".cms-versioning-diff-frame"
+    capture: {quality: 90}
+
+  - id: redirect-settings
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: how-to/images/redirect-settings.jpg
+    actions:
+      - click: "a.cms-versioning-js-edit-btn"
+      - wait_for: ".cms-edit-toggle"
+      - click: ".cms-toolbar-left > ul > li:nth-child(2) > a"
+      - click: 'a[data-rel="modal"]:has-text("Page settings")'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: 'fieldset:has-text("URL options") summary'
+          state: visible
+      - click:
+          frame: ".cms-modal iframe"
+          selector: 'fieldset:has-text("URL options") summary'
+      - wait_for:
+          frame: ".cms-modal iframe"
+          selector: ".field-redirect"
+          state: visible
+    capture: {selector: ".cms-modal", padding: 8, quality: 90}
+
+  # Keep the anonymous login form last: logging out invalidates the shared
+  # authenticated context used by every preceding capture.
+  - id: toolbar-login
+    url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"
+    output: tutorial/images/01-toolbar-on.jpg
+    actions:
+      - click: ".cms-toolbar-left > ul > li:nth-child(1) > a"
+      - click: 'a[data-method="POST"][href*="/logout/"]'
+      - wait_for:
+          selector: ".cms-form-login"
+          state: visible
+    capture: {selector: ".cms-toolbar-left", padding: 0, quality: 90}

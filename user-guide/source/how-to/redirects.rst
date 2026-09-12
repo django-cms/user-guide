@@ -1,3 +1,5 @@
+.. _how-to-redirects:
+
 Managing redirects
 ==================
 
@@ -5,7 +7,7 @@ By implementing redirects, you can retain the SEO rankings and authority of the 
 transferring it to the new one. This helps to ensure that your website maintains its
 search engine visibility.
 
-Django CMS supports redirects as part of the :ref:`Page settings <page-settings>`. It
+django CMS supports redirects as part of the :ref:`Page settings <page-settings>`. It
 happens on a per-language level. This means you can select different redirect targets
 for the different language contents of a page.
 
@@ -19,6 +21,9 @@ The simplest way to set redirects is:
 
      .. image:: ../tutorial/images/05-pagetree-form.jpg
          :alt: django CMS page tree
+
+     The numbers used below refer to the elements of a page tree row as listed in the
+     :ref:`page tree reference <ref-page-tree>`.
 
    - If the page is published, select "Create new draft" from the dropdown menu of the
      page status indicator (number 7).
@@ -44,6 +49,6 @@ The simplest way to set redirects is:
     Changes can only be made to draft page contents and will only take effect once
     published.
 
-Managing redirects in Django CMS happens on page level. The system is designed to
+Managing redirects in django CMS happens on page level. The system is designed to
 provide a user-friendly interface for content editors to manage redirects and thereby
 ensure keeping SEO rankings.

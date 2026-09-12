@@ -1,113 +1,81 @@
 .. _pagetree:
 
-The page tree structure
-=======================
+The page tree
+=============
 
-The tree structure of your site allows you to access all your pages. Many features and
-information are present in this part of your site. To better understand them, we suggest
-you look at how to access your tree structure, and understand the principles that are
-linked to it and its features.
+Every page of your site has its place in the **page tree**. The tree decides which page
+sits below which — and with that, how your visitors navigate the site and how its URLs
+are built. In this lesson you open the tree and learn to read it.
 
-See the page tree
------------------
+Open the page tree
+------------------
 
-To access the tree structure of your site, go to the project menu (which has the name of
-your site, or "example.com" on the screenshots here), and choose "Pages...". The side
-bar opens and shows the complete tree structure of your site. That is to say, all the
-pages that make up your site: visible and non-visible, pages and sub-pages, published or
-not.
+Open the **project menu** in the toolbar (it carries the name of your site, or
+"example.com" on the screenshots here) and choose **"Pages..."**. The sidebar opens and
+shows all the pages your site is made of: visible and hidden ones, pages and sub-pages,
+published or not.
 
-Alternatively, you can reach the page tree by clicking "Page contents" in the admin
-sidebar, which you find in the "Django CMS" section.
+You can also reach the tree through **"Administration..."** in the same menu, by
+clicking "Page contents" in the "django CMS" section.
 
-Principles of the parent, child and sibling pages
--------------------------------------------------
+Parent, child and sibling pages
+-------------------------------
 
-This section is intended to give you a better understanding of what is meant by page
-inheritance and the names given to it.
+Pages are nested inside one another. A page that holds other pages is their **parent
+page**; the pages below it are its **child pages**, and each child can have children of
+its own. Pages sitting at the same level are **siblings**.
 
-The page tree structure is divided into different sections: these are the pages at
-different levels. Each page can be nested in another one, i.e. a page can contain
-several sub-pages. This page is then called the "parent page" and its sub-pages are its
-"child pages". A child page can also have its own child pages. The idea is to organize
-your site in several different levels so that it is clearer for the user.
+Picture your site as a tree:
 
-To better understand, let us take the image of a tree as a metaphor:
-
-- Your **home page** is the trunk, it presents all the thematic pages of your site.
-- The **top-level pages** are the branches of your tree and have other small branches.
-  We call these top-level pages "parent pages".
-- The small branches correspond to the **child pages** of your top-level pages (the
-  "parents"). Each parent page may or may not have child pages, just as the branch of a
-  tree may or may not have smaller branches.
-- The leaves of your tree represent the content of your pages or the sub-pages of your
-  child pages, which do not have any child pages of their own.
+- Your **home page** is the trunk.
+- The **top-level pages** are the branches growing out of it.
+- Their **child pages** are the smaller branches — and those may branch again.
+- Pages without any children are the leaves.
 
 .. figure:: images/05-pagetree.jpg
     :alt: The page tree structure of django CMS
 
-    The page tree structure: Related pages, child and sibling pages. A small branch is
-    composed of pages 3, 4 and 5. The leaves are in this example are pages 2, 4 and 5.
+    The page tree: pages 3, 4 and 5 form one branch. Pages 2, 4 and 5 are leaves — they
+    have no child pages of their own.
 
-Each page is thus nested in the others when they have a common point: all your blog
-posts correspond to the parent page "Blog" for example. All your pages having the same
-the same central goal can be grouped together in a group and form the set of child pages
-of a parent page bearing the name of this topic. Thus, your parent page allows access to
-the content of your daughter pages and helps the user to better find his way around your
-site in relation to what he is looking for and wants to do.
-
-As for a sibling page, it is simply a page at the same level as those around it in the
-tree. In a group of child pages, all pages are siblings. The same applies to parent
-pages.
+Grouping pages this way does more than keep a long list tidy. Pages that belong together
+— everything about your company, say — become the children of one parent page, so
+readers find their way by moving down the tree. Your site's navigation menu is built
+from the same structure, which is why a well-organised tree is the cheapest way to make
+a site easy to use.
 
 Managing the page tree
 ----------------------
 
-The page tree is a list of all the pages of your site. It gives you an overview of your
-pages and their status.
-
-By default, the following information is displayed:
+The page tree is more than a list of your pages: each row tells you the state of a page
+and gives you the actions you can perform on it.
 
 .. image:: ./images/05-pagetree-form.jpg
     :alt: The django CMS page tree form
 
-From left to right, you will find the following items:
+Take a moment to look at the row of one of your pages. Next to its **title** you see
 
-1. The **language menu** which decides which language version of the page tree you see
-2. The dotted bar on the left to **move the pages** using Drag & Drop
-3. The **hide arrow**, present only in the case of a parent page. It shows or hides the
-   page's child pages.
-4. The **title of the page** in the selected language. If this says "Empty title" there
-   is no version of that page in the selected language, yet.
-5. The **root indicator** (house) indicating which page is presented at the root URL of
-   the site. A puzzle symbol at this place indicates that the page is handled by a
-   third-party application.
-6. The **eye icon** allows you to preview the page
-7. The **publication status menu** menu. Its color provides the following information:
-       - **Blank**: the translation of the page into this language does not exist.
-       - **White with blue border**: An unpublished draft of the page exists. There is
-         not public version of the page.
-       - **Green**: the translation exists and the page is published,
-       - **Blue**: changes on the page have not been published. If you go to this page,
-         the button at the top right will suggest you to publish the changes so that
-         they are visible to the user.
-8. **"Menu"** indicates whether the page appears in the navigation menu of your site or not,
-       - Green / check: the page is visible in the navigation menu
-       - Gray / unchecked: the page does not appear
-9. The **settings button** opens the page settings.
-10. The **add button** adds a child page.
-11. The **hamburger context menu** offers additional actions: * Copy * Cut * Paste *
-    Delete... * Set as home * Advanced settings * Miscellaneous information: the date of
-    the last change, the access (restricted or not), the author of the last
-    modifications.
+- the **status indicator**, whose colour tells you whether the page is published in the
+  selected language, has unpublished changes, or does not exist in that language yet,
+- the **"Menu"** column, which tells you whether the page is part of your site's
+  navigation,
+- and, at the right end of the row, the buttons to open the page's **settings**, to add
+  a **child page**, and a context menu with further actions.
 
-At the top right is a small menu, composed of a search button allowing you to find a
-specific page in your tree, a "..." button to choose the site whose tree you want to see
-(in many installations you will only see one site), and a button to add a new page.
+Above the tree, the language menu decides which language version of the tree you are
+looking at; the dotted bar on the left of each row lets you **move pages by drag &
+drop**.
 
-At the bottom right there is the legend with a complete list of all symbols used in the
-page tree view. Open it by clicking on the information icon:
+.. tip::
 
-.. image:: ./images/05-pagetree-legend.jpg
-    :scale: 50
-    :alt: Legend for the page tree
+    Every symbol used in the tree is listed in the legend, which you open with the
+    information icon at the bottom right:
+
+    .. image:: ./images/05-pagetree-legend.jpg
+        :scale: 50
+        :alt: Legend for the page tree
+
+You do not need to memorise the tree's controls now — they are all described in the
+:ref:`page tree reference <ref-page-tree>`, and the everyday tasks (moving a page,
+hiding it from the navigation, setting the home page, deleting it) are covered in
+:ref:`Managing pages <how-to-pages>`.

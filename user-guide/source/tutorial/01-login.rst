@@ -1,27 +1,46 @@
 .. _editing:
 
-Logging-in
+Logging in
 ==========
 
-Once you have :ref:`created your site <install-django-cms-tutorial>` with the django CMS
-components you will want to customise the site and add content. To this you will need to
-log in and edit it.
+Everything you do in django CMS — writing content, arranging it, publishing it — happens
+on your site itself, in your browser, on the page you are looking at. The only thing you
+need to get started is a login.
 
-There are different ways of accessing your user account in django CMS. Please refer to
-what the respective developer of your project has told you.
+.. note::
 
-The default way is to add ``/?toolbar_on`` to the end of your URL and use the toolbar to
-log in. The banner or login page will appear, asking you for your username and password.
-When you first log in, these two elements have been set by the developers. Therefore, if
-you are not sure how to fill in these fields, please contact them.
+    This tutorial assumes you have a django CMS site to work on. If you do not have one
+    yet, your developers can set one up for you, or you can create one yourself by
+    following the `django CMS installation tutorial
+    <https://docs.django-cms.org/en/latest/introduction/01-install.html>`_.
 
-Logging in will allow you to access your site to add, modify or delete content. You will
-be able to perform a lot of actions using the django CMS menu bar, which is present when
-you are logged in to your site.
+Open the login form
+-------------------
+
+Your site may have a login page of its own — if your developers have told you where to
+log in, use that. Otherwise add ``?toolbar_on`` to the end of your site's address, for
+example ``https://www.example.com/?toolbar_on``. A login form appears at the top of the
+page:
 
 .. image:: ./images/01-toolbar-on.jpg
     :alt: django CMS toolbar login
 
-Upon logging into your site, you will be able to see your site's pages and other content
-with a toolbar at the top of the visible area. This toolbar is used to make changes to
-your site.
+Enter your username and password and log in. If you do not have credentials yet, ask the
+developers of your site — they set up the first accounts.
+
+The toolbar appears
+-------------------
+
+Once you are logged in, a bar appears at the top of your site: the **django CMS
+toolbar**. It follows you to every page of your site, and it is how you will do
+everything else in this tutorial — create pages, add content, publish.
+
+Two things are worth knowing before you go on:
+
+- The toolbar is yours alone. Visitors of your site never see it, and the page below it
+  looks exactly as it looks to them.
+- Nothing you do from here on becomes public by accident. Your changes are kept as
+  drafts until you deliberately publish them, and every published version is kept, so
+  you can always go back.
+
+In the next lesson you take a tour of the toolbar.

@@ -72,7 +72,6 @@ drop**.
     information icon at the bottom right:
 
     .. image:: ./images/05-pagetree-legend.jpg
-        :scale: 50
         :alt: Legend for the page tree
 
 You do not need to memorise the tree's controls now — they are all described in the

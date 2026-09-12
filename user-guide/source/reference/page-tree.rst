@@ -113,5 +113,4 @@ The information icon at the bottom right opens a legend listing every symbol use
 the page tree:
 
 .. image:: ../tutorial/images/05-pagetree-legend.jpg
-    :scale: 50
     :alt: Legend for the page tree

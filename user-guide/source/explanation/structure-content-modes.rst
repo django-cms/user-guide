@@ -10,7 +10,6 @@ You can toggle between structure and content mode by clicking the button on the 
 right of the toolbar (or by pressing the space bar while editing).
 
 .. image:: ../tutorial/images/07-structure-toggle.jpg
-    :scale: 50
     :alt: Structure mode toggle opens the structure board.
 
 Two modes for two kinds of thinking

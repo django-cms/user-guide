@@ -31,6 +31,33 @@ def valid_config():
 
 
 class RepositoryRecipeTests(unittest.TestCase):
+    def test_active_images_have_alt_text_and_no_half_scale(self):
+        source_dir = Path(__file__).resolve().parents[1] / "source"
+        directive = re.compile(r"^(?P<indent>\s*)\.\. (?:image|figure)::")
+        missing_alt = []
+
+        for document in source_dir.rglob("*.rst"):
+            lines = document.read_text(encoding="utf-8").splitlines()
+            for index, line in enumerate(lines):
+                match = directive.match(line)
+                if match is None:
+                    continue
+                options = []
+                directive_indent = len(match.group("indent"))
+                for following in lines[index + 1 :]:
+                    if not following.strip():
+                        break
+                    option_indent = len(following) - len(following.lstrip())
+                    if option_indent <= directive_indent:
+                        break
+                    options.append(following.strip())
+                if not any(option.startswith(":alt:") for option in options):
+                    missing_alt.append(f"{document.relative_to(source_dir)}:{index + 1}")
+
+            self.assertNotIn(":scale: 50", "\n".join(lines), document)
+
+        self.assertEqual(missing_alt, [])
+
     def test_recipe_covers_every_documented_browser_screenshot(self):
         project_dir = Path(__file__).resolve().parents[1]
         source_dir = project_dir / "source"

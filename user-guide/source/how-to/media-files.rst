@@ -21,7 +21,6 @@ Open the media library
 2. In the **Filer** section, click **"Folders"**.
 
 .. image:: ../tutorial/images/04-filer-section.jpg
-    :scale: 50
     :alt: The filer section of the admin sidebar contains the media library
 
 You see the folders of your library. The greyed-out **"Unsorted uploads"** folder

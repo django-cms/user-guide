@@ -26,7 +26,7 @@ or
 - Click on the version menu and choose "Manage versions...".
 
   .. image:: ../tutorial/images/08-version-menu-open.jpg
-      :scale: 50
+      :alt: Version menu with actions for managing and comparing versions
 
 What the version list shows
 ---------------------------

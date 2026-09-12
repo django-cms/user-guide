@@ -14,8 +14,7 @@ is visible in the page's edit mode. (If there is a highlighted "Edit" button ins
 click it first to get to edit mode.)
 
 .. image:: ./images/08-publish-button.jpg
-    :scale: 50
-    :alt: The version menu showing "published" state.
+    :alt: The highlighted Publish button in the django CMS toolbar
 
 When published you will be taken to the published page or the "manage versions" dialog,
 depending on the setup of your site. If you're taken to the manage versions dialog,
@@ -26,7 +25,6 @@ You will see in the toolbar that the version menu now shows that the content is
 "published".
 
 .. image:: ./images/08-version-menu.jpg
-    :scale: 50
     :alt: The version menu showing "published" state.
 
 Version states

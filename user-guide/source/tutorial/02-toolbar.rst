@@ -34,7 +34,7 @@ a look:
 
 .. image:: ./images/02-project-menu.jpg
     :alt: The Project menu
-    :scale: 50
+
 
 The entries you will use most are **"Pages..."**, which opens the page tree of your
 site in a sidebar (we explore it in :ref:`lesson 5 <pagetree>`), and
@@ -58,7 +58,6 @@ The "Page" menu collects all actions that concern the page you are currently vie
 
 .. image:: ./images/02-page-menu.jpg
     :alt: The Page menu
-    :scale: 50
 
 From here you can **create new pages** (a new page next to this one, a sub-page below
 it, or a duplicate), switch to **editing** the page, and open the **page settings**.
@@ -83,7 +82,6 @@ The version menu
 
 .. image:: ./images/02-version-menu.jpg
     :alt: The version menu
-    :scale: 50
 
 django CMS keeps every page as a series of versions, so nothing you edit is visible to
 visitors until you publish it, and nothing published is ever lost. The version menu
@@ -96,7 +94,6 @@ The language menu
 
 .. image:: ./images/02-language-menu.jpg
     :alt: The language menu
-    :scale: 50
 
 On multilingual sites, the "Language" menu switches between the language versions of
 the page you are viewing. It also lets you add, delete or copy translations — see

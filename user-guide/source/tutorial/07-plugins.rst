@@ -17,14 +17,12 @@ Click the **structure board toggle** at the far right of the toolbar:
 
 .. image:: ./images/07-structure-toggle.jpg
     :alt: Toggle button for the structure board
-    :scale: 50
 
 The structure board opens beside your page and shows its placeholders — the regions your
 template makes editable. On a new page they are still empty.
 
 .. image:: ./images/07-structure-board.jpg
     :alt: django CMS structure board
-    :scale: 50
 
 .. note::
 
@@ -39,7 +37,6 @@ Add your first plugin
    plugins you can use at this position.
 
    .. image:: ./images/07-add-plugin.jpg
-       :scale: 50
        :alt: Select a plugin to add
 
 2. Choose a **Container** — a plugin that groups the content of one section of your
@@ -48,7 +45,6 @@ Add your first plugin
    in.
 
    .. image:: ./images/07-add-container.jpg
-       :scale: 50
        :alt: Add container dialog box
 
 The plugin now appears both on your page and in the structure board. Adding content is
@@ -70,7 +66,6 @@ its own, and a triangle next to the drag handle that shows or hides what is nest
 inside it.
 
 .. image:: ./images/07-nested-plugins.jpg
-    :scale: 50
     :alt: Nested plugins in a placeholder
 
 To change the order of your content — to move an image above a text, say — take hold of

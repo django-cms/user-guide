@@ -28,7 +28,6 @@ The project menu
 
 .. image:: ../tutorial/images/02-project-menu.jpg
     :alt: The Project menu
-    :scale: 50
 
 ============================ ===========================================================
 Entry                        Action
@@ -54,7 +53,6 @@ The page menu
 
 .. image:: ../tutorial/images/02-page-menu.jpg
     :alt: The Page menu
-    :scale: 50
 
 ============================ ===========================================================
 Entry                        Action
@@ -82,7 +80,6 @@ The version menu
 
 .. image:: ../tutorial/images/02-version-menu.jpg
     :alt: The version menu
-    :scale: 50
 
 The menu title shows the version number of the content you are viewing (counted per
 language) and its state — see the :ref:`version states reference
@@ -104,7 +101,6 @@ The language menu
 
 .. image:: ../tutorial/images/02-language-menu.jpg
     :alt: The language menu
-    :scale: 50
 
 The language menu is only shown on multilingual sites. It switches between the
 language versions of the content you are viewing, and contains entries to **add a

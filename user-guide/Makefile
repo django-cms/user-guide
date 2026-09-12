@@ -39,17 +39,43 @@ help:
 	@echo "  screenshots-install to install Playwright and its Chromium browser"
 	@echo "  screenshots-temporary to capture against a disposable django CMS site"
 
+venv:
+	@command -v "$(PYTHON)" >/dev/null 2>&1 || { echo "error: Python executable not found: $(PYTHON)" >&2; exit 1; }
+	@"$(PYTHON)" -c 'import sys; sys.exit("error: Python 3.11 or newer is required") if sys.version_info < (3, 11) else None'
+	@if [ -f "$(VENV_DIR)/pyvenv.cfg" ] && [ ! -x "$(VENV_PYTHON)" ]; then \
+		echo "... replacing stale virtualenv in $(VENV_DIR)"; \
+		"$(PYTHON)" -m venv --clear "$(VENV_DIR)"; \
+	else \
+		"$(PYTHON)" -m venv "$(VENV_DIR)"; \
+	fi
+	@"$(VENV_PYTHON)" -c 'import sys; print("... using", sys.executable, "(" + sys.version.split()[0] + ")")'
 
-html:
-	. $(VENV); $(SPHINXBUILD) -b html $(ALLSPHINXOPTS) build/html
+check-venv:
+	@if [ ! -x "$(VENV_PYTHON)" ]; then \
+		echo "error: virtualenv is missing or stale; run 'make install'" >&2; \
+		exit 1; \
+	fi
+	@"$(VENV_PYTHON)" -c 'import sys' >/dev/null 2>&1 || { echo "error: virtualenv is unusable; run 'make install'" >&2; exit 1; }
+
+
+html: check-venv
+	"$(SPHINXBUILD)" -b html $(ALLSPHINXOPTS) build/html
 	@echo
 	@echo "Build finished. The HTML pages are in build/html."
 #  sphinx-build -b html  -n -d build/doctrees -D latex_paper_size=a4  -D latex_paper_size=letter build/html
 
-install:
-	@echo "... setting up virtualenv"
-	python3 -m venv env
-	. $(VENV); pip install -r requirements.txt
+install: venv
+	"$(VENV_PYTHON)" -m pip install --requirement requirements.txt
+	@printf '%s\n' \
+		"" \
+		"--------------------------------------------------------------------------------" \
+		"* watch, build and serve the documentation: make run" \
+		"* check spelling: make spelling" \
+		"" \
+		"enchant must be installed for spelling checks. See:" \
+		"https://docs.django-cms.org/en/latest/contributing/documentation.html#install-the-spelling-software" \
+		"--------------------------------------------------------------------------------" \
+		""
 
 screenshots-install: install
 	"$(VENV_PYTHON)" -m pip install --requirement requirements-screenshots.txt

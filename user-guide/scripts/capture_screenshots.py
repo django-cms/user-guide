@@ -350,6 +350,17 @@ def validate_config(config: Any) -> None:
             raise ConfigurationError(
                 f"{location}.capture cannot combine selector and full_page"
             )
+        include = capture.get("include", [])
+        if not isinstance(include, list) or not all(
+            isinstance(item, str) and item for item in include
+        ):
+            raise ConfigurationError(
+                f"{location}.capture.include must be a list of CSS selectors"
+            )
+        if include and not capture.get("selector"):
+            raise ConfigurationError(
+                f"{location}.capture.include requires capture.selector"
+            )
         padding = capture.get("padding", 0)
         if not isinstance(padding, (int, float)) or isinstance(padding, bool) or padding < 0:
             raise ConfigurationError(f"{location}.capture.padding cannot be negative")
@@ -556,10 +567,11 @@ def element_labels(page: Any, labels: Sequence[Mapping[str, Any]]):
 
 def _capture_clip(
     locator: Any,
+    include_locators: Sequence[Any],
     overlay_locators: Sequence[Any],
     padding: float,
 ) -> dict[str, float]:
-    """Return a clip containing the capture target, padding, and label overlays."""
+    """Return a clip containing the target and any additional elements."""
 
     box = locator.bounding_box()
     if box is None:
@@ -568,15 +580,28 @@ def _capture_clip(
     top = box["y"] - padding
     right = box["x"] + box["width"] + padding
     bottom = box["y"] + box["height"] + padding
-    for overlays in overlay_locators:
-        for index in range(overlays.count()):
-            overlay_box = overlays.nth(index).bounding_box()
-            if overlay_box is None:
-                continue
-            left = min(left, overlay_box["x"])
-            top = min(top, overlay_box["y"])
-            right = max(right, overlay_box["x"] + overlay_box["width"])
-            bottom = max(bottom, overlay_box["y"] + overlay_box["height"])
+    def expand_to_locators(locators: Sequence[Any], extra: float) -> None:
+        nonlocal left, top, right, bottom
+        for additional in locators:
+            for index in range(additional.count()):
+                additional_box = additional.nth(index).bounding_box()
+                if additional_box is None:
+                    continue
+                left = min(left, additional_box["x"] - extra)
+                top = min(top, additional_box["y"] - extra)
+                right = max(
+                    right,
+                    additional_box["x"] + additional_box["width"] + extra,
+                )
+                bottom = max(
+                    bottom,
+                    additional_box["y"] + additional_box["height"] + extra,
+                )
+
+    expand_to_locators(include_locators, padding)
+    # Outside labels already touch their outlined element, so do not add the
+    # capture padding a second time around their overlays.
+    expand_to_locators(overlay_locators, 0)
     clipped_left = max(0, left)
     clipped_top = max(0, top)
     return {
@@ -622,14 +647,29 @@ def capture_screenshot(
                 locator_parameters["frame"] = capture["frame"]
             locator = _locator(page, locator_parameters)
             locator.scroll_into_view_if_needed()
+        include_locators = []
+        for include_selector in capture.get("include", []):
+            include_parameters = {"selector": include_selector}
+            if capture.get("frame"):
+                include_parameters["frame"] = capture["frame"]
+            include_locator = _locator(page, include_parameters)
+            include_locator.wait_for(state="visible")
+            include_locators.append(include_locator)
 
         labels = screenshot.get("labels", [])
         has_outside_label = any(
             label.get("position") in OUTSIDE_LABEL_POSITIONS for label in labels
         )
         with element_labels(page, labels) as overlay_locators:
-            if locator is not None and (padding or has_outside_label):
-                options["clip"] = _capture_clip(locator, overlay_locators, padding)
+            if locator is not None and (
+                padding or has_outside_label or include_locators
+            ):
+                options["clip"] = _capture_clip(
+                    locator,
+                    include_locators,
+                    overlay_locators,
+                    padding,
+                )
                 page.screenshot(path=temporary, **options)
             elif locator is not None:
                 locator.screenshot(path=temporary, **options)

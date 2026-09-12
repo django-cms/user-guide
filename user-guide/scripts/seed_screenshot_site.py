@@ -251,9 +251,25 @@ def _version_in_alias_state(alias, state: str):
     )
 
 
+def _frontend_image_config(image, existing=None):
+    from djangocms_frontend.contrib.image.models import Image as FrontendImage
+
+    config = FrontendImage(plugin_type="ImagePlugin").initialize_from_form().config
+    config.update(existing or {})
+    config.update(
+        {
+            "picture": {"pk": image.pk, "model": "filer.image"},
+            "alignment": "center",
+            "use_responsive_image": "yes",
+            "plugin_title": {"title": "Tutorial image"},
+            "fixture_role": "tutorial-image",
+        }
+    )
+    return config
+
+
 def _ensure_main_plugins(page, image, document, alias, destination_page) -> None:
     from cms.api import add_plugin
-    from djangocms_frontend.contrib.image.models import Image as FrontendImage
 
     placeholder = _content_placeholder(_current_content(page))
     plugins = placeholder.get_plugins(LANGUAGE)
@@ -285,22 +301,12 @@ def _ensure_main_plugins(page, image, document, alias, destination_page) -> None
     # are available when the structure board asks for the plugin's short
     # description. Merge an existing fixture's values as well, which repairs
     # fixtures created by older versions of this script.
-    image_config = FrontendImage(plugin_type="ImagePlugin").initialize_from_form().config
     if image_plugin is not None:
         image_instance, _ = image_plugin.get_plugin_instance()
-        image_config.update(image_instance.config)
-    image_config.update(
-        {
-            "picture": {"pk": image.pk, "model": "filer.image"},
-            "alignment": "center",
-            "use_responsive_image": "yes",
-            "plugin_title": {"title": "Tutorial image"},
-        }
-    )
+        image_config = _frontend_image_config(image, image_instance.config)
+    else:
+        image_config = _frontend_image_config(image)
     if image_plugin is None:
-        image_config.update(
-            {"fixture_role": "tutorial-image"}
-        )
         add_plugin(
             placeholder,
             "ImagePlugin",
@@ -360,6 +366,21 @@ def _ensure_main_plugins(page, image, document, alias, destination_page) -> None
                     "fixture_role": "text-link",
                 },
             )
+
+
+def _repair_version_image_plugins(page, image) -> None:
+    """Bring image copies in every historical version up to current defaults."""
+
+    for version in _page_versions(page):
+        placeholder = _content_placeholder(version.content)
+        for plugin in placeholder.get_plugins(LANGUAGE).filter(plugin_type="ImagePlugin"):
+            instance, _ = plugin.get_plugin_instance()
+            if instance is None:
+                continue
+            config = _frontend_image_config(image, instance.config)
+            if instance.config != config:
+                instance.config = config
+                instance.save(update_fields=["config"])
 
 
 def _add_version_note(version, text: str) -> None:
@@ -486,6 +507,7 @@ def seed_site(
         pages["user-guide-screenshot-services"],
     )
     _ensure_version_history(page, user)
+    _repair_version_image_plugins(page, image)
     _ensure_german_translation(page, user)
 
     print(

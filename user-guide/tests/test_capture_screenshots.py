@@ -1,4 +1,5 @@
 import os
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -9,6 +10,7 @@ from scripts.capture_screenshots import (
     capture_screenshot,
     configure_cms_site,
     expand_environment,
+    load_config,
     resolve_url,
     run_action,
     selected_screenshots,
@@ -25,6 +27,37 @@ def valid_config():
             {"id": "toolbar", "output": "tutorial/images/toolbar.png"}
         ],
     }
+
+
+class RepositoryRecipeTests(unittest.TestCase):
+    def test_recipe_covers_every_documented_browser_screenshot(self):
+        project_dir = Path(__file__).resolve().parents[1]
+        source_dir = project_dir / "source"
+        directive = re.compile(
+            r"^\s*\.\. (?:image|figure)::\s+(.+?)\s*$", re.MULTILINE
+        )
+        requested = re.compile(
+            r"``((?:tutorial|how-to)/images/[^`]+\.(?:jpe?g|png))``"
+        )
+        expected = set()
+        for document in source_dir.rglob("*.rst"):
+            contents = document.read_text(encoding="utf-8")
+            for match in directive.finditer(contents):
+                image = (document.parent / match.group(1)).resolve()
+                expected.add(image.relative_to(source_dir.resolve()).as_posix())
+            expected.update(requested.findall(contents))
+
+        # These are explanatory artwork rather than CMS browser captures.
+        expected -= {
+            "tutorial/images/05-pagetree.jpg",
+            "tutorial/images/08-version-states.png",
+        }
+        config = load_config(
+            project_dir / "screenshots.yml", allow_missing_environment=True
+        )
+        configured = {item["output"] for item in config["screenshots"]}
+
+        self.assertSetEqual(configured, expected)
 
 
 class EnvironmentExpansionTests(unittest.TestCase):
@@ -71,6 +104,32 @@ class TemporarySiteConfigurationTests(unittest.TestCase):
 class ValidationTests(unittest.TestCase):
     def test_accepts_minimal_configuration(self):
         validate_config(valid_config())
+
+    def test_accepts_additional_capture_elements(self):
+        config = valid_config()
+        config["screenshots"][0]["capture"] = {
+            "selector": ".dropdown",
+            "include": [".toolbar-entry"],
+        }
+
+        validate_config(config)
+
+    def test_rejects_capture_include_without_primary_selector(self):
+        config = valid_config()
+        config["screenshots"][0]["capture"] = {"include": [".toolbar-entry"]}
+
+        with self.assertRaisesRegex(ConfigurationError, "requires capture.selector"):
+            validate_config(config)
+
+    def test_rejects_invalid_capture_include(self):
+        config = valid_config()
+        config["screenshots"][0]["capture"] = {
+            "selector": ".dropdown",
+            "include": ".toolbar-entry",
+        }
+
+        with self.assertRaisesRegex(ConfigurationError, "list of CSS selectors"):
+            validate_config(config)
 
     def test_rejects_output_outside_output_directory(self):
         config = valid_config()
@@ -259,6 +318,53 @@ class CaptureTests(unittest.TestCase):
                 )
 
             self.assertEqual(target.read_bytes(), b"old screenshot")
+
+    def test_include_expands_element_capture(self):
+        page = MagicMock()
+        target = MagicMock()
+        target.bounding_box.return_value = {
+            "x": 100,
+            "y": 50,
+            "width": 100,
+            "height": 100,
+        }
+        included = MagicMock()
+        included.count.return_value = 1
+        included.nth.return_value.bounding_box.return_value = {
+            "x": 20,
+            "y": 10,
+            "width": 60,
+            "height": 30,
+        }
+        page.locator.side_effect = lambda selector: {
+            ".dropdown": target,
+            ".toolbar-entry": included,
+        }[selector]
+
+        def write_capture(*, path, **options):
+            Path(path).write_bytes(b"combined screenshot")
+
+        page.screenshot.side_effect = write_capture
+        with tempfile.TemporaryDirectory() as directory:
+            capture_screenshot(
+                page,
+                {
+                    "id": "menu",
+                    "output": "menu.png",
+                    "capture": {
+                        "selector": ".dropdown",
+                        "include": [".toolbar-entry"],
+                        "padding": 8,
+                    },
+                },
+                Path(directory),
+            )
+
+        included.wait_for.assert_called_once_with(state="visible")
+        self.assertEqual(
+            page.screenshot.call_args.kwargs["clip"],
+            {"x": 12, "y": 2, "width": 196, "height": 156},
+        )
 
     def test_labels_are_drawn_and_removed_around_capture(self):
         page = MagicMock()

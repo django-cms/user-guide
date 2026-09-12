@@ -53,6 +53,20 @@ The main fixture is available at `/en/welcome/`. Its version history and draft m
 the toolbar publish controls, version menu, manage-versions list, version comparison,
 and all four version-state indicators available to screenshot recipes.
 
+## Capture inventory
+
+The repository audit found 36 browser-generated images: all 30 UI screenshots already
+referenced by the guide plus the six images currently marked “Screenshot needed”. Every
+one has an enabled recipe in `screenshots.yml`. The page-tree illustration
+(`tutorial/images/05-pagetree.jpg`) and version-state diagram
+(`tutorial/images/08-version-states.png`) are explanatory artwork and deliberately stay
+outside the Playwright recipe. Older, unreferenced images are not regenerated.
+
+Run `python scripts/capture_screenshots.py --list` to print the machine-readable
+inventory. The test suite also compares the YAML outputs with image directives and
+“Screenshot needed” markers in all RST files, so adding a documentation screenshot
+without adding its recipe fails the tests.
+
 Existing image files are replaced only after their new capture succeeds. Run against
 a disposable or backed-up site: actions such as clicking a Publish button can change
 CMS content.
@@ -120,7 +134,8 @@ Supported actions are:
 - `goto`, `reload`, `click`, `double_click`, `fill`, `press`, `hover`, `check`,
   `uncheck`, `select_option`, and `scroll_into_view`
 - `wait_for`, `wait_for_timeout`, and `wait_for_load_state`
-- `evaluate` for small browser-side setup that cannot be expressed by another action
+- `evaluate` for small browser-side setup that cannot be expressed by another action;
+  it accepts `frame` when the expression must run inside a modal or sideframe
 
 Most element actions accept either a selector string or a mapping. A mapping can also
 contain Playwright options such as `timeout` or `force`. Use `frame` alongside
@@ -135,8 +150,11 @@ contain Playwright options such as `timeout` or `force`. Use `frame` alongside
 
 With no capture option, the current viewport is saved. Set `full_page: true` to save
 the whole page, or set `selector` to save one element. Element captures also support
-`frame` and `padding`. Common screenshot options include `quality` (JPEG only),
-`omit_background`, `animations`, `caret`, `scale`, `hide`, `mask`, and `mask_color`.
+`frame` and `padding`. Add an `include` list of CSS selectors to expand the crop to
+other visible elements in the same document—for example, to include the toolbar
+entry that opened a dropdown. Common screenshot options include `quality` (JPEG
+only), `omit_background`, `animations`, `caret`, `scale`, `hide`, `mask`, and
+`mask_color`.
 
 Use `labels` to identify important elements in the resulting image. Each label draws
 a temporary coloured outline around the matching element and places its text inside

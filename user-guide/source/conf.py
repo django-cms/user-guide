@@ -157,6 +157,9 @@ try:
 except:  # NOQA
     html_theme = 'default'
 
+if tags.has("odtsource"):
+    html_theme = "basic"
+    html_sidebars = {"**": []}
 
 show_cloud_banner = True
 

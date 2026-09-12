@@ -68,6 +68,6 @@ Version locking
 
 If version locking is enabled on your site, a draft can only be edited by the user who
 created it until the lock is removed or the draft is published. See the
-:ref:`publishing explanation <user-explanation>` and the `djangocms-versioning
+:ref:`publishing explanation <explanation-publishing>` and the `djangocms-versioning
 documentation
 <https://djangocms-versioning.readthedocs.io/en/latest/settings.html#DJANGOCMS_VERSIONING_LOCK_VERSIONS>`_.

@@ -1,3 +1,5 @@
+.. _explanation-publishing:
+
 Publishing
 ==========
 
@@ -39,29 +41,18 @@ deliberate design decision:
 - **No accidental publishing.** Visitors can never see a half-finished edit, because
   edits only ever happen in drafts that you publish as a deliberate step.
 
-Managing versions
------------------
+Versions as a history
+---------------------
 
-Versions in django CMS keep track of changes made to content over time. This feature
-allows editors to revert to earlier versions of content if needed and view the history
-of modifications:
+Because every draft and every version that was ever published is kept, your content
+carries its own history. You can see what a page looked like at any point in time,
+compare two versions to find out exactly what changed between them, and restore an
+earlier version if a change turns out to be wrong. Nothing an editor does is
+irreversible, which is what makes it safe to work directly on a live site.
 
-1. **Version History:** django CMS maintains a history of all changes made to a
-   particular piece of content.
-2. **Compare Versions:** Editors can compare different versions of content to see what
-   changes were made between each iteration.
-3. **Rollback:** If necessary, editors can revert to a previous version of the content,
-   effectively undoing recent changes.
-
-These functionalities empower editors to manage content effectively, ensuring quality
-and control over what gets published on the live site while maintaining a history of
-changes for reference or restoration purposes.
-
-.. figure:: ../tutorial/images/08-version-states.png
-    :alt: Version states and the editing process
-
-    This diagram summarises the possible states and the actions which create a change in
-    the state of a version.
+The four states a version can be in, and the actions each state allows, are listed in
+the :ref:`version states reference <ref-version-states>`. The steps for comparing,
+reverting and discarding versions are in :ref:`Managing versions <how-to-versions>`.
 
 Locked versions
 ---------------

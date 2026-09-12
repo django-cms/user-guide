@@ -22,6 +22,9 @@ The simplest way to set redirects is:
      .. image:: ../tutorial/images/05-pagetree-form.jpg
          :alt: django CMS page tree
 
+     The numbers used below refer to the elements of a page tree row as listed in the
+     :ref:`page tree reference <ref-page-tree>`.
+
    - If the page is published, select "Create new draft" from the dropdown menu of the
      page status indicator (number 7).
    - Click on the page settings icon (number 9: three horizontal sliders),

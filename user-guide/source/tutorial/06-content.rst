@@ -4,7 +4,7 @@ Creating places for content
 ===========================
 
 Content needs a place to live. Typically those are pages, but you also may have other
-content models, like aliases (chunks of content that are re-used elsewhere) or blog
+content models, like aliases (chunks of content that are reused elsewhere) or blog
 posts.
 
 We will work with pages in this guide.
@@ -49,65 +49,24 @@ to change the design, talk to the developers to review it.
 Change page settings
 --------------------
 
-To view the page settings, go to "Page Settings..." in the Page menu.
+Every page has a set of settings — its title, the slug that forms its URL, how it
+appears in the navigation, and more. They are the same fields you saw in the page
+dialog. To review them, select **"Page settings..."** in the page menu, or click the
+settings icon of the page's row in the page tree.
 
-These are the same parameters that are displayed when you create a page using the page
-dialog box. You can also access them by selecting the settings icon that appears in the
-page tree.
+The two fields you will always fill in are:
 
-Required fields
-~~~~~~~~~~~~~~~
-
-- **Title**: it will be used by the template of your site and displayed at the top of
-  the page, in the tab of the site on the browser, and in the favourites. Search engines
-  will also use it. It is therefore a field that must be filled in.
-- **Slug**: this is part of the URL of your page. In general, you will want it to
-  reflect the title of your page, and it will be automatically generated from it in an
-  appropriate format. Keep in mind that it is always valuable to keep your slugs as
-  short and sweet / pleasant / concise as possible.
+- **Title** — the title of the page. It is displayed by your site's template, used in
+  the browser tab and by search engines, and reused in the navigation menu unless you
+  set a separate menu title.
+- **Slug** — the part of the URL that identifies the page. It is generated
+  automatically from the title; keep it short and meaningful.
 
 .. note::
 
-    For your SEO, it is essential that the title and slug of your page contain words
-    related to the content of your page.
+    For your SEO, it is valuable that the title and slug of your page contain words
+    related to its content.
 
-Optional fields
-~~~~~~~~~~~~~~~
-
-- **Menu title**: If set this is used in your site's navigation menu otherwise the title
-  field of the page is used. This useful if the entire title is too long to be used in
-  navigation. For example, the title "Partner Company:Our Story" will be far too long to
-  work well in the navigation menu, especially for your users on smartphones. "Our
-  Story" would make a more appropriate menu title.
-- **Page title**: If set it replaces the title which is displayed in search engine
-  results and in the browser tab.
-
-Brief review of the different title fields
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. The **title** field is mandatory, it is the default title that is displayed on your
-   page. It contains the keywords and is reused for menus and as page title of those
-   fields do not overwrite it.
-2. The **menu title** is only used in menus where titles should be shorter.
-3. The **page title** appears in the search engine results and in the browser tab. It is
-   longer, and contains a maximum of keywords. Be careful, however, not to go too far
-   beyond the 60 characters, which seems to be the current display limit on Google.
-
-URL options
-~~~~~~~~~~~
-
-The URL options appear as a section a bit down in the page settings dialog. You might
-need to click "show" to make them visible.
-
-.. image:: ./images/06-url-options.jpg
-    :alt: URL options in the page settings dialog
-
-- **Overwrite URL**: allows you to modify the URL. By default, the URL of the page is
-  the slug of your current page, placed after the slug of its parent pages. For example,
-  its default URL could be: ``/a-propos/company/our-vision/``. Overwriting the URL would
-  allow you to shorten it to ``/our-vision/``, even though the page still keeps its
-  parents and children organised in the same way (About page, Company daughter page, Our
-  Vision grandchild page). We do not recommend using this function.
-- **Redirect**: Allows you to redirect the user to a different page. This is useful if
-  you have moved content to another page but don't want to break the URL that your users
-  may have bookmarked or affect the rank of that page in search engine results.
+Close the dialog again — we will fill the page with content in the next lesson. All
+other fields, including the URL options and the advanced settings, are described in the
+:ref:`page settings reference <ref-page-settings>`.

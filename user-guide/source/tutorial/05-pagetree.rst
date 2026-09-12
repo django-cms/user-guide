@@ -63,57 +63,35 @@ pages.
 Managing the page tree
 ----------------------
 
-The page tree is a list of all the pages of your site. It gives you an overview of your
-pages and their status.
-
-By default, the following information is displayed:
+The page tree is more than a list of your pages: each row tells you the state of a page
+and gives you the actions you can perform on it.
 
 .. image:: ./images/05-pagetree-form.jpg
     :alt: The django CMS page tree form
 
-From left to right, you will find the following items:
+Take a moment to look at the row of one of your pages. Next to its **title** you see
 
-1. The **language menu** which decides which language version of the page tree you see
-2. The dotted bar on the left to **move the pages** using Drag & Drop
-3. The **hide arrow**, present only in the case of a parent page. It shows or hides the
-   page's child pages.
-4. The **title of the page** in the selected language. If this says "Empty title" there
-   is no version of that page in the selected language, yet.
-5. The **root indicator** (house) indicating which page is presented at the root URL of
-   the site. A puzzle symbol at this place indicates that the page is handled by a
-   third-party application.
-6. The **eye icon** allows you to preview the page
-7. The **publication status menu** menu. Its colour provides the following information:
-       - **Blank**: the translation of the page into this language does not exist.
-       - **White with blue border**: An unpublished draft of the page exists. There is
-         not public version of the page.
-       - **Green**: the translation exists and the page is published,
-       - **Blue**: changes on the page have not been published. If you go to this page,
-         the button at the top right will suggest you to publish the changes so that
-         they are visible to the user.
-8. **"Menu"** indicates whether the page appears in the navigation menu of your site or not,
-       - Green / check: the page is visible in the navigation menu
-       - Gray / unchecked: the page does not appear
-9. The **settings button** opens the page settings.
-10. The **add button** adds a child page.
-11. The **hamburger context menu** offers additional actions:
+- the **status indicator**, whose colour tells you whether the page is published in the
+  selected language, has unpublished changes, or does not exist in that language yet,
+- the **"Menu"** column, which tells you whether the page is part of your site's
+  navigation,
+- and, at the right end of the row, the buttons to open the page's **settings**, to add
+  a **child page**, and a context menu with further actions.
 
-    - Copy
-    - Cut
-    - Paste
-    - Delete...
-    - Set as home
-    - Advanced settings
-    - Miscellaneous information: the date of the last change, the access (restricted
-      or not), the author of the last modifications.
+Above the tree, the language menu decides which language version of the tree you are
+looking at; the dotted bar on the left of each row lets you **move pages by drag &
+drop**.
 
-At the top right is a small menu, composed of a search button allowing you to find a
-specific page in your tree, a "..." button to choose the site whose tree you want to see
-(in many installations you will only see one site), and a button to add a new page.
+.. tip::
 
-At the bottom right there is the legend with a complete list of all symbols used in the
-page tree view. Open it by clicking on the information icon:
+    Every symbol used in the tree is listed in the legend, which you open with the
+    information icon at the bottom right:
 
-.. image:: ./images/05-pagetree-legend.jpg
-    :scale: 50
-    :alt: Legend for the page tree
+    .. image:: ./images/05-pagetree-legend.jpg
+        :scale: 50
+        :alt: Legend for the page tree
+
+You do not need to memorise the tree's controls now — they are all described in the
+:ref:`page tree reference <ref-page-tree>`, and the everyday tasks (moving a page,
+hiding it from the navigation, setting the home page, deleting it) are covered in
+:ref:`Managing pages <how-to-pages>`.

@@ -1,2 +1,4 @@
 /user-guide/env/
 /user-guide/build/
+__pycache__/
+*.py[cod]

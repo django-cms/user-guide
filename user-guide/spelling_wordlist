@@ -27,6 +27,7 @@ basilelegal
 Bertschy
 blog
 boilerplates
+breakpoint
 cacheable
 callables
 casper
@@ -60,11 +61,13 @@ Django
 django
 django CMS
 django-cms
+djangocms
 docstrings
 doctormo
 douwevandermeij
 draggable
 driesdesmet
+dropdown
 elpaso
 etc
 fallback
@@ -81,6 +84,7 @@ formset
 Foulis
 framebuffer
 freenode
+Frontend
 frontend
 furiousdave
 Gianluca
@@ -112,6 +116,7 @@ jedie
 Jens
 jokerejoker
 josjevv
+jpg
 jQuery
 jrief
 js
@@ -156,6 +161,7 @@ namespace
 namespaced
 namespaces
 Namespacing
+nestable
 newsblog
 nikolas
 northben
@@ -179,8 +185,11 @@ preload
 prized
 Procida
 programmatically
+px
 Płóciennik
 queryset
+Quickstart
+quickstart
 rc
 rebase
 recurses
@@ -251,7 +260,9 @@ uninstalled
 uninstalling
 uninstalls
 unoverridden
+Unpublish
 unpublish
+unpublished
 unregister
 upgraders
 Urbanski
@@ -263,6 +274,7 @@ utils
 vad
 Vadim
 viewable
+viewport
 Vimeo
 vs
 vs

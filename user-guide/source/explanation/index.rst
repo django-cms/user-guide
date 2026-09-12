@@ -16,4 +16,3 @@ content editor perspective.
     publishing
     aliases
     structure-content-modes
-    touch

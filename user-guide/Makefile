@@ -2,12 +2,15 @@
 # You can set these variables from the command line.
 
 SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
 PAPER         =
-VENV = env/bin/activate
 PORT = 8001
 SOURCEDIR	  = source
 BUILDDIR      = build
+PYTHON       ?= python3
+VENV_DIR     ?= env
+VENV_PYTHON   = $(VENV_DIR)/bin/python
+SPHINXBUILD  ?= $(VENV_DIR)/bin/sphinx-build
+SPHINXAUTOBUILD ?= $(VENV_DIR)/bin/sphinx-autobuild
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -61,29 +64,29 @@ screenshots-temporary: screenshots-install
 clean:
 	-rm -r $(BUILDDIR)/*
 
-dirhtml:
-	. $(VENV); $(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) build/dirhtml
+dirhtml: check-venv
+	"$(SPHINXBUILD)" -b dirhtml $(ALLSPHINXOPTS) build/dirhtml
 	@echo
 	@echo "Build finished. The HTML pages are in build/dirhtml."
 
-pickle:
-	. $(VENV); $(SPHINXBUILD) -b pickle $(ALLSPHINXOPTS) build/pickle
+pickle: check-venv
+	"$(SPHINXBUILD)" -b pickle $(ALLSPHINXOPTS) build/pickle
 	@echo
 	@echo "Build finished; now you can process the pickle files."
 
-json:
-	. $(VENV); $(SPHINXBUILD) -b json $(ALLSPHINXOPTS) build/json
+json: check-venv
+	"$(SPHINXBUILD)" -b json $(ALLSPHINXOPTS) build/json
 	@echo
 	@echo "Build finished; now you can process the JSON files."
 
-htmlhelp:
-	. $(VENV); $(SPHINXBUILD) -b htmlhelp $(ALLSPHINXOPTS) build/htmlhelp
+htmlhelp: check-venv
+	"$(SPHINXBUILD)" -b htmlhelp $(ALLSPHINXOPTS) build/htmlhelp
 	@echo
 	@echo "Build finished; now you can run HTML Help Workshop with the" \
 	      ".hhp project file in build/htmlhelp."
 
-qthelp:
-	. $(VENV); $(SPHINXBUILD) -b qthelp $(ALLSPHINXOPTS) build/qthelp
+qthelp: check-venv
+	"$(SPHINXBUILD)" -b qthelp $(ALLSPHINXOPTS) build/qthelp
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in build/qthelp, like this:"
@@ -91,40 +94,39 @@ qthelp:
 	@echo "To view the help file:"
 	@echo "# assistant -collectionFile build/qthelp/FeinCMS.qhc"
 
-latex:
-	. $(VENV); $(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) build/latex
+latex: check-venv
+	"$(SPHINXBUILD)" -b latex $(ALLSPHINXOPTS) build/latex
 	@echo
 	@echo "Build finished; the LaTeX files are in build/latex."
 	@echo "Run \`make all-pdf' or \`make all-ps' in that directory to" \
 	      "run these through (pdf)latex."
 
-changes:
-	. $(VENV); $(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) build/changes
+changes: check-venv
+	"$(SPHINXBUILD)" -b changes $(ALLSPHINXOPTS) build/changes
 	@echo
 	@echo "The overview file is in build/changes."
 
-linkcheck:
-	. $(VENV); $(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) build/linkcheck
+linkcheck: check-venv
+	"$(SPHINXBUILD)" -b linkcheck $(ALLSPHINXOPTS) build/linkcheck
 	@echo
 	@echo "Link check complete; look for any errors in the above output " \
 	      "or in build/linkcheck/output.txt."
 
-doctest:
-	. $(VENV); $(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) build/doctest
+doctest: check-venv
+	"$(SPHINXBUILD)" -b doctest $(ALLSPHINXOPTS) build/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in build/doctest/output.txt."
 
-spelling:
-	. $(VENV); $(SPHINXBUILD) -b spelling $(ALLSPHINXOPTS) build/spelling
+spelling: check-venv
+	"$(SPHINXBUILD)" -b spelling $(ALLSPHINXOPTS) build/spelling
 	@echo
 	@echo "Check finished. Wrong words can be found in " \
 		"build/spelling/output.txt."
 
-run:
-	. $(VENV); sphinx-autobuild $(ALLSPHINXOPTS) build/html --host 0.0.0.0 --port $(PORT)
+run: check-venv
+	"$(SPHINXAUTOBUILD)" $(ALLSPHINXOPTS) build/html --host 0.0.0.0 --port $(PORT)
 
-text:
-	. $(VENV); $(SPHINXBUILD) -b text $(ALLSPHINXOPTS) build/text
+text: check-venv
+	"$(SPHINXBUILD)" -b text $(ALLSPHINXOPTS) build/text
 	@echo
 	@echo "Build finished. The HTML pages are in build/text."
-

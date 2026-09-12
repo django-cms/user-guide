@@ -41,68 +41,30 @@ states "draft" and "published".
     installation might manage versions differently. This guide assumes that django CMS
     Versioning is installed.
 
-The **"published" state** marks the only version of the page that is currently visible
-to web site visitors.
+The version you just published is in the **"published" state** — it is the one your
+visitors see, and it can no longer be changed. To make further changes you create a new
+**draft** from it with the "New Draft" button; when you publish that draft, the version
+you published today becomes **"unpublished"** and is kept as a record. A draft you want
+to set aside without publishing can be **archived**.
 
-The **"draft" state** of a page is the one which the editor can change.
+All four states, and the actions each of them allows, are listed in the :ref:`version
+states reference <ref-version-states>`.
 
-Any version that has been published at any point in time will get the **"unpublished"
-state** once it is either unpublished manually or implicitly when another version of the
-page is published.
+Looking back at what changed
+----------------------------
 
-Versions in the **"archived" state** have not been published but retained by a user for
-later use.
-
-.. figure:: images/08-version-states.png
-    :alt: Version states and the editing process
-
-    This diagram summarizes the possible states and the actions which create a change in
-    the state of a version.
-
-Managing versions
------------------
-
-To manage versions of the currently displayed page, go to the Version menu and select
-"Manage Versions...":
-
-.. image:: ./images/08-version-menu-open.jpg
-    :alt: open version menu
-    :scale: 50
-
-This opens the sidebar with the manage versions dialog:
+Every version of the page is kept, so you can always find out what a page looked like
+at an earlier point, compare two versions, or restore one. Open the version menu in the
+toolbar and select **"Manage versions..."** to see the full history of the page you
+just published:
 
 .. image:: ./images/08-manage-versions.jpg
     :alt: Manage versions dialog
 
-You will see (a potentially long) list of all versions created, ever. On the right side
-of the list you see the action buttons. You can
+Working with that history — comparing, reverting and discarding versions — is covered
+step by step in :ref:`Managing versions <how-to-versions>`.
 
-- **Pencil**: Go back to the **edit** view of a draft
-- **Archive**: Archive a draft version for later reuse.
-- **Antenna**: Publish a draft
-- **Litter bin**: Delete a draft
-- **Eye**: View an old version. Note: Those cannot be edited any more.
-- **No-antenna**: Unpublish a currently public version
-- **Undo**: Revert an archived or unpublished version into a new draft version
-
-Comparing versions
-------------------
-
-With many versions being available, it sometimes is difficult to keep track of changes.
-You can visually compare two versions by
-
-- Either selecting two versions in the manage versions dialog and the choosing the
-  "Compare versions" from the actions dropdown and hitting "Go".
-- From the Version menu
-
-An example of a visual comparison is shown here:
-
-.. image:: ./images/08-comparing-versions.jpg
-    :alt: Visual comparison of versions
-
-Added content is marked green, deleted content is marked red.
-
-.. tip::
-
-    If you want to see the changes in the generate HTML code you can select "Source" in
-    the upper right of the compare view.
+That completes the tutorial: you have logged in, found your way around the toolbar and
+the page tree, uploaded an image, created a page, filled it with content and published
+it. From here, the :ref:`how-to guides <user-how-to>` cover the everyday tasks, and the
+:ref:`concepts <user-explanation>` explain why django CMS works the way it does.

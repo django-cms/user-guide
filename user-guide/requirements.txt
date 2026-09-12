@@ -55,7 +55,7 @@ django-classy-tags==4.1.0
     # via
     #   django-cms
     #   django-sekizai
-django-cms @ git+https://github.com/django-cms/django-cms@main
+django-cms~=4.1
     # via -r requirements.in
 django-formtools==2.6.1
     # via django-cms

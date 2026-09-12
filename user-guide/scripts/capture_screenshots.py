@@ -83,6 +83,7 @@ ENVIRONMENT_VARIABLE = re.compile(
 TEMPORARY_USERNAME = "admin"
 TEMPORARY_PASSWORD = "djangocms-screenshots"
 TEMPORARY_PAGE_PATH = "/en/welcome/?toolbar_on"
+TEMPORARY_SETTINGS_MARKER = "# django CMS user-guide screenshot fixture settings"
 
 ADD_ELEMENT_LABEL_SCRIPT = """
 (element, options) => {
@@ -446,7 +447,17 @@ def run_action(page: Any, action: Mapping[str, Any], base_url: str) -> None:
         expression = parameters.get("expression")
         if not isinstance(expression, str) or not expression:
             raise ConfigurationError("evaluate requires a non-empty expression")
-        page.evaluate(expression, parameters.get("argument"))
+        frame_selector = parameters.get("frame")
+        if frame_selector:
+            if not isinstance(frame_selector, str):
+                raise ConfigurationError("evaluate.frame must be a string")
+            frame_element = page.locator(frame_selector).element_handle()
+            frame = frame_element.content_frame() if frame_element is not None else None
+            if frame is None:
+                raise RuntimeError(f"Could not resolve frame {frame_selector!r}")
+            frame.evaluate(expression, parameters.get("argument"))
+        else:
+            page.evaluate(expression, parameters.get("argument"))
         return
 
     parameters = _parameters(raw_parameters)
@@ -634,6 +645,20 @@ def capture_screenshot(
     return target
 
 
+def configure_cms_site(project_dir: Path) -> None:
+    """Add deterministic fixture languages to the generated project settings."""
+
+    settings_path = project_dir / "screenshot_site" / "settings.py"
+    settings = settings_path.read_text(encoding="utf-8")
+    if TEMPORARY_SETTINGS_MARKER in settings:
+        return
+    settings += (
+        f"\n\n{TEMPORARY_SETTINGS_MARKER}\n"
+        'LANGUAGES = [("en", "English"), ("de", "German")]\n'
+    )
+    settings_path.write_text(settings, encoding="utf-8")
+
+
 def create_cms_site(
     project_dir: Path,
     *,
@@ -659,14 +684,15 @@ def create_cms_site(
         "--use-bundled-install-rules",
         "--mode",
         "traditional",
-        "--no-versioning",
+        "--versioning",
         "--no-moderation",
-        "--no-alias",
+        "--alias",
         "--no-stories",
         "--no-history",
     ]
     print(f"creating temporary django CMS site in {project_dir}", flush=True)
     subprocess.run(command, check=True)
+    configure_cms_site(project_dir)
 
     seed_script = Path(__file__).with_name("seed_screenshot_site.py")
     result = subprocess.run(

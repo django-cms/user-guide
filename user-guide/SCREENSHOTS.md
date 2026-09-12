@@ -24,10 +24,9 @@ export DJANGOCMS_PASSWORD='...'
 make screenshots
 ```
 
-For a completely disposable local fixture, one command creates a django CMS project,
-adds an `admin` superuser, creates a `/en/welcome/` page, nests a text plugin inside a
-Frontend container plugin, starts the development server, captures the screenshots,
-and removes the project again:
+For a completely disposable local fixture, one command creates and seeds a django CMS
+project, starts its development server, captures the screenshots, and removes the
+project again:
 
 ```console
 make screenshots-temporary
@@ -37,6 +36,22 @@ This uses the `djangocms` command from the virtual environment and its official 
 template. It therefore requires network access the first time. The temporary account
 uses `admin` / `djangocms-screenshots`; override either value with
 `DJANGOCMS_USERNAME` and `DJANGOCMS_PASSWORD` if desired.
+
+The fixture enables versioning and aliases and provides stable data for the complete
+guide, not only the toolbar overview:
+
+| Area | Seeded fixture |
+|---|---|
+| Pages | Welcome, About us, Services, Consulting, Training, and Contact, including a nested Services branch and mixed publication/navigation states |
+| Languages | Published English and German content on the Welcome page |
+| Plugins | A titled container with nested text, image, standalone Link / Button, inline file link, and alias plugins |
+| Media | A `Tutorial` folder containing a generated PNG with alt text and a sample PDF |
+| Aliases | A `Shared sections` category and versioned `Contact callout` alias |
+| Versions | Four English Welcome versions: one unpublished, one published, one archived, and one current draft with content differences suitable for comparison |
+
+The main fixture is available at `/en/welcome/`. Its version history and draft make
+the toolbar publish controls, version menu, manage-versions list, version comparison,
+and all four version-state indicators available to screenshot recipes.
 
 Existing image files are replaced only after their new capture succeeds. Run against
 a disposable or backed-up site: actions such as clicking a Publish button can change

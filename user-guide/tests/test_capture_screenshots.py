@@ -7,6 +7,7 @@ from unittest.mock import MagicMock, patch
 from scripts.capture_screenshots import (
     ConfigurationError,
     capture_screenshot,
+    configure_cms_site,
     expand_environment,
     resolve_url,
     run_action,
@@ -47,6 +48,24 @@ class EnvironmentExpansionTests(unittest.TestCase):
             value = expand_environment("${CMS_PASSWORD}", allow_missing=True)
 
         self.assertEqual(value, "${CMS_PASSWORD}")
+
+
+class TemporarySiteConfigurationTests(unittest.TestCase):
+    def test_adds_fixture_languages_idempotently(self):
+        with tempfile.TemporaryDirectory() as directory:
+            project_dir = Path(directory)
+            settings_path = project_dir / "screenshot_site" / "settings.py"
+            settings_path.parent.mkdir()
+            settings_path.write_text("DEBUG = True\n", encoding="utf-8")
+
+            configure_cms_site(project_dir)
+            configure_cms_site(project_dir)
+
+            settings = settings_path.read_text(encoding="utf-8")
+
+        self.assertEqual(settings.count("screenshot fixture settings"), 1)
+        self.assertIn('("en", "English")', settings)
+        self.assertIn('("de", "German")', settings)
 
 
 class ValidationTests(unittest.TestCase):
@@ -146,6 +165,28 @@ class SelectionTests(unittest.TestCase):
 
 
 class BrowserActionTests(unittest.TestCase):
+    def test_evaluate_can_target_a_frame(self):
+        page = MagicMock()
+        frame_element = page.locator.return_value.element_handle.return_value
+        frame = frame_element.content_frame.return_value
+
+        run_action(
+            page,
+            {
+                "evaluate": {
+                    "frame": "iframe.sidebar",
+                    "expression": "document.body.dataset.ready = argument",
+                    "argument": "yes",
+                }
+            },
+            "http://localhost:8000",
+        )
+
+        page.locator.assert_called_once_with("iframe.sidebar")
+        frame.evaluate.assert_called_once_with(
+            "document.body.dataset.ready = argument", "yes"
+        )
+
     def test_fill_can_target_an_element_in_a_frame(self):
         page = MagicMock()
         locator = page.frame_locator.return_value.locator.return_value

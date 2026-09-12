@@ -36,9 +36,9 @@ import imagesize
 # 6.5 inch wide -- but a screenshot is never flush with the left margin. Pandoc indents
 # a block image by 0.2 inch, and one nested in a list by up to 0.31 inch more, so the
 # widest an image may be and still clear the right margin is about 6.18 inch (593 px at
-# 96 dpi). 500 px is 5.2 inch (13.2 cm): it keeps the largest screenshots legible and
-# leaves roughly an inch of slack for deeper indentation than the guide uses today.
-DEFAULT_MAX_WIDTH = 500
+# 96 dpi). 580 px is 6.04 inch (15.3 cm): it uses nearly the whole column, so screenshots
+# stay as legible as the page allows, and still clears the deepest indentation we use.
+DEFAULT_MAX_WIDTH = 580
 
 IMG_TAG = re.compile(r"<img\b[^>]*>", re.IGNORECASE)
 ATTR = re.compile(r"""(\w[\w:-]*)\s*=\s*("([^"]*)"|'([^']*)')""")

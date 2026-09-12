@@ -14,3 +14,4 @@ django-cms~=5.1
 codespell
 pip-tools
 docstrfmt
+djangocms-simple-admin-style

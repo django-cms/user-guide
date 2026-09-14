@@ -25,7 +25,7 @@ Anatomy of a row
 From left to right, each row of the tree contains:
 
 === ============================ ==========================================================
-Nr  Element                      Meaning
+No. Element                      Meaning
 === ============================ ==========================================================
 1   **Language menu**            Selects which language version of the page tree is
                                  displayed. It sits above the tree and applies to all

@@ -13,7 +13,7 @@ for the different language contents of a page.
 
 The simplest way to set redirects is:
 
-1. **Accessing the Page Admin Interface:** Select "Pages..." in the page menu of the
+1. **Accessing the Page Admin Interface:** Select "Pages..." in the project menu of the
    toolbar.
 2. **Opening the page settings:**
 

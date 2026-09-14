@@ -94,12 +94,12 @@ image will eventually go, using exactly this pattern:
 ```rst
 .. todo::
 
-    **Screenshot needed:** ``how-to/images/add-image-dialog.png`` —
+    **Screenshot needed:** ``how-to/images/add-image-dialog.jpg`` —
     Image plugin edit dialog with the media library picker open. Quickstart
     project, light colour scheme, browser window ~1200 px wide.
 
 .. Uncomment once the screenshot exists:
-.. .. image:: images/add-image-dialog.png
+.. .. image:: images/add-image-dialog.jpg
 ..     :alt: The Image plugin dialog with the media library picker open
 ```
 
@@ -112,19 +112,18 @@ Rules:
 - Immediately below, include the final `.. image::` directive **commented out**
   (each line prefixed with `.. `), with the filename and `:alt:` text already
   written, so enabling the image is a simple uncomment once it is captured.
-- Add a matching row to [`SCREENSHOTS.md`](SCREENSHOTS.md).
+- Add a matching recipe to `user-guide/screenshots.yml`.
 
 Placeholders render as visible "Todo" admonitions in the built documentation
 (`todo_include_todos = True`), inviting readers to contribute the missing
 capture.
 
-All currently needed captures are listed in [`SCREENSHOTS.md`](SCREENSHOTS.md).
-You can audit the list against the sources with:
+You can audit outstanding placeholders against the sources with:
 
 ```bash
 grep -rn "Screenshot needed" user-guide/source --include="*.rst"
 ```
 
-Capturing screenshots is one of the easiest ways to contribute: set up the
-quickstart project, follow the capture description, and open a pull request that
-adds the image and uncomments the prepared `.. image::` directive.
+Capture the image with the automated workflow described in
+[`user-guide/SCREENSHOTS.md`](user-guide/SCREENSHOTS.md). After a successful capture,
+remove the `todo` block and uncomment the prepared `.. image::` directive.

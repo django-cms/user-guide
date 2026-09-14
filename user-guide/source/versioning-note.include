@@ -1,3 +1,5 @@
 .. note::
 
-  This section only applies to installations such as the django-cms-quickstart project which use the djangocms-versioning package for versioning. django CMS' modular architecture allows for other versioning packages, too.
+  This section describes the djangocms-versioning package used by the django CMS
+  quickstart project. Because django CMS is modular, other installations may offer
+  different version states and actions, or no version history.

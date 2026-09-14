@@ -68,12 +68,18 @@ class RepositoryRecipeTests(unittest.TestCase):
             r"``((?:tutorial|how-to)/images/[^`]+\.(?:jpe?g|png))``"
         )
         expected = set()
+        completed_placeholders = []
         for document in source_dir.rglob("*.rst"):
             contents = document.read_text(encoding="utf-8")
             for match in directive.finditer(contents):
                 image = (document.parent / match.group(1)).resolve()
                 expected.add(image.relative_to(source_dir.resolve()).as_posix())
-            expected.update(requested.findall(contents))
+            for requested_image in requested.findall(contents):
+                expected.add(requested_image)
+                if (source_dir / requested_image).is_file():
+                    completed_placeholders.append(requested_image)
+
+        self.assertEqual(completed_placeholders, [])
 
         # These are explanatory artwork rather than CMS browser captures.
         expected -= {

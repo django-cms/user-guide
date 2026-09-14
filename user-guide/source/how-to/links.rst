@@ -62,16 +62,8 @@ text, for example a call-to-action button:
    container where the link should appear.
 2. Select the **"Link / Button"** plugin.
 
-   .. todo::
-
-       **Screenshot needed:** ``how-to/images/links-button-dialog.jpg`` —
-       The "Link / Button" plugin edit dialog of djangocms-frontend, showing the
-       internal/external link fields and the "Link type" / context (colour) options.
-       Quickstart project, light colour scheme, browser window ~1200 px wide.
-
-   .. Uncomment once the screenshot exists:
-   .. .. image:: images/links-button-dialog.jpg
-   ..     :alt: The Link / Button plugin dialog
+   .. image:: images/links-button-dialog.jpg
+       :alt: Link / Button plugin dialog with destination and link type fields
 
 3. Enter the **link text** and the destination: an internal page, an external URL, a
    file from the media library, a phone number, or an email address.

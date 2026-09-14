@@ -5,17 +5,18 @@ Managing versions
 
 .. include:: ../versioning-note.include
 
-django CMS keeps every version of your content. This guide shows how to find the
-versions of a page, compare them, and restore or discard one. The states themselves —
-draft, published, unpublished and archived — and the actions available in each state
-are listed in the :ref:`version states reference <ref-version-states>`.
+With djangocms-versioning, published and archived versions remain available in the
+version history. This guide shows how to find the versions of a page, compare them, and
+restore or discard one. A discarded or deleted draft cannot be recovered. The states
+themselves — draft, published, unpublished and archived — and the actions available in
+each state are listed in the :ref:`version states reference <ref-version-states>`.
 
 Open the "manage versions" view
 -------------------------------
 
 Either
 
-- Select "Pages..." in the page menu of the toolbar and look for the page the versions
+- Select "Pages..." in the project menu of the toolbar and look for the page the versions
   of which you want to manage.
 - Click on the status indicator to open the dropdown menu.
 - Select "Manage versions...".

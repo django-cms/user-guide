@@ -11,10 +11,10 @@ of its menus.
 .. image:: ./images/02-toolbar.jpg
     :alt: The django CMS toolbar
 
-Depending on the modules present on your site and the page you are on, you can find
-various elements. The only ones that will always be present are "Project", "Page" and
-"Language". For example, a "Blog" menu will only be displayed if you have this module
-and you are on a blog page.
+Which elements appear depends on the modules installed on your site, your permissions,
+and the page you are viewing. For example, the "Language" menu only appears on
+multilingual sites, and a "Blog" menu only appears if that module is installed and you
+are viewing a blog page.
 
 One element is constantly present in your toolbar: the **django CMS logo** on the very
 left. Click on it now — it simply takes you back to your home page.
@@ -83,11 +83,12 @@ The version menu
 .. image:: ./images/02-version-menu.jpg
     :alt: The version menu
 
-django CMS keeps every page as a series of versions, so nothing you edit is visible to
-visitors until you publish it, and nothing published is ever lost. The version menu
-shows the number and status of the version you are looking at — for example "Draft"
-while you are editing. We will work with versions in :ref:`lesson 8 <publishing>`;
-the states are listed in the :ref:`version states reference <ref-version-states>`.
+On sites using djangocms-versioning, pages are managed as a series of versions. Your
+edits remain in a draft until you publish them, and earlier published versions remain
+available in the version history. The version menu shows the number and status of the
+version you are looking at — for example "Draft" while you are editing. We will work
+with versions in :ref:`lesson 8 <publishing>`; the states are listed in the
+:ref:`version states reference <ref-version-states>`.
 
 The language menu
 -----------------

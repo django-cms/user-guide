@@ -53,9 +53,9 @@ gain a toolbar: double-click a heading to rewrite it, drag a section into a new 
 drop in an image where you need one — on the page, in context, seeing what your visitors
 will see.
 
-Nothing goes public by accident. Your changes stay drafts until you publish them, and
-every version that was ever live is kept — so you can always look back, compare, and
-restore.
+Nothing goes public by accident: your changes stay drafts until you publish them. On
+sites using versioning, earlier published versions remain available for comparison and
+restoration.
 
 This guide is for the people who fill a django CMS site with content: editors, authors
 and site administrators. It assumes no knowledge of Django, HTML or programming.
@@ -112,8 +112,8 @@ What you can do
   and show it on as many pages as you like.
 - :ref:`Publish a page in several languages <how-to-translations>`, each one edited and
   published independently.
-- :ref:`Compare, restore or discard versions <how-to-versions>` — every state your site
-  has been in is kept.
+- :ref:`Compare, restore or discard versions <how-to-versions>` — review retained
+  versions and recover content from an earlier one.
 - :ref:`Organise the files of your site <how-to-media-files>` in the media library.
 - :ref:`Redirect an old address <how-to-redirects>` so visitors and search engines still
   find the content.

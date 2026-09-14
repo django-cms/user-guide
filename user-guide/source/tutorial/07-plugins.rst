@@ -138,16 +138,8 @@ your page:
    folder and pick your image.
 4. Save the dialog. Your image appears on the page.
 
-.. todo::
-
-    **Screenshot needed:** ``tutorial/images/07-add-image.jpg`` —
-    The "Picture / Image" plugin dialog with an image selected from the media
-    library's "Tutorial" folder. Quickstart project, light colour scheme, browser
-    window ~1200 px wide.
-
-.. Uncomment once the screenshot exists:
-.. .. image:: ./images/07-add-image.jpg
-..     :alt: Adding an image with the Picture / Image plugin
+.. image:: ./images/07-add-image.jpg
+    :alt: An image selected in the Picture / Image plugin dialog
 
 Links
 -----

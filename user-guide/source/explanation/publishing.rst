@@ -29,21 +29,20 @@ Why published versions cannot be edited
 Making published versions immutable may feel inconvenient at first, but it is a
 deliberate design decision:
 
-- **A reliable history.** Every state your site has ever been in is preserved
-  exactly. You can always answer "what did this page say last month?" and prove it.
-- **Safe rollback.** Because old versions are never altered, reverting to one of them
-  restores precisely what was once live — not an approximation.
+- **A reliable history.** Retained published and archived versions show what the page
+  said at earlier points in time.
+- **Safe rollback.** Because retained versions are not altered, reverting to one of
+  them restores precisely what it contained — not an approximation.
 - **No accidental publishing.** Visitors can never see a half-finished edit, because
   edits only ever happen in drafts that you publish as a deliberate step.
 
 Versions as a history
 ---------------------
 
-Because every draft and every version that was ever published is kept, your content
-carries its own history. You can see what a page looked like at any point in time,
-compare two versions to find out exactly what changed between them, and restore an
-earlier version if a change turns out to be wrong. Nothing an editor does is
-irreversible, which is what makes it safe to work directly on a live site.
+Published versions and drafts you choose to archive build a history of your content.
+You can compare retained versions to see what changed and restore an earlier version if
+a published change turns out to be wrong. Discarding or deleting a draft is different:
+it cannot be undone. Deleting a page or media file can also be irreversible.
 
 The four states a version can be in, and the actions each state allows, are listed in
 the :ref:`version states reference <ref-version-states>`. The steps for comparing,

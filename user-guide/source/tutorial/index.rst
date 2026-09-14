@@ -13,8 +13,9 @@ takes about half an hour, and by the end you will have
 - created a page and filled it with text, an image and a link, and
 - published it for your visitors to see.
 
-You do not need to know HTML, and you cannot break anything: until you publish,
-everything you do is a draft that only you can see.
+You do not need to know HTML. Your content changes remain in a draft until you publish
+them. Some administrative actions, such as deleting a page or file, cannot be undone,
+so pay attention to the warnings in those lessons.
 
 Each lesson builds on the one before, so it is worth working through them in order. All
 you need is a django CMS site and an account that may edit it — the :ref:`first lesson

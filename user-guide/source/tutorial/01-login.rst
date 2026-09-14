@@ -39,8 +39,8 @@ Two things are worth knowing before you go on:
 
 - The toolbar is yours alone. Visitors of your site never see it, and the page below it
   looks exactly as it looks to them.
-- Nothing you do from here on becomes public by accident. Your changes are kept as
-  drafts until you deliberately publish them, and every published version is kept, so
-  you can always go back.
+- Content changes do not become public by accident. They remain in drafts until you
+  deliberately publish them. If your site uses versioning, retained versions let you
+  compare changes and restore earlier published content.
 
 In the next lesson you take a tour of the toolbar.

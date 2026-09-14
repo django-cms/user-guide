@@ -25,7 +25,7 @@ Create an alias
 4. Open the alias to edit its content. An alias has a placeholder which you fill with
    plugins exactly like a page: open the structure board, add plugins, and arrange
    them (see :ref:`filling in content <plugins>`).
-5. Publish the alias using the toolbar, just like a page.
+5. Publish the alias with the toolbar.
 
 Turn existing content into an alias
 -----------------------------------
@@ -33,8 +33,8 @@ Turn existing content into an alias
 If content that should be reused already exists on a page:
 
 1. Open the **structure board** on that page (working on a draft).
-2. Open the **context menu** of the plugin you want to reuse (the hamburger menu on
-   the right of the plugin's entry) and select **"Create Alias"**.
+2. Open the **context menu** of the plugin you want to reuse (the button with three
+   horizontal lines) and select **"Create Alias"**.
 3. Choose a name and category for the new alias and save.
 
 The selected plugin and its nested plugins are copied into the new alias. You can now

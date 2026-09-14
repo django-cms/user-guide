@@ -14,8 +14,8 @@ Drafts and published versions
 
 You never edit a live page. You edit a **draft**: your own working copy, visible to you
 and your colleagues in the CMS and to nobody else. You can take as long over it as you
-need, preview it exactly as visitors will see it, and leave it half-finished overnight
-without anyone noticing.
+need, preview it without making it public, and leave it half-finished overnight without
+visitors seeing it.
 
 **Publishing** is the deliberate step that puts your draft in place of what was live
 before. The draft becomes the published version, and the version it replaces is kept as

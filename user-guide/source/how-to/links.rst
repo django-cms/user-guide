@@ -67,9 +67,8 @@ text, for example a call-to-action button:
 
 3. Enter the **link text** and the destination: an internal page, an external URL, a
    file from the media library, a phone number, or an email address.
-4. To render the link as a button, set the **"Link type"** option to "Button" and pick
-   a style (context) that fits its purpose, e.g. "Primary" for the main action of the
-   page.
+4. To render the link as a button, set **"Link type"** to "Button" and choose a style
+   that fits its purpose — for example, "Primary" for the page's main action.
 5. Click **"Save"** and publish the page.
 
 Link to a file from the media library

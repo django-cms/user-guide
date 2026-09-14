@@ -10,7 +10,7 @@ You can toggle between structure and content mode by clicking the button on the 
 right of the toolbar (or by pressing the space bar while editing).
 
 .. image:: ../tutorial/images/07-structure-toggle.jpg
-    :alt: Structure mode toggle opens the structure board.
+    :alt: Structure mode toggle that opens the structure board
 
 Two modes for two kinds of thinking
 -----------------------------------
@@ -26,7 +26,7 @@ Editing a page involves two quite different activities:
   you add plugins, nest them, and rearrange them by drag & drop.
 
 - **Writing** — working on the actual words and pictures. This is what **content
-  mode** is for. You see the page exactly as it will be rendered and edit elements
+  mode** is for. You see the rendered page and edit elements
   in place by double-clicking them (or, with inline editing enabled, by typing
   directly into the text).
 

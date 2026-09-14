@@ -108,6 +108,10 @@ What you can do
   media library shared by the whole site.
 - :ref:`Add links and buttons <how-to-links>` that keep working even when the page they
   point at moves.
+- :ref:`Rearrange page content <how-to-rearrange-content>` or :ref:`copy it to another
+  page <how-to-copy-content>` using the structure board and clipboard.
+- :ref:`Preview a draft and verify the live page <how-to-preview-verify>` before calling
+  the work complete.
 - :ref:`Maintain a footer, a banner or a contact block in one place <how-to-aliases>`
   and show it on as many pages as you like.
 - :ref:`Publish a page in several languages <how-to-translations>`, each one edited and
@@ -115,8 +119,11 @@ What you can do
 - :ref:`Compare, restore or discard versions <how-to-versions>` — review retained
   versions and recover content from an earlier one.
 - :ref:`Organise the files of your site <how-to-media-files>` in the media library.
+- :ref:`Replace a file without breaking its references <how-to-replace-media>`.
 - :ref:`Redirect an old address <how-to-redirects>` so visitors and search engines still
   find the content.
+- :ref:`Diagnose missing editing and publishing actions
+  <how-to-editing-troubleshooting>` when the interface appears stuck.
 
 About this guide
 ----------------
@@ -146,7 +153,7 @@ native French and extended.
         This guide is also available as one document you can read offline,
         print, improve, or hand to a new colleague: `download the user guide (ODT)
         <django-cms-user-guide.odt>`_. It opens in LibreOffice, Word, Pages and Google
-        Docs. The file is rebuilt with the rest of the guide, so it is never out of date.
+        Docs. The file is built from the same source as the online guide.
 
 .. toctree::
     :maxdepth: 1

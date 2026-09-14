@@ -43,7 +43,7 @@ presenting it consistently.
     in the page tree creates a child page exactly where you want it.
 
     .. image:: ./images/06-create-page.jpg
-        :alt: The page dialog box
+        :alt: Create page dialog with page settings
 
     All routes are described in :ref:`Create a new page <how-to-create-page>`.
 
@@ -65,10 +65,10 @@ The two fields you will always fill in are:
 - **Slug** — the part of the URL that identifies the page. It is generated
   automatically from the title; keep it short and meaningful.
 
-.. note::
+.. tip::
 
-    For your SEO, it is valuable that the title and slug of your page contain words
-    related to its content.
+    Use a title that tells readers what the page contains. Keep the slug short,
+    recognisable and appropriate for the page's language.
 
 Close the dialog again — we will fill the page with content in the next lesson. All
 other fields, including the URL options and the advanced settings, are described in the

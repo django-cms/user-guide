@@ -49,8 +49,8 @@ Check the image details
 
 Click on the image's name to open its details. Here you can change the **name**, add a
 **caption**, and — most importantly — set the **alternative text** ("alt text"), which
-is read aloud by screen readers and used when the image cannot be displayed. Fill it
-in with a short description of what the image shows, and save.
+can replace the image for people using screen readers. Describe the image's relevant
+content or purpose, then save.
 
 You can come back to the media library at any time to rename, move or replace files.
 The full set of tasks is covered in :ref:`Managing media files <how-to-media-files>`.

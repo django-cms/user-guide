@@ -3,33 +3,31 @@
 Standard plugins
 ================
 
-Each site has its own set of installed plugins. This reference is based on the plugins
-installed with django CMS quickstart. For how to work with plugins in general, see
-:ref:`filling in content <plugins>` in the tutorial.
+The plugins available to you depend on the site's configuration and on the placeholder
+or parent plugin you are using. This page describes the plugins included in a typical
+django CMS quickstart project. Your site may add, remove, rename or restrict them.
 
-django CMS groups its plugins into categories. We list the plugins by category.
+For the actions common to every plugin, see :ref:`Filling in content <plugins>`,
+:ref:`Rearranging content <how-to-rearrange-content>` and :ref:`Copying content
+<how-to-copy-content>`.
 
 Generic
 -------
 
 **Text**
-    The text plugin is a simple yet versatile plugin used for adding and editing text
-    content. It allows you to directly insert formatted text, such as paragraphs,
-    headings, lists, and links.
+    Adds formatted text, including paragraphs, headings, lists and links.
 
-    :Fields: The rich text itself, edited in the editor that opens when the plugin is
-             added or changed.
-    :Note: Other plugins (images, links, ...) can be embedded into the text through
-           the "CMS Plugins" menu of the editor. See :ref:`how-to-internal-links` and
-           :ref:`how-to-add-image`.
+    :Fields: Rich text edited in the editor that opens when you add or change the
+             plugin.
+    :Note: The editor's **"CMS Plugins"** menu can embed images, links and other
+           supported plugins inside the text. See :ref:`Creating links and buttons
+           <how-to-links>` and :ref:`Adding an image <how-to-add-image>`.
 
 **Alias**
-    The Alias plugin is a powerful tool that enables content editors to display certain
-    content on many pages without duplicating it. The Alias plugin let predefined
-    content blocks appear at its position by linking them. If the alias content is
-    updated, the linked content also changes.
+    Displays a reusable content block maintained separately from the page. Publishing
+    a change to the alias updates every place that displays it.
 
-    :Fields: Alias — the alias whose content is displayed at this position.
+    :Fields: The alias to display.
     :Note: See :ref:`Reusing content with aliases <how-to-aliases>`.
 
 Frontend
@@ -37,116 +35,103 @@ Frontend
 
 .. include:: ../frontend-note.include
 
-The frontend plugins are part of the djangocms-frontend package, which might (or might
-not) be installed on your site. Its purpose is to provide web site components like
-sliders, accordions, etc. for content editors. Those components in most cases are
-implemented by the designer of the web site. Content editors can use the component
-at any place on the site.
+These plugins provide common layout and interface components. Their appearance and
+available options depend on the site's design, so the result may differ from the
+examples described here.
 
 **Accordion**
-    Use the Accordion plugin to build vertically collapsing accordions.
+    Groups content into sections that expand and collapse vertically.
 
 **Alert**
-    Provide contextual feedback messages for typical user actions for a handful of
-    contexts: success, warning, danger, info, ....
+    Displays a prominent status or feedback message, such as information, success,
+    warning or danger.
 
 **Badge**
-    Provide small counters or pieces of information for a handful of contexts: success,
-    warning, danger, info, ....
+    Displays a small label, status or count.
 
 **Blockquote**
-    Quote blocks of content from another source. Optionally provide a source.
+    Marks a quotation and can identify its source.
 
 **Card**
-    Structure content with a flexible and extensible container with multiple variants
-    and options
+    Groups related content in a bordered or styled panel.
 
-    :Fields: Background context (colour), text alignment, card components (header,
-             body, footer, image overlay) added as nested plugins.
-    :Note: Use "Card layout" to arrange several cards in a grid or deck.
+    :Fields: Background style, text alignment and nested card components such as a
+             header, body, footer or image overlay.
+    :Note: Use **Card layout** to arrange several cards together.
 
 **Card layout**
-    Organise several cards into one layout
+    Arranges multiple Card plugins in a grid or deck.
 
 **Carousel**
-    Cycle through elements, images or slides of text, like a carousel.
+    Presents a sequence of slides containing images or other content.
 
-    :Fields: Transition style, interval, controls and indicator options; the slides
-             are added as nested "Carousel slide" plugins, each with an image,
-             optional caption and link.
+    :Fields: Transition, interval, controls and indicators. Add each slide as a nested
+             **Carousel slide** plugin with an optional image, caption and link.
 
 **Code**
-    Present (computer) code blocks
+    Displays a block of computer code with suitable formatting.
 
 **Collapse**
-    Toggle the visibility of content
+    Lets visitors show and hide nested content.
 
 **Container**
-    Contain, pad, and align your content within a given device or viewport for
-    responsive designs
+    Groups, aligns and constrains other plugins as one page section.
 
-    :Fields: Container type (fixed, fluid or breakpoint-specific), spacing and
-             background options. All fields are optional.
-    :Tip: The title field is shown in the plugin tree — name your containers after the
-          page sections they hold to keep large plugin trees navigable.
+    :Fields: Fixed, fluid or breakpoint-specific width; spacing; background options.
+    :Tip: Give the container a descriptive title such as "Team" or "Contact". The title
+          appears in the structure board and makes long pages easier to navigate.
 
 **Editor note**
-    Mark contents visible to editors only
+    Adds a note that editors can see but visitors cannot.
 
 **Figure**
-    Display related images and text
+    Groups an image or other media with related text, such as a caption.
 
 **Heading**
-    Add headline with optional anchor.
+    Adds a heading with an optional link target.
 
-    :Fields: Heading text, heading level (H1–H6), optional anchor identifier that can
-             be used as a link target and by the "Table of contents" plugin.
+    :Fields: Heading text, level (H1–H6), and an optional anchor used by links and the
+             **Table of contents** plugin.
 
 **Icon**
-    Give visual clues by adding icons
+    Displays an icon from the icon set configured for the site.
 
 **Jumbotron (deprecated)**
-    Showcase your hero unit
+    Displays a large highlighted section. Use the layout components recommended by
+    your site's designers for new content.
 
 **Link / Button**
-    Reference and link other contents
+    Links to another page, an external URL, a file, a telephone number or an email
+    address. It can appear as a text link or a styled button.
 
-    :Fields: Link text; destination (internal page, external URL, file, phone number
-             or email address); link type (text link or button) and button context
-             (colour); size and target options.
+    :Fields: Link text, destination, link type, visual context, size and target.
     :Note: See :ref:`Creating links and buttons <how-to-links>`.
 
 **List group**
-    Displaying a series of content flexibly. Modify and extend them to support just
-    about any content within.
+    Presents a series of related items as a vertical list.
 
 **Media**
-    Construct highly repetitive components like blog comments, tweets, and the like
+    Places media beside nested content, for example an image beside a short text.
 
 **Picture / Image**
-    Show images from the media library
+    Displays an image from the media library or an external image URL.
 
-    :Fields: Image (chosen from the media library or uploaded directly); optional
-             external image URL; width, height and alignment; optional link (internal
-             page or external URL); responsive and thumbnail options.
+    :Fields: Image, dimensions, alignment, optional link, responsive behaviour and
+             thumbnail options.
     :Note: See :ref:`Adding an image to a page <how-to-add-image>`.
 
 **Row** and **Column**
-    Build responsive layouts of all shapes and sizes thanks to a twelve column system,
-    six default responsive tiers
+    Build responsive multi-column layouts. Columns live inside rows; content plugins
+    live inside columns.
 
-    :Fields: Row: vertical/horizontal alignment and gutter options; the option to
-             create several columns at once. Column: column width (1–12) per
-             breakpoint, alignment and offset options.
-    :Note: Columns only live inside rows. Content plugins are nested inside the
-           columns.
+    :Fields: Row alignment and gutters; Column width, alignment and offset at each
+             configured responsive breakpoint.
 
 **Spacing**
-    Add horizontal spaces around the child content
+    Adds configurable space around nested content.
 
 **Table of contents**
-    Create a table of contents for all sections starting with the "Heading" plugin.
+    Builds a linked list from Heading plugins rendered before it on the page.
 
 **Tabs**
-    Create a tabbed interface for content that is only shown when the corresponding tab
-    is activated.
+    Groups content into labelled panels and displays one panel at a time.

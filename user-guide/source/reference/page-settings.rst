@@ -21,7 +21,7 @@ Basic settings
 --------------
 
 .. image:: ../tutorial/images/02-page-settings.jpg
-    :alt: The page settings dialogue
+    :alt: Page settings dialog with title, slug and metadata fields
 
 ======================== ========= ======================================================
 Field                    Required  Meaning
@@ -36,12 +36,10 @@ Field                    Required  Meaning
                                    page's URL (slug) safely <how-to-change-slug>`.
 **Menu title**           no        Replaces the title in the navigation menu. Useful
                                    when the full title is too long for menus.
-**Page title**           no        Replaces the title in search engine results and the
-                                   browser tab. Avoid much more than 60 characters —
-                                   longer titles are cut off in search results.
-**Description meta tag** no        A short summary used by search engines in result
-                                   snippets and by social networks when the page is
-                                   shared.
+**Page title**           no        Replaces the title in the browser tab and can be used
+                                   in search results. Keep it concise and descriptive.
+**Description meta tag** no        A short summary that search engines or social sites
+                                   may use when presenting the page.
 ======================== ========= ======================================================
 
 URL options

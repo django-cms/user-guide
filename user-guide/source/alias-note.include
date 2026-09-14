@@ -1,3 +1,5 @@
 .. note::
 
-  This section only applies to installations such as the django-cms-quickstart project which use the djangocms-alias package.
+    This section applies to sites with aliases enabled, including the django CMS
+    quickstart project. If you do not see an Aliases menu or plugin, your site may not
+    provide this feature.

@@ -43,7 +43,7 @@ To create a folder inside another one, open the parent folder first and then cli
 
     Organise folders the way your team looks for files — by section of the site, by
     campaign or by year — rather than by file type. "Press photos 2025" is easier to
-    search than "JPEGs".
+    search than "JPEG images".
 
 Upload files
 ------------

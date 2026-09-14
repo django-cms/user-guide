@@ -30,16 +30,8 @@ this tutorial:
 1. Click the **"New Folder"** button at the top right of the folder list.
 2. Name the folder "Tutorial" and save.
 
-.. todo::
-
-    **Screenshot needed:** ``tutorial/images/04-filer-new-folder.jpg`` —
-    The filer folder list with the "New Folder" button highlighted and the new
-    "Tutorial" folder dialog open. Quickstart project, light colour scheme, browser
-    window ~1200 px wide.
-
-.. Uncomment once the screenshot exists:
-.. .. image:: ./images/04-filer-new-folder.jpg
-..     :alt: Creating a new folder in the media library
+.. image:: ./images/04-filer-new-folder.jpg
+    :alt: Creating a new Tutorial folder in the media library
 
 Upload an image
 ---------------
@@ -49,16 +41,8 @@ Upload an image
    **upload button** at the top right and pick a file.
 3. The image appears in the folder once the upload finishes.
 
-.. todo::
-
-    **Screenshot needed:** ``tutorial/images/04-filer-upload.jpg`` —
-    The inside of a filer folder with one uploaded image visible and the upload
-    button at the top right highlighted. Quickstart project, light colour scheme,
-    browser window ~1200 px wide.
-
-.. Uncomment once the screenshot exists:
-.. .. image:: ./images/04-filer-upload.jpg
-..     :alt: An uploaded image inside a media library folder
+.. image:: ./images/04-filer-upload.jpg
+    :alt: An uploaded image in the Tutorial folder of the media library
 
 Check the image details
 -----------------------

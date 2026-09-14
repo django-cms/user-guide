@@ -19,16 +19,8 @@ Create an alias
    existing one.
 3. Click **"Add Alias"**, give the alias a descriptive name, and save.
 
-   .. todo::
-
-       **Screenshot needed:** ``how-to/images/aliases-changelist.jpg`` —
-       The Aliases overview in the sidebar with at least one category and one alias
-       visible, the "Add Alias" button visible. Quickstart project, light colour
-       scheme, browser window ~1200 px wide.
-
-   .. Uncomment once the screenshot exists:
-   .. .. image:: images/aliases-changelist.jpg
-   ..     :alt: The Aliases overview in the sidebar
+   .. image:: images/aliases-changelist.jpg
+       :alt: Aliases overview with a category, an alias and the Add Alias button
 
 4. Open the alias to edit its content. An alias has a placeholder which you fill with
    plugins exactly like a page: open the structure board, add plugins, and arrange

@@ -47,7 +47,7 @@ Duplicate an existing page
 Copy or move a page in the page tree
 ------------------------------------
 
-1. Select **"Pages..."** in the page menu of the toolbar to open the page tree.
+1. Select **"Pages..."** in the project menu of the toolbar to open the page tree.
 
    .. image:: ../tutorial/images/05-pagetree-form.jpg
        :alt: django CMS page tree
@@ -111,7 +111,7 @@ Set a page as the home page
 The home page is the page served at the root URL of your site, marked with a house
 icon in the page tree.
 
-1. Select **"Pages..."** in the page menu of the toolbar to open the page tree.
+1. Select **"Pages..."** in the project menu of the toolbar to open the page tree.
 2. Open the **hamburger context menu** at the right end of the row of the page you
    want to make the new home page.
 3. Select **"Set as home"**.

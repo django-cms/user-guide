@@ -27,7 +27,7 @@ State            Meaning
                  edited.
 **Unpublished**  A version that was published at some point and is not any more —
                  either unpublished manually or replaced by publishing another
-                 version. Kept as a permanent record.
+                 version. Retained in the version history.
 **Archived**     A draft that was set aside for later use. Not visible to visitors and
                  not editable until reverted into a new draft.
 ================ =======================================================================

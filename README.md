@@ -15,5 +15,6 @@ See [Regenerating screenshots](user-guide/SCREENSHOTS.md) to update the guide's 
 images against a prepared django CMS instance or a new django CMS version.
 
 Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for how to build the
-docs locally and the conventions used, and [SCREENSHOTS.md](SCREENSHOTS.md) for a list
-of screenshots that still need to be captured.
+docs locally and the conventions used, and
+[Regenerating screenshots](user-guide/SCREENSHOTS.md) for the automated capture
+workflow and current screenshot inventory.

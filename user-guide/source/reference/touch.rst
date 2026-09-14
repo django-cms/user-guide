@@ -5,102 +5,63 @@ Using touch-screen devices with django CMS
 
 .. important::
 
-    These notes about touch interface support apply only to the **django CMS admin and
-    editing interfaces**. The visitor-facing published site is **wholly independent** of
-    this, and the responsibility of the site developer.
+    These notes apply to the **django CMS administration and editing interfaces**.
+    The visitor-facing site is designed separately and may have different device
+    requirements.
 
-General
--------
+Touch support depends on the browser, screen size, installed plugins and the site's
+frontend code. A tablet-sized screen generally gives the toolbar, sidebars and editing
+dialogs more room than a phone. For longer editing sessions, a keyboard and pointing
+device may still be more comfortable.
 
-django CMS has made extensive use of double-click functionality, which lacks an exact
-equivalent in touch-screen interfaces. The touch interface will interpret taps and
-touches in an intelligent way.
+Touch interactions
+------------------
 
-Depending on the context, a tap will be interpreted to mean *open for editing* (that is,
-the equivalent of a double-click), or to mean *select* (the equivalent of a single
-click), according to what makes sense in that context.
+django CMS uses interactions that were originally designed for a mouse, including
+double-clicking, hovering and dragging. On a touch screen:
 
-Similarly, in some contexts similar interactions may *drag* objects, or may *scroll*
-them, depending on what makes most sense. Sometimes, the two behaviours will be present
-in the same view, for example in the page list, where certain areas are draggable (for
-page re-ordering) while other parts of the page can be used for scrolling.
+- A tap may open an editing control or select an item, depending on the context.
+- Some content can be opened for editing by tapping it, while other content is easier
+  to reach through its pencil button in the structure board.
+- Use the dotted drag handle when moving pages or plugins. Starting a gesture elsewhere
+  may scroll the view instead.
+- Controls that normally appear on hover may be less obvious. The page tree, structure
+  board and context menus provide explicit buttons for many of the same actions.
 
-In general, the chosen behaviour is reasonable for a particular object, context or
-portion of the screen, and in practice is quicker and easier to apprehend simply by
-using it than it is to explain.
-
-Pop-up help text will refer to clicking or tapping depending on the device being used.
-
-Be aware that some hover-related user hints are simply not available to touch interface
-users.
+If a gesture is difficult to perform reliably, use the corresponding menu or action
+button where one is available.
 
 .. _device-support:
 
-Device support
---------------
+Screen size and orientation
+---------------------------
 
-Smaller devices such as most phones are too small to be adequately usable. For example,
-your Apple Watch is sadly unlikely to provide a very good django CMS editing experience.
+The toolbar, structure board and administration sidebar all take up space beside the
+page being edited. On a narrow screen, controls may be crowded or the editable page may
+become too small to assess accurately. Switching to landscape orientation or a larger
+screen can help.
 
-Older devices will often lack the performance to support a usefully responsive frontend
-editing/administration interface.
+Always check the result in **Preview** mode. Responsive pages can look different at
+different viewport sizes, and the editing interface itself changes the space available
+to the page.
 
-The following devices are known to work well, so newer devices and more powerful models
-should also be suitable:
+Rich-text editing
+-----------------
 
-- iOS: Apple iPad Air 1, Mini 4
-- Android: Sony Xperia Z2 Tablet, Samsung Galaxy Tab 4
-- Windows 10: Microsoft Surface
+Rich-text editors and on-screen keyboards vary between browsers and devices. The
+keyboard can cover part of a dialog, and selecting text or embedded plugins precisely
+may be difficult. Saving frequently and using a hardware keyboard can make substantial
+text editing easier.
 
-We welcome feedback about specific devices.
+The rich-text editor is supplied by an installed package, so its controls and touch
+behaviour may differ from those shown in this guide.
 
-Your site's frontend
---------------------
+Site-specific limitations
+-------------------------
 
-django CMS's toolbar and frontend editing architecture rely on good practices in your
-own frontend code. To work well with django CMS's responsive management framework, your
-own site should be friendly towards multiple devices.
-
-Whether you use your own frontend code or a framework such as Bootstrap 3 or Foundation,
-be aware that problems in your CSS or markup can affect django CMS editing modes, and
-this will become especially apparent to users of mobile/hand-held devices.
-
-Known issues
-------------
-
-General issues
-~~~~~~~~~~~~~~
-
-- Editing links that lack sufficient padding is currently difficult or impossible using
-  touch-screens.
-- Similarly, other areas of a page where the visible content is composed entirely of
-  links with minimal padding around them can be difficult or impossible to open for
-  editing by tapping. This can affect the navigation menu (double-clicking on the
-  navigation menu opens the page list).
-- Adding links is known to be problematic on some Android devices, because of the
-  behaviour of the keyboard.
-- On some devices, managing django CMS in the browser's *private* (also known as
-  *incognito*) mode can have significant performance implications.
-
-  This is because local storage is not available in this mode, and user state must be
-  stored in a Django session, which is much less efficient.
-
-  This is an unusual use case, and should not affect many users.
-
-CKEditor issues
-~~~~~~~~~~~~~~~
-
-- Scrolling on narrow devices, especially when opening the keyboard inside the CKEditor,
-  does not always work ideally - sometimes the keyboard can appear in the wrong place
-  on-screen.
-- Sometimes the CKEditor moves unexpectedly on-screen in use.
-- Sometimes in Safari on iOS devices, a rendering bug will apparently truncate or
-  reposition portions of the toolbar when the CKEditor is opened - even though sections
-  may appear to missing or moved, they can still be activated by touching the part of
-  the screen where they should have been found.
-
-Django Admin issues
-~~~~~~~~~~~~~~~~~~~
-
-- In the page tree, the first touch on the page opens the keyboard which may be
-  undesirable. This happens because Django automatically focuses the search form input.
+A site's CSS and markup can affect frontend editing. Small links, overlapping elements
+or content with little space around it may be hard to select by touch even when the CMS
+interface itself works correctly. If a particular page or plugin cannot be edited
+reliably on a touch device, report the page, browser and device to the team responsible
+for the site. They can determine whether the problem belongs to django CMS, an installed
+plugin or the site's frontend.

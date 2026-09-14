@@ -55,8 +55,7 @@ and all four version-state indicators available to screenshot recipes.
 
 ## Capture inventory
 
-The repository audit found 36 browser-generated images: all 30 UI screenshots already
-referenced by the guide plus the six images currently marked “Screenshot needed”. Every
+The repository audit found 36 browser-generated images referenced by the guide. Every
 one has an enabled recipe in `screenshots.yml`. The page-tree illustration
 (`tutorial/images/05-pagetree.jpg`) and version-state diagram
 (`tutorial/images/08-version-states.png`) are explanatory artwork and deliberately stay
@@ -65,7 +64,8 @@ outside the Playwright recipe. Older, unreferenced images are not regenerated.
 Run `python scripts/capture_screenshots.py --list` to print the machine-readable
 inventory. The test suite also compares the YAML outputs with image directives and
 “Screenshot needed” markers in all RST files, so adding a documentation screenshot
-without adding its recipe fails the tests.
+without adding its recipe fails the tests. It also rejects a “Screenshot needed” marker
+when the requested image already exists.
 
 Existing image files are replaced only after their new capture succeeds. Run against
 a disposable or backed-up site: actions such as clicking a Publish button can change

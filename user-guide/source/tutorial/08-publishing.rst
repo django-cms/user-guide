@@ -51,10 +51,10 @@ states reference <ref-version-states>`.
 Looking back at what changed
 ----------------------------
 
-Every version of the page is kept, so you can always find out what a page looked like
-at an earlier point, compare two versions, or restore one. Open the version menu in the
-toolbar and select **"Manage versions..."** to see the full history of the page you
-just published:
+Published and archived versions remain in the version history, so you can compare them
+or restore their content. Drafts that you discard or delete cannot be recovered. Open
+the version menu in the toolbar and select **"Manage versions..."** to see the retained
+history of the page you just published:
 
 .. image:: ./images/08-manage-versions.jpg
     :alt: Manage versions dialog

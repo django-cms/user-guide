@@ -57,9 +57,9 @@ You can place images directly inside a text plugin so that they flow with the te
 Set the alternative text
 ------------------------
 
-The alternative text ("alt text") is read aloud by screen readers and displayed when
-the image cannot be shown. It is essential for accessibility and helps search engines
-understand your content.
+The alternative text ("alt text") gives people who cannot see the image an equivalent
+description of its purpose. Screen readers can read it aloud, and browsers may display
+it when the image cannot be loaded.
 
 - In the media library, you can set a default alternative text for each file in its
   **"Alt text"** field (see :ref:`Managing media files <how-to-media-files>`).
@@ -69,7 +69,20 @@ understand your content.
 .. tip::
 
     Write alt text that conveys the purpose of the image in its context, for example
-    "Our team at the 2025 company retreat" rather than "photo1.jpg".
+    "Our team at the company retreat" rather than "photo1.jpg". Do not begin with
+    "Image of" unless the fact that it is an image is important.
+
+Before publishing, check that:
+
+- an informative image has concise alt text that communicates the relevant content;
+- a linked image describes the link's purpose as well as the image where necessary;
+- important words shown inside the image also appear in nearby text; and
+- a purely decorative image has empty alt text, if your site's image plugin supports
+  that choice, rather than a filename or meaningless description.
+
+A caption and alt text serve different purposes: visitors can see the caption, while
+alt text replaces the image for someone who cannot. One does not automatically replace
+the other.
 
 Control size and alignment
 --------------------------

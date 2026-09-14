@@ -41,6 +41,9 @@ Entry                        Action
                              djangocms-alias).
 **User settings**            Sets the language of the administration interface and
                              toolbar.
+**Clipboard...**             Shows the plugin currently copied or cut. Available in
+                             edit mode when the clipboard contains content.
+**Clear clipboard**          Removes the copied or cut plugin from the clipboard.
 **Disable toolbar**          Completely disables the toolbar and the front-end editor
                              for your user. To re-enable it, add ``?toolbar_on`` to the
                              end of the URL in your browser.
@@ -116,6 +119,9 @@ you are viewing:
 =================== ====================================================================
 Button              Action
 =================== ====================================================================
+**Undo**            Optional. Reverses the most recent supported action in the current
+                    editing history.
+**Redo**            Optional. Applies the most recently undone action again.
 **Create**          Opens the creation wizard for a new page or other content types
                     available on your site.
 **Edit**            Opens the current content in edit mode.
@@ -127,6 +133,10 @@ Button              Action
 **Publish**         Makes the current draft the published version. A previously
                     published version becomes "unpublished".
 =================== ====================================================================
+
+Undo and Redo are not available on every site. They operate on recent editing actions
+and are separate from the retained versions described in :ref:`Managing versions
+<how-to-versions>`.
 
 Display toggles
 ---------------

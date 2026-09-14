@@ -72,6 +72,10 @@ To change the order of your content — to move an image above a text, say — t
 the plugin by the dotted handle on the left of its entry and **drag** it to its new
 place.
 
+For moving between placeholders, nesting, copying and pasting, see :ref:`Rearranging
+content on a page <how-to-rearrange-content>` and :ref:`Copying content between pages
+<how-to-copy-content>`.
+
 .. tip::
 
     Hold the **SHIFT** key while hovering over an entry in the structure board and the

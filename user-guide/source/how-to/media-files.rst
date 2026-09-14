@@ -78,10 +78,9 @@ Find, move and rename files
 - **Rename** a file by opening its details and changing its name. The file keeps working
   on every page that uses it — pages refer to the file itself, not to its name.
 
-Replacing a file is the fastest way to update an image that appears in many places: the
-pages showing it keep their reference, so they all display the new version at once. If
-your installation offers no replace action, upload the new file and edit the plugins
-that should use it.
+To update every reference while keeping the same media record, follow :ref:`Replacing
+an existing media file <how-to-replace-media>`. Upload a separate file instead when
+some pages must continue to use the old content.
 
 Delete files safely
 -------------------

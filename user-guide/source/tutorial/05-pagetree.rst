@@ -41,8 +41,7 @@ Picture your site as a tree:
 Grouping pages this way does more than keep a long list tidy. Pages that belong together
 — everything about your company, say — become the children of one parent page, so
 readers find their way by moving down the tree. Your site's navigation menu is built
-from the same structure, which is why a well-organised tree is the cheapest way to make
-a site easy to use.
+from the same structure, so a well-organised tree makes the site easier to use.
 
 Managing the page tree
 ----------------------
@@ -51,7 +50,7 @@ The page tree is more than a list of your pages: each row tells you the state of
 and gives you the actions you can perform on it.
 
 .. image:: ./images/05-pagetree-form.jpg
-    :alt: The django CMS page tree form
+    :alt: Page tree with publication, navigation and page-action controls
 
 Take a moment to look at the row of one of your pages. Next to its **title** you see
 

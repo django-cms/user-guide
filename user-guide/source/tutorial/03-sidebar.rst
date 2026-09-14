@@ -10,7 +10,7 @@ interface**, which django CMS opens in a sidebar over your page.
 Open it now: in the **project menu**, select **"Administration..."**.
 
 .. image:: ./images/03-sidebar.jpg
-    :alt: Example sidebar
+    :alt: Administration sidebar showing django CMS and Filer sections
     :width: 800
 
 What you find here depends on the packages installed on your site, so your sidebar will

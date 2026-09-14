@@ -45,7 +45,7 @@ Add your first plugin
    in.
 
    .. image:: ./images/07-add-container.jpg
-       :alt: Add container dialog box
+       :alt: Container plugin dialog
 
 The plugin now appears both on your page and in the structure board. Adding content is
 this step, repeated: pick a place, pick a plugin, fill in its form.

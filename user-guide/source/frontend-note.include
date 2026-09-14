@@ -1,3 +1,4 @@
 .. note::
 
-  This section only applies to installations such as the django-cms-quickstart project which use the djangocms-frontend package.
+    This section uses the frontend plugins included in the django CMS quickstart
+    project. Plugin names, fields and styles may differ on your site.

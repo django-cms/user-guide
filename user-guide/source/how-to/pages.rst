@@ -8,6 +8,17 @@ self-contained: pick the task you want to do and follow its steps. If you are ne
 django CMS, work through the :ref:`tutorial <user-tutorial>` first — it introduces the
 :ref:`toolbar <toolbar>` and the :ref:`page tree <pagetree>` used throughout this guide.
 
+On this page
+------------
+
+- :ref:`Create a new page <how-to-create-page>`
+- :ref:`Duplicate a page <how-to-duplicate-page>`
+- :ref:`Copy or move a page <how-to-move-page>`
+- :ref:`Change a page's URL <how-to-change-slug>`
+- :ref:`Show or hide a page in navigation <how-to-page-navigation>`
+- :ref:`Set the home page <how-to-home-page>`
+- :ref:`Delete a page <how-to-delete-page>`
+
 .. _how-to-create-page:
 
 Create a new page
@@ -16,9 +27,9 @@ Create a new page
 1. Open the page menu in the toolbar and select **"Create page"**. You can choose
    between:
 
-   - **New page** - creates a page at the same level as the page you are currently on
+   - **New page** — creates a page at the same level as the page you are currently on
      (a sibling page).
-   - **New sub page** - creates a page nested under the page you are currently on
+   - **New sub page** — creates a page nested under the page you are currently on
      (a child page).
 
 2. Enter the **title** of the page. The **slug** (the last part of the page's URL) is
@@ -34,6 +45,8 @@ Create a new page
     to open the creation wizard, or use the **add button** of a page's row in the
     :ref:`page tree <pagetree>` to create a child page at a specific position.
 
+.. _how-to-duplicate-page:
+
 Duplicate an existing page
 --------------------------
 
@@ -43,6 +56,8 @@ Duplicate an existing page
 3. Adjust the title and slug of the copy in the dialog and click **"Create"**.
 4. The duplicate is created as a draft containing a copy of the original page's
    content. Edit and publish it like any other page.
+
+.. _how-to-move-page:
 
 Copy or move a page in the page tree
 ------------------------------------
@@ -55,12 +70,12 @@ Copy or move a page in the page tree
 2. To **move** a page, click on the dotted bar on the left of the page's row and drag
    the page to its new position. Drop it onto a page to nest it as a child page, or
    between two pages to make it their sibling.
-3. Alternatively, use the **hamburger context menu** at the right end of the page's
-   row:
+3. Alternatively, use the **context menu** at the right end of the page's row (the
+   button with three horizontal lines):
 
    - Select **"Cut"** (to move) or **"Copy"** (to duplicate the page including its
      sub-pages).
-   - Open the hamburger context menu of the destination page and select **"Paste"**.
+   - Open the context menu of the destination page and select **"Paste"**.
      The page is inserted as a child of the destination page.
 
 .. note::
@@ -84,13 +99,15 @@ Follow these steps to change it safely:
 3. Change the **"Slug"** field. If the full URL should differ from the slug-based
    default, open the **"URL options"** section and use **"Overwrite URL"**.
 4. Click **"Save"**, then publish the change.
-5. To preserve visitors and SEO ranking arriving through the old URL, set up a
-   redirect from the old URL: see :ref:`Managing redirects <how-to-redirects>`.
+5. If the old address must continue to work, preserve it with a redirect. See
+   :ref:`Redirecting an old page <how-to-redirects>`.
 
 .. note::
 
     Slugs are language-specific. Use the language tabs at the top of the page settings
     dialog to change the slug for each language.
+
+.. _how-to-page-navigation:
 
 Show or hide a page in the navigation menu
 ------------------------------------------
@@ -105,6 +122,8 @@ Alternatively, in the :ref:`page tree <pagetree>`, click the indicator in the
 A hidden page remains accessible through its URL — hiding it from the menu does not
 unpublish it and does not restrict access.
 
+.. _how-to-home-page:
+
 Set a page as the home page
 ---------------------------
 
@@ -112,14 +131,16 @@ The home page is the page served at the root URL of your site, marked with a hou
 icon in the page tree.
 
 1. Select **"Pages..."** in the project menu of the toolbar to open the page tree.
-2. Open the **hamburger context menu** at the right end of the row of the page you
-   want to make the new home page.
+2. Open the **context menu** at the right end of the row of the page you want to make
+   the new home page.
 3. Select **"Set as home"**.
 
 .. note::
 
     The previous home page remains published and becomes reachable under its regular
     slug-based URL.
+
+.. _how-to-delete-page:
 
 Delete a page
 -------------
@@ -136,5 +157,4 @@ Delete a page
 3. The confirmation dialog lists everything that will be deleted along with the page.
    Review it carefully and confirm.
 
-Alternatively, select **"Delete..."** from the page's hamburger context menu in the
-page tree.
+Alternatively, select **"Delete..."** from the page's context menu in the page tree.

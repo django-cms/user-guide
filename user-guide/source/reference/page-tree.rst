@@ -20,7 +20,7 @@ Anatomy of a row
 ----------------
 
 .. image:: ../tutorial/images/05-pagetree-form.jpg
-    :alt: The django CMS page tree
+    :alt: Page tree with numbered publication, navigation and page-action controls
 
 From left to right, each row of the tree contains:
 
@@ -48,7 +48,7 @@ No. Element                      Meaning
 9   **Settings button**          Opens the :ref:`page settings <ref-page-settings>` of the
                                  page.
 10  **Add button**               Creates a child page below this page.
-11  **Context menu**             The hamburger menu with further actions; see `Context
+11  **Context menu**             The button with three horizontal lines; see `Context
                                  menu entries`_ below.
 === ============================ ==========================================================
 
@@ -75,7 +75,7 @@ The states themselves are described in the :ref:`version states reference
 Context menu entries
 --------------------
 
-The hamburger menu at the right end of a row (number 11) offers:
+The context menu at the right end of a row (number 11) offers:
 
 ========================= =========================================================
 Entry                     Action
@@ -102,8 +102,8 @@ Above the tree
 At the top right of the page tree you find:
 
 - a **search** button to find a page by title,
-- a **"..."** button to choose which site's tree is displayed (most installations serve
-  a single site),
+- a **more options** button (three dots) to choose which site's tree is displayed (most
+  installations serve a single site),
 - an **add page** button that creates a new top-level page.
 
 The legend

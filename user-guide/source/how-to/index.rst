@@ -21,6 +21,8 @@ Manage pages and languages
 --------------------------
 
 - :ref:`Create, duplicate, move or delete pages <how-to-pages>`.
+- :ref:`Change a page's URL safely <how-to-change-slug>` or :ref:`show and hide it in
+  navigation <how-to-page-navigation>`.
 - :ref:`Translate a page <how-to-translations>`.
 - :ref:`Redirect an old URL <how-to-redirects>`.
 

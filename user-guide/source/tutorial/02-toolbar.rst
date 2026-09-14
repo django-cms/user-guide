@@ -16,8 +16,7 @@ and the page you are viewing. For example, the "Language" menu only appears on
 multilingual sites, and a "Blog" menu only appears if that module is installed and you
 are viewing a blog page.
 
-One element is constantly present in your toolbar: the **django CMS logo** on the very
-left. Click on it now — it simply takes you back to your home page.
+The **django CMS logo** sits at the far left. Click it to return to the home page.
 
 .. tip::
 
@@ -43,12 +42,7 @@ site in a sidebar (we explore it in :ref:`lesson 5 <pagetree>`), and
 
 .. note::
 
-    You might not see all of the elements described here, or even more elements. This
-    strongly depends on your django CMS setup.
-
-.. note::
-
-    If you choose "Disable toolbar", you can only make the toolbar reappear by adding
+    If you choose **"Disable toolbar"**, make it reappear by adding
     ``?toolbar_on`` to the end of the URL in your browser window.
 
 The page menu
@@ -71,7 +65,7 @@ the dialog again without saving:
   the page's URL.
 
 .. image:: ./images/02-page-settings.jpg
-    :alt: The page settings dialogue
+    :alt: Page settings dialog with title and slug fields
 
 The page settings are available separately for each language of the page — note the
 language tabs at the top of the dialog. All other fields are described in the

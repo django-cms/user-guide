@@ -90,12 +90,12 @@ Control size and alignment
 The image plugin offers options to control how the image is rendered. The exact set of
 options depends on your site's design:
 
-- **Width / Height** - scale the image to fixed dimensions. If your site uses a
+- **Width / Height** — scale the image to fixed dimensions. If your site uses a
   responsive design, prefer leaving these empty and letting the design determine the
   size.
-- **Alignment** - float the image to the left or right of the surrounding content, or
+- **Alignment** — float the image to the left or right of the surrounding content, or
   centre it.
-- **Link** - make the image clickable by linking it to a page, an external URL, or the
+- **Link** — make the image clickable by linking it to a page, an external URL, or the
   full-size version of the image.
 
 .. note::

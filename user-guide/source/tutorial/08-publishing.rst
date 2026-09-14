@@ -5,45 +5,34 @@ Publishing content
 
 .. include:: ../versioning-note.include
 
-Once you have finished filling in your newly created page (or blog post), it is saved as
-a draft. It will not be published until you decide to do so. As an editor, you can view
-drafts, but any site visitors will only see published pages.
+The page you created is still a draft. Editors can see it, but visitors cannot. In this
+lesson you preview it, publish it, and confirm which version is live.
 
-To publish a page, click on the highlighted "Publish" button in the toolbar. This button
-is visible in the page's edit mode. (If there is a highlighted "Edit" button instead,
-click it first to get to edit mode.)
+Preview the draft once more. When it is ready, return to edit mode and click the
+highlighted **"Publish"** button in the toolbar. If the toolbar shows **"Edit"** instead,
+click that first.
 
 .. image:: ./images/08-publish-button.jpg
     :alt: The highlighted Publish button in the django CMS toolbar
 
-When published you will be taken to the published page or the "manage versions" dialog,
-depending on the setup of your site. If you're taken to the manage versions dialog,
-click on the eye button of the top listed version to get back to the page you just
-published.
-
-You will see in the toolbar that the version menu now shows that the content is
-"published".
+After publishing, your site opens either the page or the Manage versions view. From the
+version list, use the view button in the newest row to return to the page. The version
+menu in the toolbar now shows **"Published"**.
 
 .. image:: ./images/08-version-menu.jpg
-    :alt: The version menu showing "published" state.
+    :alt: Version menu showing the Published state
 
 Version states
 --------------
 
-Since django CMS 4, pages and other publishable content can have more than the two
-states "draft" and "published".
+Pages and other publishable content can have more than the two states Draft and
+Published.
 
-.. note::
-
-    Versioning is managed by an optional package like django CMS Versioning. Your
-    installation might manage versions differently. This guide assumes that django CMS
-    Versioning is installed.
-
-The version you just published is in the **"published" state** — it is the one your
+The version you just published is in the **Published** state — it is the one your
 visitors see, and it can no longer be changed. To make further changes you create a new
-**draft** from it with the "New Draft" button; when you publish that draft, the version
-you published today becomes **"unpublished"** and is kept as a record. A draft you want
-to set aside without publishing can be **archived**.
+**Draft** from it with **"New Draft"**. When you publish that draft, the version you
+published today becomes **Unpublished** and remains in the history. A draft you want to
+set aside without publishing can be **Archived**.
 
 All four states, and the actions each of them allows, are listed in the :ref:`version
 states reference <ref-version-states>`.
@@ -61,6 +50,10 @@ history of the page you just published:
 
 Working with that history — comparing, reverting and discarding versions — is covered
 step by step in :ref:`Managing versions <how-to-versions>`.
+
+Before you finish, open the page in a private browser window and check what visitors
+receive. :ref:`Previewing and verifying changes <how-to-preview-verify>` provides a
+short checklist for future updates.
 
 That completes the tutorial: you have logged in, found your way around the toolbar and
 the page tree, uploaded an image, created a page, filled it with content and published

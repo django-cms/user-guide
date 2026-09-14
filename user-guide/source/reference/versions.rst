@@ -53,8 +53,8 @@ View / Preview       ✓       ✓           ✓             ✓
 
 Notes:
 
-- Only drafts can be deleted. Published and unpublished versions are kept on purpose
-  as a permanent history.
+- Only drafts can be discarded through the version manager. Published and unpublished
+  versions are retained as history.
 - Publishing a draft automatically moves the previously published version to
   "unpublished".
 - "Edit" on a published version in the version manager creates a new draft based on

@@ -1,54 +1,56 @@
 .. _how-to-redirects:
 
-Managing redirects
-==================
+Redirecting an old page
+=======================
 
-By implementing redirects, you can retain the SEO rankings and authority of the old URL,
-transferring it to the new one. This helps to ensure that your website maintains its
-search engine visibility.
+A redirect sends visitors from one page to another. Use one when an old address must
+continue to work after its content has moved. Redirects are language-specific, so check
+and publish each required language separately.
 
-django CMS supports redirects as part of the :ref:`Page settings <page-settings>`. It
-happens on a per-language level. This means you can select different redirect targets
-for the different language contents of a page.
+Redirect a page
+---------------
 
-The simplest way to set redirects is:
+1. Open the **project menu** and select **"Pages..."**.
+2. Find the page whose current address should redirect visitors.
 
-1. **Accessing the Page Admin Interface:** Select "Pages..." in the project menu of the
-   toolbar.
-2. **Opening the page settings:**
+   .. image:: ../tutorial/images/05-pagetree-form.jpg
+       :alt: Page tree with page-management controls
 
-   - Find the page you want to redirect in the page tree.
-
-     .. image:: ../tutorial/images/05-pagetree-form.jpg
-         :alt: django CMS page tree
-
-     The numbers used below refer to the elements of a page tree row as listed in the
-     :ref:`page tree reference <ref-page-tree>`.
-
-   - If the page is published, select "Create new draft" from the dropdown menu of the
-     page status indicator (number 7).
-   - Click on the page settings icon (number 9: three horizontal sliders),
-
-3. **Changing the redirect setting:**
+3. If the page is published, open its publication status menu and select **"New
+   Draft"**.
+4. Open the page settings with the sliders button in its row.
+5. Expand **"URL options"** and choose the destination in **"Redirect"**.
 
    .. image:: ./images/redirect-settings.jpg
-       :alt: django CMS page settings
+       :alt: Redirect field in the URL options of the page settings
 
-   - Find the "URL options" section.
-   - Click "Show" to open the "URL options" section
-   - Change the "Redirect" setting by selecting the page which the current one should be
-     redirected to
-   - Close the setting by clicking "Save" at the bottom
+6. Save the settings and publish the draft.
+7. Open the source address in a private browser window and confirm that it reaches the
+   intended destination.
 
-4. **Publishing the change:**
+The redirect only works while the source page still exists at the old address. If you
+already changed its slug or moved it to a different parent, create a page at the old
+location and configure that page to redirect to the new one.
 
-   - Select "Publish" from the dropdown menu of the page status indicator (number 7)
+.. warning::
 
-.. note::
+    Do not redirect a page to itself, and do not create a chain that eventually leads
+    back to it. A loop such as A → B → A prevents visitors from reaching either page.
 
-    Changes can only be made to draft page contents and will only take effect once
-    published.
+Redirect each language
+----------------------
 
-Managing redirects in django CMS happens on page level. The system is designed to
-provide a user-friendly interface for content editors to manage redirects and thereby
-ensure keeping SEO rankings.
+Page settings belong to one language at a time. Use the language tabs in the settings
+dialog to select the source language, then set and publish its redirect. Repeat for the
+other languages that need one; their destinations may differ.
+
+Remove a redirect
+-----------------
+
+1. Create a draft of the redirecting page.
+2. Open **"Page settings..."**, expand **"URL options"**, and clear **"Redirect"**.
+3. Save and publish the draft.
+4. Visit the page while logged out and confirm that its own content appears again.
+
+Hiding the source page from navigation is optional. A hidden page still responds at its
+URL, so its redirect continues to work.

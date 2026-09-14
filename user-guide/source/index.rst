@@ -153,7 +153,7 @@ native French and extended.
         This guide is also available as one document you can read offline,
         print, improve, or hand to a new colleague: `download the user guide (ODT)
         <django-cms-user-guide.odt>`_. It opens in LibreOffice, Word, Pages and Google
-        Docs. The file is rebuilt with the rest of the guide, so it is never out of date.
+        Docs. The file is built from the same source as the online guide.
 
 .. toctree::
     :maxdepth: 1

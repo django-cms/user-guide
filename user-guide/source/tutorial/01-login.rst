@@ -37,8 +37,8 @@ everything else in this tutorial — create pages, add content, publish.
 
 Two things are worth knowing before you go on:
 
-- The toolbar is yours alone. Visitors of your site never see it, and the page below it
-  looks exactly as it looks to them.
+- The toolbar is visible only to authorised users. Visitors do not see it. Use Preview
+  mode when you want to judge the page without its editing controls.
 - Content changes do not become public by accident. They remain in drafts until you
   deliberately publish them. If your site uses versioning, retained versions let you
   compare changes and restore earlier published content.

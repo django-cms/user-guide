@@ -66,7 +66,7 @@ per language. To edit them:
    languages.
 
    .. image:: ../tutorial/images/02-page-settings.jpg
-       :alt: The page settings dialogue with language tabs
+       :alt: Page settings dialog with language tabs
 
 3. Save your changes.
 

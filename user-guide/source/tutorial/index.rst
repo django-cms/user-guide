@@ -37,6 +37,6 @@ you need is a django CMS site and an account that may edit it — the :ref:`firs
 
     **Touch-screen users**
 
-    django CMS supports touch-screen interfaces, though there are currently some
-    limitations in support. You can complete this tutorial using a touch-screen device,
-    but please consult :ref:`touch`, and see the notes on :ref:`device-support`.
+    Touch-screen editing depends on the device, browser and site. You may be able to
+    complete this tutorial on a tablet, but first read :ref:`touch`, especially the
+    notes on :ref:`device-support`.

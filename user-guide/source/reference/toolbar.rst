@@ -14,7 +14,7 @@ From left to right, the toolbar contains:
 1. The **django CMS logo** — returns you to the home page.
 2. The **project menu**, labelled with the name of your site.
 3. The **page menu**.
-4. Context-dependent menus, e.g. the **version menu** and the **language menu**.
+4. Context-dependent menus, for example the **version menu** and the **language menu**.
 5. The **colour scheme toggle**.
 6. Context-dependent **action buttons**.
 7. The **structure board toggle**.
@@ -44,7 +44,7 @@ Entry                        Action
 **Clipboard...**             Shows the plugin currently copied or cut. Available in
                              edit mode when the clipboard contains content.
 **Clear clipboard**          Removes the copied or cut plugin from the clipboard.
-**Disable toolbar**          Completely disables the toolbar and the front-end editor
+**Disable toolbar**          Completely disables the toolbar and the frontend editor
                              for your user. To re-enable it, add ``?toolbar_on`` to the
                              end of the URL in your browser.
 **Shortcuts**                Gives access to your shortcuts.

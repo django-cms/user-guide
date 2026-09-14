@@ -14,6 +14,18 @@ for putting an image on a page see :ref:`Adding an image to a page <how-to-add-i
     installations such as the django CMS quickstart project. If your site manages files
     differently, ask your developers.
 
+On this page
+------------
+
+- :ref:`Open the media library <how-to-open-media-library>`
+- :ref:`Create folders <how-to-media-folders>`
+- :ref:`Upload files <how-to-upload-media>`
+- :ref:`Describe a file <how-to-describe-media>`
+- :ref:`Find, move or rename files <how-to-organise-media>`
+- :ref:`Delete files safely <how-to-delete-media>`
+
+.. _how-to-open-media-library:
+
 Open the media library
 ----------------------
 
@@ -27,11 +39,13 @@ You see the folders of your library. The greyed-out **"Unsorted uploads"** folde
 collects every file that was uploaded directly from a plugin dialog and never assigned
 to a folder.
 
+.. _how-to-media-folders:
+
 Create folders
 --------------
 
-Folders work like the ones on your computer, and they are the only thing standing
-between you and a library of several hundred unsorted files.
+Folders work like the ones on your computer. A simple, shared naming scheme keeps a
+large library usable for everyone.
 
 1. Click **"New Folder"** at the top right of the folder list.
 2. Give the folder a name and save.
@@ -45,6 +59,8 @@ To create a folder inside another one, open the parent folder first and then cli
     campaign or by year — rather than by file type. "Press photos 2025" is easier to
     search than "JPEG images".
 
+.. _how-to-upload-media:
+
 Upload files
 ------------
 
@@ -54,19 +70,22 @@ Upload files
 
 The files appear in the folder as soon as the upload finishes.
 
+.. _how-to-describe-media:
+
 Describe a file
 ---------------
 
 Click a file's name to open its details. The fields worth filling in are:
 
 - **Name** — what you and your colleagues will search for.
-- **Alt text** — a short description of what an image shows. Screen readers read it
-  aloud and browsers display it when the image cannot be loaded, which makes it the
-  single most valuable field for the accessibility of your site. It is used as the
-  default whenever the image is placed on a page.
+- **Alt text** — the default text alternative used when the image is placed on a page.
+  Describe the image's purpose rather than its filename. See :ref:`Set the alternative
+  text <how-to-add-image>` for context-specific guidance.
 - **Caption** — text that some plugins display alongside the image.
 
 Save when you are done.
+
+.. _how-to-organise-media:
 
 Find, move and rename files
 ---------------------------
@@ -82,14 +101,15 @@ To update every reference while keeping the same media record, follow :ref:`Repl
 an existing media file <how-to-replace-media>`. Upload a separate file instead when
 some pages must continue to use the old content.
 
+.. _how-to-delete-media:
+
 Delete files safely
 -------------------
 
 .. warning::
 
-    Deleting a file removes it from every page that uses it. An image deleted here
-    disappears from the articles and pages it was placed on, and those pages will not
-    warn you.
+    Deleting a file affects every page that refers to it. Images disappear and file
+    links stop working; the affected pages do not warn you.
 
 Before deleting a file or a folder, check whether its contents are still in use. If you
 are unsure, move the file to an "Archive" folder instead of deleting it: nothing breaks,

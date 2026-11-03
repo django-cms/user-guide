@@ -9,7 +9,7 @@ Every editable content item — a page content in a given language, an alias, a 
 post — has a series of numbered versions. Each version is in exactly one of four
 states.
 
-.. figure:: ../tutorial/images/08-version-states-fixed.png
+.. figure:: ../tutorial/images/08-version-states.png
     :alt: Version states and the editing process
 
     The possible states and the actions which change the state of a version.

@@ -41,6 +41,24 @@
                 border-right: 1px solid var(--color-background-border);
             }
         }
+
+        .download-button-wrap {
+            text-align: center;
+            margin-top: 0.8rem;
+        }
+        .download-button {
+            display: inline-block;
+            padding: 0.7em 1.4em;
+            background: var(--color-brand-primary);
+            color: var(--color-background-primary) !important;
+            border-radius: 0.4rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .download-button:hover {
+            filter: brightness(1.1);
+            text-decoration: none;
+        }
     </style>
 
 .. _user-manual:
@@ -144,9 +162,13 @@ native French and extended.
         :class: tip
 
         This guide is also available as one document you can read offline,
-        print, improve, or hand to a new colleague: `download the user guide (ODT)
-        <django-cms-user-guide.odt>`_. It opens in LibreOffice, Word, Pages and Google
-        Docs. The file is rebuilt with the rest of the guide, so it is never out of date.
+        print, improve, or hand to a new colleague. It opens in LibreOffice, Word,
+        Pages and Google Docs, and is rebuilt with the rest of the guide, so it is
+        never out of date.
+
+        .. raw:: html
+
+            <div class="download-button-wrap"><a class="download-button" href="django-cms-user-guide.odt">⬇&nbsp; Download the user guide (ODT)</a></div>
 
 .. toctree::
     :maxdepth: 1

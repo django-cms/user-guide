@@ -528,7 +528,7 @@ screenshots:
       - wait_for: "a.cms-versioning-js-publish-btn"
     capture: {selector: "a.cms-versioning-js-publish-btn", padding: 8, quality: 90}
     labels:
-      - {selector: a.cms-versioning-js-publish-btn, text: "Click here to publish"}
+      - {selector: a.cms-versioning-js-publish-btn, text: "Click here to publish", position: outside-bottom}
 
   - id: published-version-status
     url: "${DJANGOCMS_PAGE_PATH:-/?toolbar_on}"

@@ -599,9 +599,10 @@ def _capture_clip(
                 )
 
     expand_to_locators(include_locators, padding)
-    # Outside labels already touch their outlined element, so do not add the
-    # capture padding a second time around their overlays.
-    expand_to_locators(overlay_locators, 0)
+    # Outside labels sit against their outlined element, so the gap between the
+    # two never needs extra room. Their outer edge, however, must get the same
+    # capture padding as everything else, or the label is cropped flush.
+    expand_to_locators(overlay_locators, padding)
     clipped_left = max(0, left)
     clipped_top = max(0, top)
     return {
